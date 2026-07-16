@@ -1,720 +1,305 @@
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Shreya Nair is a data scientist creating thoughtful machine learning systems and clear, useful data experiences.">
+    <meta name="theme-color" content="#f4f0e8">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Shreya Nair — Data Scientist">
+    <meta property="og:description" content="Selected data science, machine learning, and analytics work by Shreya Nair.">
+    <meta property="og:image" content="assets/img/about.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Shreya Nair — Data Scientist</title>
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Shreya Nair",
+            "jobTitle": "Data Scientist",
+            "url": "https://shreya-001.github.io/Shreya-Website/",
+            "sameAs": [
+                "https://github.com/shreya-001",
+                "https://www.linkedin.com/in/shreya-nair-gopi/"
+            ]
+        }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-        <!--==================== UNICONS ====================-->
-        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-        
-        <!--==================== SWIPER CSS ====================-->
-        <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-        
-        <!--==================== CSS ====================-->
-        <link rel="stylesheet" href="assets/css/styles.css">
+    <header class="site-header" id="header">
+        <nav class="nav container" aria-label="Main navigation">
+            <a class="nav__brand" href="#home" aria-label="Shreya Nair, home">SN</a>
 
-        <title>SHREYA NAIR</title>
-    </head>
-    <body>
-        <!--==================== HEADER ====================-->
-        <header class="header" id="header">
-            <nav class="nav container">
-                <a href="#" class="nav__logo">Shreya Nair</a>
+            <button class="nav__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+                <span class="nav__toggle-label">Menu</span>
+                <span class="nav__toggle-lines" aria-hidden="true"></span>
+            </button>
 
-                <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list grid">
-                        <li class="nav__item">
-                            <a href="#home" class="nav__link active-link">
-                                <i class="uil uil-estate nav__icon"></i> Home
-                            </a>
-                        </li>
-
-                        <li class="nav__item">
-                            <a href="#about" class="nav__link">
-                                <i class="uil uil-user nav__icon"></i> About
-                            </a>
-                        </li>
-
-                        <li class="nav__item">
-                            <a href="#skills" class="nav__link">
-                                <i class="uil uil-file-alt nav__icon"></i> Skills
-                            </a>
-                        </li>
-
-                        <li class="nav__item">
-                            <a href="#qualification" class="nav__link">
-                                <i class="uil uil-graduation-cap nav__icon"></i> Qualifications
-                            </a>
-                        </li>
-
-                        <li class="nav__item">
-                            <a href="#portfolio" class="nav__link">
-                                <i class="uil uil-scenery nav__icon"></i> Projects
-                            </a>
-                        </li>
-
-                        <li class="nav__item">
-                            <a href="#contact" class="nav__link">
-                                <i class="uil uil-message nav__icon"></i> Contact Me
-                            </a>
-                        </li>
-
-                    </ul>
-                    
-                    <i class="uil uil-times nav__close" id="nav-close"></i>
-                </div>
-
-                <div class="nav__btns">
-                    <!-- Theme change button -->
-                    <i class="uil uil-moon change-theme" id="theme-button"></i>
-
-                    <div class="nav__toggle" id="nav-toggle">
-                        <i class="uil uil-apps"></i>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-        <!--==================== MAIN ====================-->
-        <main class="main">
-            <!--==================== HOME ====================-->
-            <section class="home section" id="home">
-                <div class="home__container container grid">
-                    <div class="home__content grid">
-                        <div class="home__social">
-                            <a href="https://www.linkedin.com/in/shreya-nair-gopi/" target="_blank" class="home__social-icon">
-                                <i class="uil uil-linkedin-alt"></i>
-                            </a>
-    
-                            <a href="https://www.instagram.com/shry.001_/" target="_blank" class="home__social-icon">
-                                <i class="uil uil-instagram"></i>                            
-                            </a>
-    
-                            <a href="https://github.com/shreya-001" target="_blank" class="home__social-icon">
-                                <i class="uil uil-github-alt"></i>                            
-                            </a>
-                        </div>
-    
-                        <div class="home__img">
-                            <svg class="home__blob" viewBox="0 0 200 187">
-                                <mask id="mask0" mask-type="alpha">
-                                    <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
-                                    130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
-                                    97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
-                                    0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-                                </mask>
-                                <g mask="url(#mask0)">
-                                    <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
-                                    165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
-                                    129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
-                                    -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-
-                                    <!--==================== 
-                                        Insert your image in the Img folder and Change your image |
-                                        Center your image with X: horizontal, Y: vertical 
-                                    ====================-->
-                                    <image class="home__blob-img" x="-90" y="0" href="assets/img/perfil.png"/>
-                                </g>
-                            </svg>
-                        </div>
-
-                        <div class="home__data">
-                            <h2 class="home__title">Hi, I'm Shreya Nair</h2>
-                            <h3 class="home__subtitle">Data Scientist</h3>
-                            <p class="home__description">Embracing AI/ML with boundless curiosity, fearlessly exploring data's depths, 
-                                and delighting in every challenge along the way.</p>
-                            <a href="#contact" class="button button--flex">
-                                Contact Me <i class="uil uil-message button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    
-                    <div class="home__scroll">
-                        <a href="#about" class="home__scroll-button button--flex">
-                            <i class="uil uil-mouse-alt home__scroll-mouse"></i>
-                            <span class="home__scroll-name">Scroll down</span>
-                            <i class="uil uil-arrow-down home__scroll-arrow"></i>
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <!--==================== ABOUT ====================-->
-            <section class="about section" id="about">
-                <h2 class="section__title">About Me</h2>
-                <span class="section__subtitle">My introduction</span>
-
-                <div class="about__container container grid">
-                    <img src="assets/img/about.jpg" alt="" class="about__img">
-
-                    <div class="about__data">
-                        <p class="about__description">Data Scientist, with a passion for solving real-world problems. 
-                            I have a keen interest in the field of Data Science and Machine Learning and unwavering thirst for knowledge, 
-                            constantly seeking opportunities to learn and expand my expertise, which fuels my drive to excel in any role I undertake.
-                        </p>
-
-                        <div class="about__info">
-                            <div>
-                                <span class="about__info-title">2.5</span>
-                                <span class="about__info-name">Years <br> experience</span>
-                            </div>
-
-                            <div>
-                                <span class="about__info-title">10+</span>
-                                <span class="about__info-name">Completed <br> projects</span>
-                            </div>
-
-                            <div>
-                                <span class="about__info-title">02</span>
-                                <span class="about__info-name">Companies <br> worked</span>
-                            </div>
-                        </div>
-
-                        <div class="about__buttons">
-                            <!--==================== Change your CV ====================-->
-                            <a download="" href="assets/pdf/Shreya_Nair_Resume_2024.pdf" class="button button--flex">
-                                Download CV <i class="uil uil-download-alt button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!--==================== SKILLS ====================-->
-            <section class="skills section" id="skills">
-                <h2 class="section__title">Skills</h2>
-                <span class="section__subtitle">My technical level</span>
-                
-                <div class="skills__container container grid">
-                    <div>
-                        <!--==================== SKILLS 1====================-->
-                        <div class="skills__content skills__open">
-                            <div class="skills__header">
-                                <i class="uil uil-brackets-curly skills__icon"></i>
-    
-                                <div>
-                                    <h1 class="skills__title">Programming Languages: </h1>
-                                </div>
-    
-                                <i class="uil uil-angle-down skills__arrow"></i>
-                            </div>
-    
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Python</h3>
-                                        <span class="skills__number">90%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__python"></span>
-                                    </div>
-                                </div>
-    
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">HTML</h3>
-                                        <span class="skills__number">70%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__html"></span>
-                                    </div>
-                                </div>
-    
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">JavaScript</h3>
-                                        <span class="skills__number">50%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__JS"></span>
-                                    </div>
-                                </div>
-    
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">CSS</h3>
-                                        <span class="skills__number">60%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__css"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--==================== SKILLS 2====================-->
-                        <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="uil uil-database skills__icon"></i>
-    
-                                <div>
-                                    <h1 class="skills__title">Database Technologies:</h1>
-                                </div>
-    
-                                <i class="uil uil-angle-down skills__arrow"></i>
-                            </div>
-    
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">MySQL</h3>
-                                        <span class="skills__number">70%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__mysql"></span>
-                                    </div>
-                                </div>
-    
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">PostgreSQL</h3>
-                                        <span class="skills__number">55%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__postgresql"></span>
-                                    </div>
-                                </div>
-    
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">MongoDB</h3>
-                                        <span class="skills__number">60%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__mongodb"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                         <!--==================== SKILLS 3====================-->
-                         <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="class uil uil-laptop-cloud skills__icon"></i>
-                                <div>
-                                    <h1 class="skills__title">AI/ML and Cloud Technologies: </h1>
-                                    <span class="skills__subtitle"></span>
-                                </div>
-                                <i class="uil uil-angle-down skills__arrow"></i>
-                            </div>
-
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Data Analytics</h3>
-                                        <span class="skills__number">85%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__dataanalytics"></span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Data Visualization</h3>
-                                        <span class="skills__number">90%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__visualization"></span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Machine Learning</h3>
-                                        <span class="skills__number">75%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__ML"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Statistical Analysis</h3>
-                                        <span class="skills__number">80%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__SA"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Deep Learning</h3>
-                                        <span class="skills__number">75%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__DL"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Natural Language Processing</h3>
-                                        <span class="skills__number">80%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__NLP"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">GCP</h3>
-                                        <span class="skills__number">60%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__GCP"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--==================== SKILLS 4====================-->
-                        <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="class uil uil-desktop skills__icon"></i>
-                                <div>
-                                    <h1 class="skills__title">Other Technologies: </h1>
-                                    <span class="skills__subtitle"></span>
-                                </div>
-                                <i class="uil uil-angle-down skills__arrow"></i>
-                            </div>
-
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">MLFlow</h3>
-                                        <span class="skills__number">65%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__mlflow"></span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Docker</h3>
-                                        <span class="skills__number">40%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__docker"></span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">REST API</h3>
-                                        <span class="skills__number">50%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__restapi"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Flask</h3>
-                                        <span class="skills__number">40%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__flask"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!--==================== QUALIFICATION ====================-->
-            <section class="qualification section" id="qualification">
-                <h2 class="section__title">Qualification</h2>
-                <span class="section__subtitle"></span>
-
-                <div class="qualification__container container">
-                    <div class="qualification__tabs">
-                        <div class="qualification__button button--flex qualification__active" data-target="#education">
-                            <i class="uil uil-graduation-cap qualification__icon"></i>
-                            Education
-                        </div>
-
-                        <div class="qualification__button button--flex" data-target="#work">
-                            <i class="uil uil-briefcase-alt qualification__icon"></i>
-                            Work experience
-                        </div>
-                    </div>
-
-                    <div class="qualification_sections">
-                        <!--==================== QUALIFICATION CONTENT1====================-->
-                        <div class="qualification__content qualification__active" data-content id="education">
-                            <!--==================== QUALIFICATION 1====================-->
-                            <div class="qualification__data">
-                                <div>
-                                    <h3 class="qualification__title">PG Diploma in Artificial Intelligence and Machine Learning</h3>
-                                    <span class="qualification__subtitle">Lambton College in Toronto (CANADA)</span>
-                                    <div class="qualification__calender">
-                                        <i class="uil uil-calender-alt"></i>
-                                        2023 May - 2025 Jan
-                                        
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <span class="qualification__line"></span>
-                                </div>
-                            </div>
-
-                            <!--==================== QUALIFICATION 2====================-->
-                            
-                            <div class="qualification__data">
-                                <div></div>
-                                
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <span class="qualification__line"></span>
-                                </div>
-                                <div>
-                                    <h3 class="qualification__title"> Dual Degree Masters in Computer Application</h3>
-                                    <span class="qualification__subtitle">SCMS School of Technology and Management (INDIA)</span>
-                                    <div class="qualification__calender">
-                                        <i class="uil uil-calender-alt"></i>
-                                        2015 - 2020 
-                                    </div>
-                                </div>
-                            </div>
-
-                        
-                        </div>
-                        
-                        <!--==================== QUALIFICATION CONTENT 2====================-->
-                        <div class="qualification__content" data-content id="work">
-                            <!--==================== QUALIFICATION 2====================-->
-                            <div class="qualification__data">
-                               
-                                <div>
-                                    <h3 class="qualification__title">Project Coordinator (RPA)</h3>
-                                    <span class="qualification__subtitle">Claysys Technologies (INDIA)</span>
-                                    <div class="qualification__calender">
-                                        <i class="uil uil-calender-alt"></i>
-                                        2021 April - 2022 Dec
-                                    </div>
-
-                                </div>
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <span class="qualification__line"></span>
-                                </div>
-                            </div>
-                            
-                            
-
-                            <!--==================== QUALIFICATION 2====================-->
-                            <div class="qualification__data">
-                                <div></div>
-                                
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <span class="qualification__line"></span>
-                                </div>
-                                <div>
-                                    <h3 class="qualification__title">Data Science Intern</h3>
-                                    <span class="qualification__subtitle">RAK Analytics Pvt.Ltd. (INDIA)</span>
-                                    <div class="qualification__calender">
-                                        <i class="uil uil-calender-alt"></i>
-                                        2019 - 2020
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            
-
-                        
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-
-            <!--==================== PORTFOLIO ====================-->
-            <section class="portfolio section" id="portfolio">
-                <h2 class="section__title">Projects</h2>
-                <span class="section__subtitle">Most Recent Projects</span>
-
-                <div class="portfolio__container container swiper-container">
-                    <div class="swiper-wrapper">
-                        <!--==================== PORTFOLIO 1====================-->
-                        <div class="portfolio__content grid swiper-slide">
-                            <img src="assets/img/portfolio1.jpg" alt="" class="portfolio__img">
-
-                            <div class="portfolio__data">
-                                <h3 class="portfolio__title">Stock Sentimental Analysis</h3>
-                                <p class="portfolio__description">
-                                    • Incorporated sentiment analysis to forecast stock market trends by extracting features from sentiment expressing texts (news articles, social media posts) and employing machine learning algorithms, including GANs, to predict stock close prices.<br>
-                                    • The prevailing sentiment among traders and investors provided valuable insights into potential future market fluctuations, facilitating informed decision-making in investment strategies. </p>
-                            
-                                <a href="https://github.com/shreya-001/StockMarket_SentimentAnalysis" class="button button--flex button--small portfolio__button">
-                                    View
-                                    <i class="uil uil-eye button__icon"></i>
-                                        
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--==================== PORTFOLIO 2====================-->
-                        <div class="portfolio__content grid swiper-slide">
-                            <img src="assets/img/portfolio2.jpg" alt="" class="portfolio__img">
-
-                            <div class="portfolio__data">
-                                <h3 class="portfolio__title">Audio Classification</h3>
-                                <p class="portfolio__description">
-                                    • Built a detailed pipeline for a deep learning model to classify audio samples.
-                                    <br>
-                                    • This project includes preprocessing steps involving data loading,
-                                    visualisation, and feature extraction using Mel-Frequency Cepstral Coefficients (MFCCs) </p>
-                            
-                                <a href="https://github.com/shreya-001/Audio_Classification" class="button button--flex button--small portfolio__button">
-                                    View
-                                    <i class="uil uil-eye button__icon"></i>
-                                        
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--==================== PORTFOLIO 3====================-->
-                        <div class="portfolio__content grid swiper-slide">
-                            <img src="assets/img/portfolio3.jpg" alt="" class="portfolio__img">
-
-                            <div class="portfolio__data">
-                                <h3 class="portfolio__title">London Borough Credit Card Anomaly Detection</h3>
-                                <p class="portfolio__description">
-                                    • Built an interactive visualizations using Plotly Dash to gain insights about the data.
-                                    <br>
-                                    • Built an Isolation Forest Anomaly Detection model for detecting anomalies in the transactions.</p>
-                            
-                                <a href="https://github.com/shreya-001/London-Borough-of-Barnet" class="button button--flex button--small portfolio__button">
-                                    View
-                                    <i class="uil uil-eye button__icon"></i>
-                                        
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--==================== PORTFOLIO 4====================-->
-                        <div class="portfolio__content grid swiper-slide">
-                            <img src="assets/img/portfolio4.jpg" alt="" class="portfolio__img">
-
-                            <div class="portfolio__data">
-                                <h3 class="portfolio__title">UPCOMING PROJECTS!</h3>
-                                <p class="portfolio__description">
-                                    • GreenVine (Leaf disease detection project)
-                                    <br>
-                                    • Computer Vision Project using YOLOv9
-                                    <br>
-                                    • EmoCare GenAI Project
-                                    <br>
-                                    • AND MORE!</p>
-                                    
-                                <a href="https://github.com/shreya-001" class="button button--flex button--small portfolio__button">
-                                    View
-                                    <i class="uil uil-eye button__icon"></i>
-                                        
-                                </a>
-                            </div>
-                        </div> 
-                    </div>
-                    
-                    <div class="swiper-button-next">
-                        <i class="uil uil-angle-right-b swiper-portfolio-icon"></i>
-                    </div>
-                    <div class="swiper-button-prev">
-                        <i class="uil uil-angle-left-b swiper-portfolio-icon"></i>
-                    </div>
-                
-                    <div class="swiper-pagination"></div>
-                    
-                </div>
-            </section>
-
-            <!--==================== CONTACT ME ====================-->
-            <section class="contact section" id="contact">
-                <h2 class="section__title">Contact Me</h2>
-                <span class="section__subtitle">Get in touch</span>
-
-                <div class="contact__container container grid">
-                    <div>
-                        <div class="contact__information">
-                            <i class="uil uil-phone contact__icon"></i>
-
-                            <div>
-                                <h3 class="contact__title">Phone </h3>
-                                <span class="contact__subtitle">437-559-3146</span>
-                            </div>
-                        </div>
-
-                        <div class="contact__information">
-                            <i class="uil uil-envelope contact__icon"></i>
-
-                            <div>
-                                <h3 class="contact__title">Email</h3>
-                                <span class="contact__subtitle">shreyanair.1697@gmail.com</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!--==================== FOOTER ====================-->
-        <footer class="footer">
-            <div class="footer__bg">
-                <div class="footer__container container grid">
-                    <div>
-                        <h1 class="footer__title">Shreya Nair</h1>
-                        <span class="footer__subtitle">Data Scientist</span>
-                    </div>
-
-                    <ul class="footer__links">
-                        <li>
-                            <a href="#skills" class="footer__link">Skills</a>
-                        </li>
-                        <li>
-                            <a href="#portfolio" class="footer__link">Projects</a>
-                        </li>
-                        <li>
-                            <a href="#contact" class="footer__link">Contact</a>
-                        </li>
-                    </ul>
-                    <div class="footer__socials">
-                        <a href="https://github.com/shreya-001" target="_blank" class="footer__social">
-                            <i class="uil uil-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/shreya-nair-gopi/" target="_blank" class="footer__social">
-                            <i class="uil uil-linkedin"></i>
-                        </a>
-                        <a href="https://www.instagram.com/shry.001_/" target="_blank" class="footer__social">
-                            <i class="uil uil-instagram-alt"></i>
-                            
-                        </a>
-                    </div>
-                </div>
-                <p class="footer__copy">&#169; Shreya Nair. All right reserved</p>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li><a class="nav__link active-link" href="#work">Work</a></li>
+                    <li><a class="nav__link" href="#about">Profile</a></li>
+                    <li><a class="nav__link" href="#experience">Experience</a></li>
+                    <li><a class="nav__link" href="#contact">Contact</a></li>
+                </ul>
+                <a class="nav__availability" href="mailto:shreyanairjob@gmail.com">
+                    <span aria-hidden="true"></span> Available for opportunities
+                </a>
             </div>
-        </footer>
-        
-        <!--==================== SCROLL TOP ====================-->
-        <a href="#" class="scrollup" id="scroll-up">
-            <i class="uil uil-arrow-up scrollup__icon"></i>
-        </a>
+        </nav>
+    </header>
 
-        <!--==================== SWIPER JS ====================-->
-        <script src="assets/js/swiper-bundle.min.js"></script>
+    <main id="main-content">
+        <section class="hero section" id="home" aria-labelledby="hero-title">
+            <div class="hero__container container">
+                <div class="hero__eyebrow reveal">
+                    <p>Data scientist · Toronto, Canada</p>
+                    <p>Portfolio / 2026</p>
+                </div>
 
-        <!--==================== MAIN JS ====================-->
-        <script src="assets/js/main.js"></script>
-    </body>
+                <div class="hero__headline reveal">
+                    <h1 id="hero-title">I turn complex data into <em>decisions that matter.</em></h1>
+                </div>
+
+                <div class="hero__lower">
+                    <div class="hero__portrait-wrap reveal">
+                        <img class="hero__portrait" src="assets/img/perfil.png" alt="Portrait of Shreya Nair" width="520" height="640">
+                        <p class="hero__caption">Curious by nature.<br>Rigorous by practice.</p>
+                    </div>
+
+                    <div class="hero__intro reveal">
+                        <p>I'm Shreya Nair, a data scientist exploring the space where machine learning, human context, and clear communication meet.</p>
+                        <div class="hero__actions">
+                            <a class="text-link" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
+                            <a class="text-link text-link--muted" href="assets/pdf/Shreya-Nair-Data-Scientist.pdf" download>Download résumé <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="work section" id="work" aria-labelledby="work-title">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <p class="section-kicker">01 / Selected work</p>
+                    <h2 id="work-title">Projects built to find the signal in the noise.</h2>
+                </div>
+
+                <div class="project-list">
+                    <article class="project reveal">
+                        <a class="project__image-link" href="https://github.com/shreya-001/StockMarket_SentimentAnalysis" target="_blank" rel="noopener noreferrer" aria-label="View Stock Market Sentiment Analysis on GitHub">
+                            <figure class="project__figure">
+                                <img src="assets/img/portfolio1.jpg" alt="Stock market data visualization for the sentiment analysis project" width="960" height="640" loading="lazy">
+                                <span class="project__index">01</span>
+                            </figure>
+                        </a>
+                        <div class="project__body">
+                            <div>
+                                <p class="project__meta">Machine learning · NLP · GANs</p>
+                                <h3>Stock Market Sentiment Analysis</h3>
+                            </div>
+                            <p>Combining sentiment signals from news and social media with machine learning models to explore market movement and forecast closing prices.</p>
+                            <a class="arrow-link" href="https://github.com/shreya-001/StockMarket_SentimentAnalysis" target="_blank" rel="noopener noreferrer">View repository <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project reveal">
+                        <a class="project__image-link" href="https://github.com/shreya-001/Audio_Classification" target="_blank" rel="noopener noreferrer" aria-label="View Audio Classification on GitHub">
+                            <figure class="project__figure">
+                                <img src="assets/img/portfolio2.jpg" alt="Audio waveform representing the audio classification project" width="960" height="640" loading="lazy">
+                                <span class="project__index">02</span>
+                            </figure>
+                        </a>
+                        <div class="project__body">
+                            <div>
+                                <p class="project__meta">Deep learning · Audio · MFCC</p>
+                                <h3>Audio Classification</h3>
+                            </div>
+                            <p>An end-to-end deep learning pipeline that transforms raw sound into useful features and classifies audio using Mel-frequency cepstral coefficients.</p>
+                            <a class="arrow-link" href="https://github.com/shreya-001/Audio_Classification" target="_blank" rel="noopener noreferrer">View repository <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project reveal">
+                        <a class="project__image-link" href="https://github.com/shreya-001/London-Borough-of-Barnet" target="_blank" rel="noopener noreferrer" aria-label="View London Borough Anomaly Detection on GitHub">
+                            <figure class="project__figure">
+                                <img src="assets/img/portfolio3.jpg" alt="Analytics dashboard from the London Borough transaction anomaly project" width="960" height="640" loading="lazy">
+                                <span class="project__index">03</span>
+                            </figure>
+                        </a>
+                        <div class="project__body">
+                            <div>
+                                <p class="project__meta">Anomaly detection · Plotly Dash</p>
+                                <h3>London Borough Transaction Anomalies</h3>
+                            </div>
+                            <p>An interactive analytical experience using Plotly Dash and Isolation Forest to surface unusual credit card transactions for closer review.</p>
+                            <a class="arrow-link" href="https://github.com/shreya-001/London-Borough-of-Barnet" target="_blank" rel="noopener noreferrer">View repository <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project reveal">
+                        <a class="project__image-link" href="https://github.com/shreya-001/Mixtape_Creation" target="_blank" rel="noopener noreferrer" aria-label="View Mixtape Creation on GitHub">
+                            <figure class="project__figure">
+                                <img src="assets/img/mixtape-project-cover.png" alt="Flowing audio tape and waveform artwork representing seamless mixtape crossfades" width="1536" height="1024" loading="lazy">
+                                <span class="project__index">04</span>
+                            </figure>
+                        </a>
+                        <div class="project__body">
+                            <div>
+                                <p class="project__meta">FastAPI · Streamlit · FFmpeg</p>
+                                <h3>Mixtape Creation</h3>
+                            </div>
+                            <p>A full-stack audio platform that turns uploaded tracks into a seamless crossfaded mixtape, renders a shareable video, and optionally publishes it to YouTube through an asynchronous job workflow.</p>
+                            <a class="arrow-link" href="https://github.com/shreya-001/Mixtape_Creation" target="_blank" rel="noopener noreferrer">View repository <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="work__more reveal">
+                    <p>Explore the full collection of data products, machine learning experiments, and production-minded applications.</p>
+                    <a class="text-link" href="https://github.com/shreya-001" target="_blank" rel="noopener noreferrer">Visit GitHub <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile section" id="about" aria-labelledby="about-title">
+            <div class="container">
+                <div class="section-heading section-heading--split reveal">
+                    <p class="section-kicker">02 / Profile</p>
+                    <h2 id="about-title">Technology is most powerful when it stays grounded in people.</h2>
+                </div>
+
+                <div class="profile__grid">
+                    <figure class="profile__image reveal">
+                        <img src="assets/img/about.jpg" alt="Shreya Nair working in a professional setting" width="720" height="900" loading="lazy">
+                        <figcaption>Always learning, always asking a better question.</figcaption>
+                    </figure>
+
+                    <div class="profile__content reveal">
+                        <p class="profile__lede">I approach data science with equal parts curiosity and care: understanding the problem first, then choosing the model.</p>
+                        <p>My work spans machine learning, analytics, natural language processing, and visualization. I enjoy transforming ambiguous questions into clear analytical systems—and explaining the result so that people can act on it.</p>
+
+                        <div class="capabilities" aria-label="Technical capabilities">
+                            <div class="capability">
+                                <p class="capability__number">01</p>
+                                <div>
+                                    <h3>Data &amp; modelling</h3>
+                                    <p>Python, statistical analysis, machine learning, deep learning, NLP</p>
+                                </div>
+                            </div>
+                            <div class="capability">
+                                <p class="capability__number">02</p>
+                                <div>
+                                    <h3>Analytics &amp; visualisation</h3>
+                                    <p>Data analysis, Plotly, dashboards, storytelling, experimentation</p>
+                                </div>
+                            </div>
+                            <div class="capability">
+                                <p class="capability__number">03</p>
+                                <div>
+                                    <h3>Systems &amp; tools</h3>
+                                    <p>SQL, PostgreSQL, MongoDB, GCP, MLflow, Docker, Flask, REST APIs</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="experience section" id="experience" aria-labelledby="experience-title">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <p class="section-kicker">03 / Experience &amp; education</p>
+                    <h2 id="experience-title">A path shaped by systems, data, and continuous learning.</h2>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline__group reveal">
+                        <p class="timeline__label">Experience</p>
+                        <article class="timeline__item">
+                            <p class="timeline__date">2025 — Present</p>
+                            <div>
+                                <h3>Data Science Specialist</h3>
+                                <p>Think Dirty — Clean Beauty App · Toronto</p>
+                            </div>
+                        </article>
+                        <article class="timeline__item">
+                            <p class="timeline__date">2024 — 2025</p>
+                            <div>
+                                <h3>Data Science Co-op Student</h3>
+                                <p>Think Dirty — Clean Beauty App · Toronto</p>
+                            </div>
+                        </article>
+                        <article class="timeline__item">
+                            <p class="timeline__date">2021 — 2022</p>
+                            <div>
+                                <h3>Project Coordinator, RPA</h3>
+                                <p>Claysys Technologies · India</p>
+                            </div>
+                        </article>
+                        <article class="timeline__item">
+                            <p class="timeline__date">2019 — 2020</p>
+                            <div>
+                                <h3>Data Science Intern</h3>
+                                <p>RAK Analytics Pvt. Ltd. · India</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="timeline__group reveal">
+                        <p class="timeline__label">Education</p>
+                        <article class="timeline__item">
+                            <p class="timeline__date">2023 — 2025</p>
+                            <div>
+                                <h3>Postgraduate Diploma, Artificial Intelligence &amp; Machine Learning</h3>
+                                <p>Lambton College · Toronto, Canada</p>
+                            </div>
+                        </article>
+                        <article class="timeline__item">
+                            <p class="timeline__date">2015 — 2020</p>
+                            <div>
+                                <h3>Dual Degree, Master of Computer Applications</h3>
+                                <p>SCMS School of Technology and Management · India</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact section" id="contact" aria-labelledby="contact-title">
+            <div class="contact__container container reveal">
+                <p class="section-kicker">04 / Start a conversation</p>
+                <h2 id="contact-title">Have a complex question worth exploring?</h2>
+                <a class="contact__email" href="mailto:shreyanairjob@gmail.com">shreyanairjob@gmail.com <span aria-hidden="true">↗</span></a>
+                <div class="contact__footer">
+                    <p>Based in Toronto. Open to data science and machine learning opportunities.</p>
+                    <div class="social-links" aria-label="Social profiles">
+                        <a href="https://www.linkedin.com/in/shreya-nair-gopi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="https://github.com/shreya-001" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://medium.com/@shreyanair.1697" target="_blank" rel="noopener noreferrer">Medium</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container container">
+            <p>© <span id="year">2026</span> Shreya Nair</p>
+            <a href="#home">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
 </html>
