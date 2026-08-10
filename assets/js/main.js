@@ -3,17 +3,35 @@ const menu = document.querySelector("#nav-menu");
 const menuToggle = document.querySelector("#nav-toggle");
 const navLinks = [...document.querySelectorAll(".nav__link")];
 const sections = [...document.querySelectorAll("main section[id]")];
-const pageContent = [document.querySelector("main"), document.querySelector("footer")];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const themeToggle = document.querySelector("#theme-toggle");
+const themeLabel = themeToggle.querySelector(".theme-toggle__label");
+const themeColor = document.querySelector('meta[name="theme-color"]');
+
+function updateThemeControl() {
+    const currentTheme = document.documentElement.dataset.theme;
+    const targetTheme = currentTheme === "dark" ? "light" : "dark";
+    const targetLabel = targetTheme[0].toUpperCase() + targetTheme.slice(1);
+
+    themeLabel.textContent = targetLabel;
+    themeToggle.setAttribute("aria-label", `Switch to ${targetTheme} theme`);
+    themeToggle.title = `Switch to ${targetTheme} theme`;
+    themeColor.content = currentTheme === "dark" ? "#17121e" : "#f5efe7";
+}
+
+updateThemeControl();
+
+themeToggle.addEventListener("click", () => {
+    const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem("portfolio-theme", nextTheme);
+    updateThemeControl();
+});
 
 function setMenu(open) {
     menu.classList.toggle("is-open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
     menuToggle.querySelector(".nav__toggle-label").textContent = open ? "Close" : "Menu";
-    document.body.classList.toggle("menu-open", open);
-    pageContent.forEach((element) => {
-        element.inert = open;
-    });
 
     if (open) navLinks[0].focus();
 }
@@ -31,6 +49,14 @@ document.addEventListener("keydown", (event) => {
         setMenu(false);
         menuToggle.focus();
     }
+});
+
+document.addEventListener("click", (event) => {
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+    const clickedMenu = menu.contains(event.target);
+    const clickedToggle = menuToggle.contains(event.target);
+
+    if (isOpen && !clickedMenu && !clickedToggle) setMenu(false);
 });
 
 window.addEventListener("resize", () => {
