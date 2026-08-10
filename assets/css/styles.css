@@ -709,8 +709,9 @@ ul {
     margin-top: 1.2rem;
     font-family: var(--display);
     font-size: clamp(4rem, 8.5vw, 8.5rem);
-    font-variation-settings: "wdth" 88;
-    letter-spacing: -0.07em;
+    font-variation-settings: "wdth" 96;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
 }
 
 .contact__details > p {
@@ -1049,6 +1050,8 @@ ul {
 
     .contact h2 {
         font-size: clamp(3.8rem, 18vw, 6rem);
+        letter-spacing: -0.025em;
+        line-height: 1;
     }
 
     .contact__glow {
