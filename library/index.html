@@ -666,6 +666,23 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
     radial-gradient(1.2px 1.2px at 80px 140px, rgba(236,231,255,0.3), transparent);
   background-size: 260px 260px;
 }
+/* ================= Gentle life in the room ================= */
+.room .swing { transform-box: view-box; transform-origin: 280px 0px; animation: swingy 5s ease-in-out infinite; }
+@keyframes swingy { 0%, 100% { transform: rotate(-2.2deg); } 50% { transform: rotate(2.2deg); } }
+.room .sway { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 6s ease-in-out infinite; }
+.room .sway.slow { animation-duration: 7.5s; animation-delay: -2s; }
+.room .sway-hang { transform-box: fill-box; transform-origin: 50% 0%; animation: sway 6.5s ease-in-out infinite; }
+.room .sway-up { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 5s ease-in-out infinite; }
+@keyframes sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+.room .owl-lids { transform-box: fill-box; transform-origin: 50% 0%; transform: scaleY(0); animation: blink 5.5s infinite; }
+@keyframes blink { 0%, 90%, 100% { transform: scaleY(0); } 93%, 95% { transform: scaleY(1); } }
+.room .dog-tail { transform-box: fill-box; transform-origin: 90% 95%; animation: wag 1.6s ease-in-out infinite; }
+@keyframes wag { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(14deg); } }
+.room .dog-z { animation: zz 4s ease-in infinite; opacity: 0; }
+.room .bulbg.tw { animation: flick var(--d, 3s) ease-in-out infinite; animation-delay: var(--dl, 0s); }
+@keyframes flick { 0%, 100% { opacity: 1; } 20% { opacity: 0.45; } 24% { opacity: 0.95; } 48% { opacity: 0.6; } 52% { opacity: 1; } 75% { opacity: 0.35; } 80% { opacity: 0.9; } }
+.room .bulb.tw { animation: none; }
+@media (prefers-reduced-motion: reduce) { .room * { animation: none !important; } }
 </style>
 </head>
 <body>
@@ -694,7 +711,8 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
     <g id="caseR"><rect x="548" y="30" width="252" height="412" fill="#2b1b13"/><rect x="558" y="40" width="232" height="398" fill="#170f0b"/><g class="r-books"></g></g>
     <path d="M0 48 H252 M548 48 H800" stroke="#c9a24a" stroke-width="3"/>
     <!-- owl on the right bookcase -->
-    <g transform="translate(64 6)"><ellipse cx="0" cy="16" rx="12" ry="15" fill="#6b5340"/><ellipse cx="0" cy="19" rx="7" ry="10" fill="#a88a6a"/><path d="M-11 4 L-7 9 L-3 3 Z M11 4 L7 9 L3 3 Z" fill="#6b5340"/><circle cx="-5" cy="10" r="4.5" fill="#f4e1b0"/><circle cx="5" cy="10" r="4.5" fill="#f4e1b0"/><circle cx="-5" cy="10" r="2" fill="#1a1208"/><circle cx="5" cy="10" r="2" fill="#1a1208"/><path d="M-1.5 13 L0 16 L1.5 13 Z" fill="#e0a040"/><path d="M-6 30 h4 M2 30 h4" stroke="#e0a040" stroke-width="2"/></g>
+    <g transform="translate(64 6)"><ellipse cx="0" cy="16" rx="12" ry="15" fill="#6b5340"/><ellipse cx="0" cy="19" rx="7" ry="10" fill="#a88a6a"/><path d="M-11 4 L-7 9 L-3 3 Z M11 4 L7 9 L3 3 Z" fill="#6b5340"/><circle cx="-5" cy="10" r="4.5" fill="#f4e1b0"/><circle cx="5" cy="10" r="4.5" fill="#f4e1b0"/><circle cx="-5" cy="10" r="2" fill="#1a1208"/><circle cx="5" cy="10" r="2" fill="#1a1208"/><g class="owl-lids"><ellipse cx="-5" cy="10" rx="4.9" ry="4.9" fill="#6b5340"/><ellipse cx="5" cy="10" rx="4.9" ry="4.9" fill="#6b5340"/></g><path d="M-1.5 13 L0 16 L1.5 13 Z" fill="#e0a040"/><path d="M-6 30 h4 M2 30 h4" stroke="#e0a040" stroke-width="2"/></g>
+
     <!-- rolling ladder -->
     <g stroke="#6b4428" stroke-linecap="round"><path d="M172 44 L226 444 M204 44 L258 444" stroke-width="6"/><g class="r-rungs" stroke-width="4"></g></g>
     <path d="M168 50 q4 -12 10 -2 M200 50 q4 -12 10 -2" stroke="#c9a24a" stroke-width="3" fill="none"/>
@@ -704,11 +722,11 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
     <path d="M0 470 H800 M0 498 H800" stroke="#000" stroke-opacity=".25"/>
     <ellipse cx="420" cy="492" rx="130" ry="22" fill="#2c2358"/><ellipse cx="420" cy="492" rx="112" ry="16" fill="none" stroke="#c9a24a" stroke-opacity=".5" stroke-dasharray="2 5"/>
     <!-- hanging pothos -->
-    <g><path d="M538 0 V40" stroke="#5a4636" stroke-width="1.5"/><path d="M526 40 h24 l-4 16 h-16 z" fill="#8a4f32"/>
+    <g class="sway-hang"><path d="M538 0 V40" stroke="#5a4636" stroke-width="1.5"/><path d="M526 40 h24 l-4 16 h-16 z" fill="#8a4f32"/>
       <g stroke="#3f6a3a" stroke-width="2" fill="none"><path d="M530 56 C520 90 534 120 524 160"/><path d="M546 56 C556 100 544 130 552 176"/></g>
       <g fill="#5e8f4f"><ellipse cx="524" cy="80" rx="6" ry="3.5" transform="rotate(-30 524 80)"/><ellipse cx="531" cy="112" rx="6" ry="3.5" transform="rotate(25 531 112)"/><ellipse cx="524" cy="150" rx="6" ry="3.5"/><ellipse cx="552" cy="92" rx="6" ry="3.5" transform="rotate(30 552 92)"/><ellipse cx="546" cy="132" rx="6" ry="3.5" transform="rotate(-25 546 132)"/><ellipse cx="552" cy="170" rx="5" ry="3"/></g></g>
     <!-- swing chair with the cat -->
-    <g><path d="M262 22 V238 M298 22 V238" stroke="#a8875e" stroke-width="2.5"/><circle cx="280" cy="236" r="6" fill="none" stroke="#c9a24a" stroke-width="3"/>
+    <g class="swing"><path d="M262 22 V238 M298 22 V238" stroke="#a8875e" stroke-width="2.5"/><circle cx="280" cy="236" r="6" fill="none" stroke="#c9a24a" stroke-width="3"/>
       <path d="M280 242 C222 250 220 352 280 372 C340 352 338 250 280 242 Z" fill="url(#rWicker)" stroke="#5a3b20" stroke-width="3"/>
       <path d="M280 262 C244 270 244 340 280 352 C316 340 316 270 280 262 Z" fill="#1d120c"/>
       <ellipse cx="280" cy="342" rx="32" ry="11" fill="#6a55c8"/><ellipse cx="280" cy="338" rx="26" ry="6" fill="#8a74e0"/>
@@ -718,30 +736,72 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
       <rect x="48" y="444" width="160" height="28" rx="3" fill="#4a3426"/><rect x="54" y="448" width="148" height="20" rx="2" fill="#d9cdb0"/>
       <g stroke="#b9ab8a" stroke-width="1.2" fill="none"><path d="M56 453 C80 450 100 456 120 453 S160 450 200 454"/><path d="M56 458 C80 455 100 461 120 458 S160 455 200 459"/><path d="M56 463 C80 460 100 466 120 463 S160 460 200 464"/><ellipse cx="96" cy="458" rx="15" ry="7"/><ellipse cx="96" cy="458" rx="21" ry="9.5"/></g>
       <ellipse cx="96" cy="457" rx="8" ry="5" fill="#5d5a66"/><ellipse cx="150" cy="459" rx="6" ry="4" fill="#6e6a78"/><ellipse cx="160" cy="456" rx="3.5" ry="2.5" fill="#57545f"/>
-      <path d="M186 466 C184 452 192 446 188 434" stroke="#5a3b20" stroke-width="3" fill="none"/><circle cx="182" cy="436" r="8" fill="#4f7d44"/><circle cx="194" cy="430" r="7" fill="#5e8f4f"/><circle cx="188" cy="424" r="6" fill="#6f9a5a"/></g>
+      <g class="sway slow"><path d="M186 466 C184 452 192 446 188 434" stroke="#5a3b20" stroke-width="3" fill="none"/><circle cx="182" cy="436" r="8" fill="#4f7d44"/><circle cx="194" cy="430" r="7" fill="#5e8f4f"/><circle cx="188" cy="424" r="6" fill="#6f9a5a"/></g></g>
     <!-- floor candles -->
     <g><rect x="232" y="452" width="10" height="24" rx="2" fill="#efe2c4"/><rect x="246" y="460" width="9" height="16" rx="2" fill="#e6d6b4"/>
       <ellipse class="flame" cx="237" cy="446" rx="3" ry="6" fill="#ffcf73"/><ellipse class="flame" cx="250.5" cy="454" rx="2.6" ry="5" fill="#ffcf73"/>
       <circle cx="243" cy="452" r="26" fill="url(#rWarm)"/></g>
     <!-- sleeping dog on the rug -->
-    <g transform="translate(372 462)"><ellipse cx="48" cy="22" rx="44" ry="15" fill="#d38b45"/><ellipse cx="62" cy="27" rx="20" ry="8" fill="#f1dcc0"/><path d="M8 20 q-10 -4 -6 8" stroke="#d38b45" stroke-width="7" fill="none" stroke-linecap="round"/>
-      <circle cx="92" cy="18" r="14" fill="#d9944f"/><ellipse cx="101" cy="24" rx="8" ry="5.5" fill="#f1dcc0"/><circle cx="107" cy="23" r="2" fill="#2a1a10"/>
-      <path d="M82 8 L84 -8 L93 5 Z M96 6 L102 -8 L106 9 Z" fill="#c07a38"/><path d="M88 18 q3 2 6 0" stroke="#2a1a10" stroke-width="1.5" fill="none"/></g>
+    <g class="dog" transform="translate(352 452)">
+      <path class="dog-tail" d="M18 26 C6 22 0 12 6 4" stroke="#c97f3c" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M16 30 C14 16 34 10 58 10 C80 10 92 16 96 26 L98 36 C74 42 34 42 20 38 C16 36 16 34 16 30 Z" fill="#d38b45"/>
+      <ellipse cx="30" cy="27" rx="15" ry="11" fill="#c27a38"/>
+      <ellipse cx="44" cy="40" rx="13" ry="4" fill="#d38b45"/><ellipse cx="55" cy="40.5" rx="5" ry="3.3" fill="#f1dcc0"/>
+      <path d="M40 18 C52 16 66 16 76 19" stroke="#b56f30" stroke-width="2" fill="none" opacity=".6"/>
+      <ellipse cx="86" cy="30" rx="10" ry="9" fill="#f1dcc0"/>
+      <ellipse cx="110" cy="38" rx="17" ry="4.5" fill="#d38b45"/><ellipse cx="124" cy="38.5" rx="5" ry="3.3" fill="#f1dcc0"/>
+      <ellipse cx="106" cy="41" rx="17" ry="4" fill="#c88340"/><ellipse cx="120" cy="41.5" rx="5" ry="3" fill="#f1dcc0"/>
+      <path d="M90 22 C90 12 98 6 108 7 C118 8 124 15 123 24 C122 30 114 33 104 32 C96 31 90 28 90 22 Z" fill="#d9944f"/>
+      <ellipse cx="124" cy="27" rx="10" ry="6.5" fill="#f1dcc0"/><ellipse cx="133" cy="24.5" rx="3.3" ry="2.6" fill="#2a1a10"/>
+      <path d="M124 31 q4 2 8 -1" stroke="#9a6a4a" stroke-width="1.2" fill="none"/>
+      <path d="M104 18 q4 3 8 0" stroke="#2a1a10" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M98 9 C90 10 86 18 88 30 C90 34 96 32 97 26 C98 20 100 14 98 9 Z" fill="#9a5a26"/>
+      <path d="M92 20 C94 26 92 30 90 34" stroke="#b03a3a" stroke-width="4" fill="none"/><circle cx="91" cy="36" r="2.4" fill="#f4c66d"/>
+      <text x="114" y="0" font-size="9" fill="#a9a2cc" font-family="Georgia, serif" class="dog-z">z</text>
+    </g>
     <!-- monstera -->
-    <g><path d="M496 444 h40 l-5 30 h-30 z" fill="#4a5a6a"/><g fill="#3f7a4a"><path d="M516 444 C490 420 480 390 500 370 C510 395 518 410 516 444 Z"/><path d="M516 444 C540 410 556 396 572 400 C560 420 540 436 516 444 Z"/><path d="M516 444 C508 400 520 370 540 360 C540 392 528 420 516 444 Z" fill="#4f8a58"/></g>
-      <g stroke="#2c5534" stroke-width="1.2"><path d="M516 444 L500 375 M516 444 L568 401 M516 444 L538 364"/></g></g>
-    <!-- café counter -->
-    <g><rect x="560" y="404" width="240" height="12" fill="#4a3020"/><rect x="566" y="416" width="234" height="104" fill="#21160f"/>
-      <path d="M600 426 v84 M660 426 v84 M720 426 v84 M780 426 v84" stroke="#3a281c" stroke-width="2"/>
-      <rect x="690" y="342" width="76" height="62" rx="6" fill="url(#rChrome)"/><rect x="696" y="332" width="64" height="12" rx="3" fill="#3a3844"/>
-      <rect x="702" y="362" width="52" height="8" rx="2" fill="#2a2834"/><rect x="718" y="370" width="20" height="10" rx="2" fill="#2a2834"/>
-      <path d="M722 392 h12 v8 a6 6 0 0 1 -12 0 z" fill="#efe6d6"/><circle cx="752" cy="352" r="4" fill="#ff8a5c"/>
-      <g class="steam" stroke="#e8dcc8" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M726 388 q-3 -5 0 -9 q3 -4 0 -8"/><path d="M732 386 q-3 -5 0 -9 q3 -4 0 -8"/></g>
-      <ellipse cx="626" cy="404" rx="24" ry="4" fill="#cfc4b0"/><path d="M604 404 C604 374 648 374 648 404 Z" fill="rgba(220,230,255,0.16)" stroke="rgba(230,235,255,0.45)"/><path d="M612 404 c0 -10 28 -10 28 0 z" fill="#b5654a"/>
-      <rect x="664" y="384" width="9" height="20" rx="2" fill="#efe2c4"/><rect x="676" y="390" width="8" height="14" rx="2" fill="#e6d6b4"/>
-      <ellipse class="flame" cx="668.5" cy="378" rx="2.8" ry="5.5" fill="#ffcf73"/><ellipse class="flame" cx="680" cy="385" rx="2.4" ry="4.6" fill="#ffcf73"/>
-      <circle cx="674" cy="388" r="26" fill="url(#rWarm)"/>
-      <path d="M574 404 h22 v-10 a11 11 0 0 0 -22 0 z" fill="#7a3236"/><path d="M596 396 a5 5 0 0 1 0 8" stroke="#7a3236" stroke-width="3" fill="none"/></g>
+    <g><path d="M496 444 h40 l-5 30 h-30 z" fill="#4a5a6a"/><g class="sway" fill="#3f7a4a"><path d="M516 444 C490 420 480 390 500 370 C510 395 518 410 516 444 Z"/><path d="M516 444 C540 410 556 396 572 400 C560 420 540 436 516 444 Z"/><path d="M516 444 C508 400 520 370 540 360 C540 392 528 420 516 444 Z" fill="#4f8a58"/></g>
+      <g class="sway" stroke="#2c5534" stroke-width="1.2"><path d="M516 444 L500 375 M516 444 L568 401 M516 444 L538 364"/></g></g>
+    <!-- my work desk with coffee -->
+    <g class="desk">
+      <ellipse cx="742" cy="404" rx="70" ry="10" fill="url(#rWarm)"/>
+      <rect x="556" y="404" width="244" height="11" rx="2" fill="#5a3a26"/><rect x="556" y="413" width="244" height="5" fill="#3b261a"/>
+      <rect x="566" y="418" width="9" height="102" fill="#3b261a"/><rect x="782" y="418" width="9" height="102" fill="#3b261a"/>
+      <rect x="690" y="418" width="92" height="40" fill="#2f1f15"/><rect x="726" y="434" width="20" height="3" rx="1.5" fill="#c9a24a"/>
+      <!-- notebook, pen and glasses -->
+      <path d="M566 402 L572 394 L598 394 L596 402 Z" fill="#efe6d6"/><path d="M584 394 L583 402" stroke="#c9b99a"/>
+      <path d="M570 398 h10 M570 400 h8 M588 398 h6" stroke="#b9ab8a" stroke-width=".7"/>
+      <path d="M592 392 L606 399" stroke="#3a2c6a" stroke-width="2" stroke-linecap="round"/>
+      <g fill="none" stroke="#c9a24a" stroke-width="1.2"><circle cx="575" cy="396.5" r="2.6"/><circle cx="582" cy="396.5" r="2.6"/><path d="M577.6 396.5 h1.8"/></g>
+      <!-- big coffee mug -->
+      <path d="M608 380 h22 v18 a6 6 0 0 1 -6 6 h-10 a6 6 0 0 1 -6 -6 z" fill="#7a3236"/>
+      <path d="M630 385 a6 6 0 0 1 0 12" stroke="#7a3236" stroke-width="3.5" fill="none"/>
+      <ellipse cx="619" cy="380" rx="11" ry="2.4" fill="#3b2116"/>
+      <path d="M612 391 h14" stroke="#f4c66d" stroke-width="1" opacity=".6"/>
+      <g class="steam" stroke="#e8dcc8" stroke-width="1.8" fill="none" stroke-linecap="round"><path d="M613 376 q-3 -6 0 -11 q3 -5 0 -10"/><path d="M619 374 q-3 -6 0 -11 q3 -5 0 -10"/><path d="M625 376 q-3 -6 0 -11 q3 -5 0 -10"/></g>
+      <!-- laptop -->
+      <path d="M640 400 h80 l6 5 h-92 z" fill="#b9b7c4"/><rect x="648" y="350" width="64" height="48" rx="3" fill="#2a2834"/>
+      <rect x="652" y="354" width="56" height="40" rx="1.5" fill="#1b1840"/>
+      <rect x="652" y="354" width="56" height="9" fill="#2b2466"/><circle cx="657" cy="358.5" r="2" fill="#f4c66d"/><path d="M662 358.5 h20" stroke="#f4c66d" stroke-width="1.5"/>
+      <g fill="#8a6cf0" opacity=".9"><rect x="656" y="368" width="5" height="14" rx="1"/><rect x="662" y="371" width="4" height="11" rx="1" fill="#5e8f4f"/><rect x="667" y="366" width="6" height="16" rx="1" fill="#b4586a"/><rect x="674" y="369" width="4" height="13" rx="1" fill="#4b78a6"/></g>
+      <path d="M684 370 h18 M684 375 h14 M684 380 h16" stroke="#a9a2cc" stroke-width="1.2"/>
+      <rect x="652" y="386" width="56" height="3" rx="1.5" fill="#0d0b22"/><rect x="652" y="386" width="22" height="3" rx="1.5" fill="#8fd8c6"/>
+      <ellipse cx="680" cy="374" rx="44" ry="30" fill="#8fb4ff" opacity=".08"/>
+      <!-- book stack with a candle -->
+      <rect x="726" y="396" width="30" height="8" rx="1" fill="#3a3a6c"/><rect x="729" y="389" width="25" height="7" rx="1" fill="#6d2f3a"/><rect x="727" y="383" width="28" height="6" rx="1" fill="#2f4a3a"/>
+      <path d="M727 386 h28 M729 392 h25 M726 400 h30" stroke="#d9b26a" stroke-width=".6" opacity=".7"/>
+      <rect x="736" y="370" width="8" height="13" rx="1.5" fill="#efe2c4"/><ellipse class="flame" cx="740" cy="365" rx="2.6" ry="5.2" fill="#ffcf73"/><circle cx="740" cy="370" r="20" fill="url(#rWarm)"/>
+      <!-- desk lamp -->
+      <path d="M752 352 L772 404" stroke="#4a3f86" stroke-width="0"/>
+      <path d="M760 352 L742 392" fill="none"/>
+      <path d="M744 352 L700 404 L790 404 Z" fill="rgba(255,214,130,0.10)"/>
+      <ellipse cx="778" cy="403" rx="13" ry="3.5" fill="#2b2456"/>
+      <path d="M778 401 L784 368 L760 346" stroke="#2b2456" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M766 338 L746 352 L758 362 Z" fill="#c9a24a"/><circle cx="752" cy="356" r="3" fill="#fff1c9"/>
+      <!-- succulent -->
+      <path d="M700 396 h12 l-2 8 h-8 z" fill="#8a4f32"/>
+      <g class="sway-up"><path d="M706 396 l-5 -7 l5 3 l5 -3 z M706 396 l-2 -10 l2 4 l2 -4 z" fill="#6f9a5a"/></g>
+    </g>
     <!-- fairy lights -->
     <g class="r-lights" fill="none" stroke="#3a3048" stroke-width="1.2">
       <path d="M0 16 Q 200 92 400 20 T 800 16"/><path d="M110 6 Q 400 118 690 6"/>
@@ -2571,7 +2631,7 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.se
         const r = rand();
         if (r < 0.05 && x < x1 - 30) { // a small candle or plant on the shelf
           if (rand() < 0.5) { el('rect', {x, y: base - 20, width: 7, height: 16, rx: 1.5, fill: '#efe2c4'}, g); el('ellipse', {class: 'flame', cx: x + 3.5, cy: base - 24, rx: 2.2, ry: 4.4, fill: '#ffcf73'}, g); el('circle', {cx: x + 3.5, cy: base - 18, r: 16, fill: 'url(#rWarm)'}, g); x += 14; }
-          else { el('path', {d: `M${x} ${base - 14} h14 l-2 10 h-10 z`, fill: '#8a4f32'}, g); el('circle', {cx: x + 7, cy: base - 20, r: 7, fill: '#5e8f4f'}, g); x += 18; }
+          else { el('path', {d: `M${x} ${base - 14} h14 l-2 10 h-10 z`, fill: '#8a4f32'}, g); const pg = el('g', {class: 'sway-up'}, g); el('circle', {cx: x + 7, cy: base - 20, r: 7, fill: '#5e8f4f'}, pg); el('circle', {cx: x + 3, cy: base - 24, r: 4, fill: '#6f9a5a'}, pg); x += 18; }
           continue;
         }
         const w = 6 + Math.floor(rand() * 9), h = 30 + Math.floor(rand() * 18);
@@ -2590,8 +2650,10 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.se
     const L = p.getTotalLength(), n = Math.round(L / 24);
     for (let i = 1; i < n; i++) {
       const pt = p.getPointAtLength((i / n) * L), warm = (i + j) % 5 === 0 ? '#ffe7b0' : '#ffcf7a';
-      el('circle', {cx: pt.x.toFixed(1), cy: (pt.y + 2.5).toFixed(1), r: 4.5, fill: warm, opacity: 0.5, filter: 'url(#rBloom)'}, bulbs);
-      el('circle', {cx: pt.x.toFixed(1), cy: (pt.y + 2.5).toFixed(1), r: 1.9, fill: warm, class: i % 3 === 0 ? 'bulb tw' : 'bulb'}, bulbs);
+      const bg = el('g', {class: rand() < 0.7 ? 'bulbg tw' : 'bulbg'}, bulbs);
+      bg.style.setProperty('--d', (1.8 + rand() * 3.4).toFixed(2) + 's'); bg.style.setProperty('--dl', (-rand() * 5).toFixed(2) + 's');
+      el('circle', {cx: pt.x.toFixed(1), cy: (pt.y + 2.5).toFixed(1), r: 4.5, fill: warm, opacity: 0.5, filter: 'url(#rBloom)'}, bg);
+      el('circle', {cx: pt.x.toFixed(1), cy: (pt.y + 2.5).toFixed(1), r: 1.9, fill: warm, class: 'bulb'}, bg);
     }
   });
 })();
