@@ -683,6 +683,8 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
 @keyframes flick { 0%, 100% { opacity: 1; } 20% { opacity: 0.45; } 24% { opacity: 0.95; } 48% { opacity: 0.6; } 52% { opacity: 1; } 75% { opacity: 0.35; } 80% { opacity: 0.9; } }
 .room .bulb.tw { animation: none; }
 @media (prefers-reduced-motion: reduce) { .room * { animation: none !important; } }
+.gsap-on .room .swing, .gsap-on .room .sway, .gsap-on .room .sway-hang, .gsap-on .room .sway-up, .gsap-on .room .owl-lids, .gsap-on .room .dog-tail, .gsap-on .room .bulbg.tw, .gsap-on .room .flame { animation: none !important; }
+.gsap-on .room .swing, .gsap-on .room .sway, .gsap-on .room .sway-hang, .gsap-on .room .sway-up, .gsap-on .room .owl-lids, .gsap-on .room .dog-tail, .gsap-on .room .flame, .gsap-on .room .cat-body, .gsap-on .room .dog-body { transform-origin: 0 0 !important; transform-box: view-box !important; }
 </style>
 </head>
 <body>
@@ -730,7 +732,7 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
       <path d="M280 242 C222 250 220 352 280 372 C340 352 338 250 280 242 Z" fill="url(#rWicker)" stroke="#5a3b20" stroke-width="3"/>
       <path d="M280 262 C244 270 244 340 280 352 C316 340 316 270 280 262 Z" fill="#1d120c"/>
       <ellipse cx="280" cy="342" rx="32" ry="11" fill="#6a55c8"/><ellipse cx="280" cy="338" rx="26" ry="6" fill="#8a74e0"/>
-      <g class="r-cat" transform="translate(252 300) scale(0.5)"><ellipse cx="58" cy="50" rx="42" ry="18" fill="#c27a3e"/><path d="M34 40 q4 8 0 18 M50 34 q5 10 0 22 M66 33 q5 10 0 22" stroke="#9a5a28" stroke-width="3" fill="none"/><path d="M22 56 Q 8 68 40 67 Q 74 68 92 62" stroke="#b56f36" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="94" cy="47" r="16" fill="#cd8648"/><path d="M82 38 L84 23 L94 33 Z M98 33 L108 22 L108 39 Z" fill="#cd8648"/><path d="M86 49 q4 3 8 0 M98 49 q4 3 8 0" stroke="#3a2416" stroke-width="1.6" fill="none"/></g></g>
+      <g class="r-cat" transform="translate(252 300) scale(0.5)"><g class="cat-body"><ellipse cx="58" cy="50" rx="42" ry="18" fill="#c27a3e"/><path d="M34 40 q4 8 0 18 M50 34 q5 10 0 22 M66 33 q5 10 0 22" stroke="#9a5a28" stroke-width="3" fill="none"/><path d="M22 56 Q 8 68 40 67 Q 74 68 92 62" stroke="#b56f36" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="94" cy="47" r="16" fill="#cd8648"/><path d="M82 38 L84 23 L94 33 Z M98 33 L108 22 L108 39 Z" fill="#cd8648"/><path d="M86 49 q4 3 8 0 M98 49 q4 3 8 0" stroke="#3a2416" stroke-width="1.6" fill="none"/></g></g></g>
     <!-- zen garden on a low table -->
     <g><rect x="34" y="470" width="190" height="9" rx="2" fill="#3b261a"/><rect x="44" y="479" width="8" height="30" fill="#2a1a12"/><rect x="206" y="479" width="8" height="30" fill="#2a1a12"/>
       <rect x="48" y="444" width="160" height="28" rx="3" fill="#4a3426"/><rect x="54" y="448" width="148" height="20" rx="2" fill="#d9cdb0"/>
@@ -744,7 +746,7 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
     <!-- sleeping dog on the rug -->
     <g class="dog" transform="translate(352 452)">
       <path class="dog-tail" d="M18 26 C6 22 0 12 6 4" stroke="#c97f3c" stroke-width="7" fill="none" stroke-linecap="round"/>
-      <path d="M16 30 C14 16 34 10 58 10 C80 10 92 16 96 26 L98 36 C74 42 34 42 20 38 C16 36 16 34 16 30 Z" fill="#d38b45"/>
+      <g class="dog-body"><path d="M16 30 C14 16 34 10 58 10 C80 10 92 16 96 26 L98 36 C74 42 34 42 20 38 C16 36 16 34 16 30 Z" fill="#d38b45"/>
       <ellipse cx="30" cy="27" rx="15" ry="11" fill="#c27a38"/>
       <ellipse cx="44" cy="40" rx="13" ry="4" fill="#d38b45"/><ellipse cx="55" cy="40.5" rx="5" ry="3.3" fill="#f1dcc0"/>
       <path d="M40 18 C52 16 66 16 76 19" stroke="#b56f30" stroke-width="2" fill="none" opacity=".6"/>
@@ -756,7 +758,7 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
       <path d="M124 31 q4 2 8 -1" stroke="#9a6a4a" stroke-width="1.2" fill="none"/>
       <path d="M104 18 q4 3 8 0" stroke="#2a1a10" stroke-width="1.6" fill="none" stroke-linecap="round"/>
       <path d="M98 9 C90 10 86 18 88 30 C90 34 96 32 97 26 C98 20 100 14 98 9 Z" fill="#9a5a26"/>
-      <path d="M92 20 C94 26 92 30 90 34" stroke="#b03a3a" stroke-width="4" fill="none"/><circle cx="91" cy="36" r="2.4" fill="#f4c66d"/>
+      <path d="M92 20 C94 26 92 30 90 34" stroke="#b03a3a" stroke-width="4" fill="none"/><circle cx="91" cy="36" r="2.4" fill="#f4c66d"/></g>
       <text x="114" y="0" font-size="9" fill="#a9a2cc" font-family="Georgia, serif" class="dog-z">z</text>
     </g>
     <!-- monstera -->
@@ -868,6 +870,7 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
 </div>
 <div class="toasts" id="toasts" aria-live="assertive"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
 <script src="config.js"></script>
 <script>
@@ -2656,6 +2659,77 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.se
       el('circle', {cx: pt.x.toFixed(1), cy: (pt.y + 2.5).toFixed(1), r: 1.9, fill: warm, class: 'bulb'}, bg);
     }
   });
+})();
+
+/* life */
+/* ================= Natural motion for the room (GSAP + smooth noise) ================= */
+(() => {
+  const room = document.querySelector('svg.room');
+  if (!room || !window.gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('gsap-on');
+  const R = Math.random;
+  // smooth 1D value noise in 0..1
+  const noise = () => { const p = Array.from({length: 256}, R); return x => { const i = Math.floor(x), f = x - i, t = f * f * (3 - 2 * f); return p[i & 255] * (1 - t) + p[(i + 1) & 255] * t; }; };
+  const $ = s => [...room.querySelectorAll(s)];
+  gsap.ticker.lagSmoothing(500, 33);
+
+  // candle flames: each flickers on its own, with the odd draught
+  const flames = $('.flame').map(el => { gsap.set(el, {transformOrigin: '50% 100%'}); return {el, n: noise(), n2: noise(), sp: 5 + R() * 4, sy: gsap.quickSetter(el, 'scaleY'), sx: gsap.quickSetter(el, 'scaleX'), sk: gsap.quickSetter(el, 'skewX', 'deg'), op: gsap.quickSetter(el, 'opacity')}; });
+  // fairy lights: soft breathing, with a rare quick flicker
+  const bulbs = $('.bulbg').map(el => ({op: gsap.quickSetter(el, 'opacity'), n: noise(), sp: 0.25 + R() * 0.6, f: noise(), fsp: 1.5 + R() * 2}));
+  // plants: a slow breeze, each plant a little different
+  const breeze = noise();
+  const plant = (sel, origin, amp, phase) => $(sel).map(el => { gsap.set(el, {transformOrigin: origin}); return {rot: gsap.quickSetter(el, 'rotation', 'deg'), n: noise(), amp: amp * (0.7 + R() * 0.6), ph: phase + R() * 2}; });
+  const monstera = $('.sway').filter(el => !el.classList.contains('slow'));
+  monstera.forEach(el => gsap.set(el, {svgOrigin: '516 444'}));
+  const monN = noise();
+  const plants = [...plant('.sway.slow', '50% 100%', 3, 0), ...plant('.sway-hang', '50% 0%', 4, 3), ...plant('.sway-up', '50% 100%', 5, 6)];
+  // the swing: a real pendulum whose reach drifts slowly
+  const swing = room.querySelector('.swing');
+  if (swing) gsap.set(swing, {svgOrigin: '280 0'});
+  const swingRot = swing && gsap.quickSetter(swing, 'rotation', 'deg');
+  const swingAmp = noise();
+
+  gsap.ticker.add((time) => {
+    const t = time;
+    flames.forEach(f => {
+      const a = f.n(t * f.sp), b = f.n2(t * f.sp * 0.37);
+      const gust = b > 0.82 ? (b - 0.82) * 4 : 0;
+      f.sy(0.82 + a * 0.32 - gust * 0.25); f.sx(1.06 - a * 0.14); f.sk((f.n2(t * 2.1) - 0.5) * 10 + gust * 12); f.op(0.78 + a * 0.22);
+    });
+    bulbs.forEach(b => { const base = 0.6 + 0.4 * b.n(t * b.sp), fl = b.f(t * b.fsp); b.op(fl > 0.86 ? base * 0.35 : base); });
+    const gust = breeze(t * 0.18);
+    plants.forEach(p => p.rot((p.n(t * 0.4 + p.ph) - 0.5) * p.amp + (gust - 0.5) * p.amp * 0.6));
+    const mr = (monN(t * 0.35) - 0.5) * 3 + (gust - 0.5) * 2.5; monstera.forEach(el => gsap.set(el, {rotation: mr}));
+    if (swingRot) swingRot((1.1 + 1.6 * swingAmp(t * 0.08)) * Math.sin(t * 2 * Math.PI / 4.3));
+  });
+
+  // owl: blinks at random moments, sometimes twice
+  const lids = room.querySelector('.owl-lids');
+  if (lids) {
+    gsap.set(lids, {transformOrigin: '50% 0%', scaleY: 0});
+    const blink = () => {
+      const tl = gsap.timeline({onComplete: () => gsap.delayedCall(2 + R() * 6, blink)});
+      tl.to(lids, {scaleY: 1, duration: 0.07, ease: 'power2.in'}).to(lids, {scaleY: 0, duration: 0.12, ease: 'power2.out'});
+      if (R() < 0.3) tl.to(lids, {scaleY: 1, duration: 0.07, delay: 0.12}).to(lids, {scaleY: 0, duration: 0.12});
+    };
+    gsap.delayedCall(1 + R() * 2, blink);
+  }
+  // dog: wags in happy little bursts, then rests; breathes slowly
+  const tail = room.querySelector('.dog-tail');
+  if (tail) {
+    gsap.set(tail, {transformOrigin: '90% 95%', rotation: -6});
+    const wag = () => {
+      const n = 3 + Math.floor(R() * 5), sp = 0.12 + R() * 0.1;
+      const tl = gsap.timeline({onComplete: () => gsap.delayedCall(2.5 + R() * 6, wag)});
+      for (let i = 0; i < n; i++) tl.to(tail, {rotation: 16 - i * 1.5, duration: sp, ease: 'sine.inOut'}).to(tail, {rotation: -8, duration: sp, ease: 'sine.inOut'});
+      tl.to(tail, {rotation: -6, duration: 0.6, ease: 'sine.out'});
+    };
+    gsap.delayedCall(1.5, wag);
+  }
+  const breathe = (sel, amt, dur) => { const el = room.querySelector(sel); if (el) gsap.to(el, {scaleY: 1 + amt, transformOrigin: '50% 100%', duration: dur, ease: 'sine.inOut', yoyo: true, repeat: -1, repeatRefresh: true}); };
+  breathe('.cat-body', 0.05, 1.7);
+  breathe('.dog-body', 0.03, 2.2);
 })();
 
 /* ================= Golden sparks, only when you level up ================= */
