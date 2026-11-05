@@ -307,7 +307,7 @@
         const C = window.LANTERN_CONFIG || {};
         if (!C.supabaseUrl || !C.supabaseAnonKey) return fileData();
         return fetch(`${C.supabaseUrl}/rest/v1/public_reading?id=eq.public&select=data,updated_at`, {
-            headers: { apikey: C.supabaseAnonKey, Authorization: `Bearer ${C.supabaseAnonKey}` },
+            headers: String(C.supabaseAnonKey).startsWith("sb_") ? { apikey: C.supabaseAnonKey } : { apikey: C.supabaseAnonKey, Authorization: `Bearer ${C.supabaseAnonKey}` },
             cache: "no-cache",
         })
             .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
