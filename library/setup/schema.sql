@@ -13,6 +13,7 @@ create policy "Read my own library" on public.library_docs for select using (aut
 create policy "Add to my own library" on public.library_docs for insert with check (auth.uid() = owner);
 create policy "Edit my own library" on public.library_docs for update using (auth.uid() = owner) with check (auth.uid() = owner);
 create policy "Remove from my own library" on public.library_docs for delete using (auth.uid() = owner);
+grant select, insert, update, delete on public.library_docs to authenticated;
 alter publication supabase_realtime add table public.library_docs;
 
 -- The public reading log your website shows (only what you choose to share).
@@ -26,6 +27,8 @@ alter table public.public_reading enable row level security;
 create policy "Anyone can read the public reading log" on public.public_reading for select using (true);
 create policy "Owner publishes the reading log" on public.public_reading for insert with check (auth.uid() = owner);
 create policy "Owner updates the reading log" on public.public_reading for update using (auth.uid() = owner) with check (auth.uid() = owner);
+grant select on public.public_reading to anon, authenticated;
+grant insert, update on public.public_reading to authenticated;
 
 -- Spine photos: anyone can view them (so your website can show them); only you can add or remove yours.
 insert into storage.buckets (id, name, public) values ('spines', 'spines', true) on conflict (id) do nothing;
