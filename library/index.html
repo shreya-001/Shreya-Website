@@ -635,88 +635,120 @@ h1, h2, h3 { font-weight: 600; letter-spacing: 0.01em; }
   .lantern { width: 34px; } .lantern.l1 { left: 19%; } .lantern.l2 { right: 19%; }
 }
 @media (prefers-reduced-motion: reduce) { #sky, #motes { display: none; } }
+/* ================= The room (calmer: only candles, steam and fairy lights move, gently) ================= */
+.scene.room-scene { position: relative; height: auto !important; aspect-ratio: 800 / 520; max-width: 860px; margin: 0 auto; overflow: hidden; border-radius: 0 0 22px 22px; background: #0f0c20; box-shadow: 0 20px 50px rgba(5,3,20,0.6); }
+.room { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.room-window { position: absolute; left: 36.25%; top: 7.69%; width: 27.5%; height: 65.38%; display: block; }
+.room .flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flicker 0.22s infinite alternate; }
+.room .bulb.tw { animation: bulb 6s ease-in-out infinite; }
+.room .bulb.tw:nth-child(4n) { animation-delay: -2s; } .room .bulb.tw:nth-child(5n) { animation-delay: -4s; }
+@keyframes bulb { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+.room .r-cat { animation: none; }
+.room-title { text-align: center; margin: 18px auto 0; position: relative; z-index: 1; }
+.room-title h1 { font-size: clamp(30px, 6.5vw, 46px); color: var(--gold-2); text-shadow: 0 0 16px rgba(244,198,109,0.4); }
+.room-title p { margin: 2px 0 0; color: var(--violet); font-family: var(--display); font-style: italic; font-size: 18px; }
+.hud { margin-top: 14px !important; }
+.scene-controls { z-index: 3; }
+.fab, .xpbar i::after { animation: none !important; }
+.spine.tapped { animation: none; }
+
+body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(1.2px 1.2px at 23px 41px, rgba(236,231,255,0.7), transparent),
+    radial-gradient(1.2px 1.2px at 97px 13px, rgba(236,231,255,0.5), transparent),
+    radial-gradient(1.2px 1.2px at 161px 88px, rgba(236,231,255,0.6), transparent),
+    radial-gradient(1.2px 1.2px at 210px 150px, rgba(236,231,255,0.45), transparent),
+    radial-gradient(1.2px 1.2px at 58px 190px, rgba(236,231,255,0.55), transparent),
+    radial-gradient(1.2px 1.2px at 132px 211px, rgba(236,231,255,0.4), transparent),
+    radial-gradient(1.2px 1.2px at 190px 40px, rgba(236,231,255,0.6), transparent),
+    radial-gradient(1.2px 1.2px at 12px 120px, rgba(236,231,255,0.35), transparent),
+    radial-gradient(1.2px 1.2px at 240px 230px, rgba(236,231,255,0.5), transparent),
+    radial-gradient(1.2px 1.2px at 80px 140px, rgba(236,231,255,0.3), transparent);
+  background-size: 260px 260px;
+}
 </style>
 </head>
 <body>
 
-<header class="scene" aria-label="A candlelit library café">
-  <div class="shelfwall left" aria-hidden="true"><div></div><div></div><div></div><div></div></div>
-  <div class="shelfwall right" aria-hidden="true"><div></div><div></div><div></div><div></div></div>
-  <div class="window" aria-hidden="true">
-    <canvas id="weather"></canvas>
-    <div class="mullion-v"></div><div class="mullion-h"></div>
-  </div>
-  <div class="sill" aria-hidden="true"></div>
-
-  <svg class="cat" viewBox="0 0 120 70" aria-hidden="true">
-    <g class="body">
-      <ellipse cx="58" cy="50" rx="42" ry="18" fill="#c27a3e"/>
-      <path d="M34 40 q4 8 0 18 M50 34 q5 10 0 22 M66 33 q5 10 0 22" stroke="#9a5a28" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <g class="tailtip"><path d="M22 56 Q 8 68 40 67 Q 74 68 92 62" stroke="#b56f36" stroke-width="9" fill="none" stroke-linecap="round"/></g>
-      <circle cx="94" cy="47" r="16" fill="#cd8648"/>
-      <path d="M82 38 L84 23 L94 33 Z" fill="#cd8648"/><path d="M98 33 L108 22 L108 39 Z" fill="#cd8648"/>
-      <path d="M85 36 L86 28 L91 33 Z" fill="#e9a6a0"/>
-      <path d="M86 49 q4 3 8 0 M98 49 q4 3 8 0" stroke="#3a2416" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-      <path d="M95 54 l1.5 1.5 l1.5 -1.5" stroke="#3a2416" stroke-width="1.2" fill="none"/>
+<header class="scene room-scene" aria-label="A dark library café at night: tall bookshelves with a rolling ladder, fairy lights, a swing chair with a sleeping cat, a city skyline through the window, a café counter, a zen garden, plants, a dog and an owl">
+  <canvas id="weather" class="room-window" aria-hidden="true"></canvas>
+  <svg class="room" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <defs>
+      <linearGradient id="rWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1633"/><stop offset="1" stop-color="#0f0c20"/></linearGradient>
+      <linearGradient id="rFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1c17"/><stop offset="1" stop-color="#140d0b"/></linearGradient>
+      <linearGradient id="rWood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2a1a12"/><stop offset=".5" stop-color="#3b261a"/><stop offset="1" stop-color="#2a1a12"/></linearGradient>
+      <linearGradient id="rChrome" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5f5d6b"/><stop offset=".45" stop-color="#c9c7d4"/><stop offset="1" stop-color="#4a4856"/></linearGradient>
+      <radialGradient id="rWarm" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffcf7a" stop-opacity=".45"/><stop offset="1" stop-color="#ffcf7a" stop-opacity="0"/></radialGradient>
+      <filter id="rBloom" x="-1" y="-1" width="3" height="3"><feGaussianBlur stdDeviation="2.2"/></filter>
+      <pattern id="rWicker" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#7a5532"/><path d="M0 4 Q2 0 4 4 T8 4 M0 8 Q2 4 4 8 T8 8" stroke="#5a3b20" stroke-width="1.2" fill="none"/></pattern>
+    </defs>
+    <!-- wall with the arched window cut out -->
+    <path d="M0 0 H800 V520 H0 Z M290 380 V150 A110 110 0 0 1 510 150 V380 Z" fill="url(#rWall)" fill-rule="evenodd"/>
+    <rect x="0" y="0" width="800" height="22" fill="#0c0919"/>
+    <!-- window frame -->
+    <path d="M290 380 V150 A110 110 0 0 1 510 150 V380 Z" fill="none" stroke="#3a2a20" stroke-width="12"/>
+    <path d="M400 40 V380 M290 205 H510 M290 292 H510" stroke="#3a2a20" stroke-width="5"/>
+    <rect x="276" y="376" width="248" height="13" rx="3" fill="#4a3324"/>
+    <!-- bookcases -->
+    <g id="caseL"><rect x="0" y="30" width="252" height="412" fill="#2b1b13"/><rect x="10" y="40" width="232" height="398" fill="#170f0b"/><g class="r-books"></g></g>
+    <g id="caseR"><rect x="548" y="30" width="252" height="412" fill="#2b1b13"/><rect x="558" y="40" width="232" height="398" fill="#170f0b"/><g class="r-books"></g></g>
+    <path d="M0 48 H252 M548 48 H800" stroke="#c9a24a" stroke-width="3"/>
+    <!-- owl on the right bookcase -->
+    <g transform="translate(64 6)"><ellipse cx="0" cy="16" rx="12" ry="15" fill="#6b5340"/><ellipse cx="0" cy="19" rx="7" ry="10" fill="#a88a6a"/><path d="M-11 4 L-7 9 L-3 3 Z M11 4 L7 9 L3 3 Z" fill="#6b5340"/><circle cx="-5" cy="10" r="4.5" fill="#f4e1b0"/><circle cx="5" cy="10" r="4.5" fill="#f4e1b0"/><circle cx="-5" cy="10" r="2" fill="#1a1208"/><circle cx="5" cy="10" r="2" fill="#1a1208"/><path d="M-1.5 13 L0 16 L1.5 13 Z" fill="#e0a040"/><path d="M-6 30 h4 M2 30 h4" stroke="#e0a040" stroke-width="2"/></g>
+    <!-- rolling ladder -->
+    <g stroke="#6b4428" stroke-linecap="round"><path d="M172 44 L226 444 M204 44 L258 444" stroke-width="6"/><g class="r-rungs" stroke-width="4"></g></g>
+    <path d="M168 50 q4 -12 10 -2 M200 50 q4 -12 10 -2" stroke="#c9a24a" stroke-width="3" fill="none"/>
+    <circle cx="226" cy="448" r="5" fill="#c9a24a"/><circle cx="258" cy="448" r="5" fill="#c9a24a"/>
+    <!-- floor and rug -->
+    <rect x="0" y="442" width="800" height="78" fill="url(#rFloor)"/>
+    <path d="M0 470 H800 M0 498 H800" stroke="#000" stroke-opacity=".25"/>
+    <ellipse cx="420" cy="492" rx="130" ry="22" fill="#2c2358"/><ellipse cx="420" cy="492" rx="112" ry="16" fill="none" stroke="#c9a24a" stroke-opacity=".5" stroke-dasharray="2 5"/>
+    <!-- hanging pothos -->
+    <g><path d="M538 0 V40" stroke="#5a4636" stroke-width="1.5"/><path d="M526 40 h24 l-4 16 h-16 z" fill="#8a4f32"/>
+      <g stroke="#3f6a3a" stroke-width="2" fill="none"><path d="M530 56 C520 90 534 120 524 160"/><path d="M546 56 C556 100 544 130 552 176"/></g>
+      <g fill="#5e8f4f"><ellipse cx="524" cy="80" rx="6" ry="3.5" transform="rotate(-30 524 80)"/><ellipse cx="531" cy="112" rx="6" ry="3.5" transform="rotate(25 531 112)"/><ellipse cx="524" cy="150" rx="6" ry="3.5"/><ellipse cx="552" cy="92" rx="6" ry="3.5" transform="rotate(30 552 92)"/><ellipse cx="546" cy="132" rx="6" ry="3.5" transform="rotate(-25 546 132)"/><ellipse cx="552" cy="170" rx="5" ry="3"/></g></g>
+    <!-- swing chair with the cat -->
+    <g><path d="M262 22 V238 M298 22 V238" stroke="#a8875e" stroke-width="2.5"/><circle cx="280" cy="236" r="6" fill="none" stroke="#c9a24a" stroke-width="3"/>
+      <path d="M280 242 C222 250 220 352 280 372 C340 352 338 250 280 242 Z" fill="url(#rWicker)" stroke="#5a3b20" stroke-width="3"/>
+      <path d="M280 262 C244 270 244 340 280 352 C316 340 316 270 280 262 Z" fill="#1d120c"/>
+      <ellipse cx="280" cy="342" rx="32" ry="11" fill="#6a55c8"/><ellipse cx="280" cy="338" rx="26" ry="6" fill="#8a74e0"/>
+      <g class="r-cat" transform="translate(252 300) scale(0.5)"><ellipse cx="58" cy="50" rx="42" ry="18" fill="#c27a3e"/><path d="M34 40 q4 8 0 18 M50 34 q5 10 0 22 M66 33 q5 10 0 22" stroke="#9a5a28" stroke-width="3" fill="none"/><path d="M22 56 Q 8 68 40 67 Q 74 68 92 62" stroke="#b56f36" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="94" cy="47" r="16" fill="#cd8648"/><path d="M82 38 L84 23 L94 33 Z M98 33 L108 22 L108 39 Z" fill="#cd8648"/><path d="M86 49 q4 3 8 0 M98 49 q4 3 8 0" stroke="#3a2416" stroke-width="1.6" fill="none"/></g></g>
+    <!-- zen garden on a low table -->
+    <g><rect x="34" y="470" width="190" height="9" rx="2" fill="#3b261a"/><rect x="44" y="479" width="8" height="30" fill="#2a1a12"/><rect x="206" y="479" width="8" height="30" fill="#2a1a12"/>
+      <rect x="48" y="444" width="160" height="28" rx="3" fill="#4a3426"/><rect x="54" y="448" width="148" height="20" rx="2" fill="#d9cdb0"/>
+      <g stroke="#b9ab8a" stroke-width="1.2" fill="none"><path d="M56 453 C80 450 100 456 120 453 S160 450 200 454"/><path d="M56 458 C80 455 100 461 120 458 S160 455 200 459"/><path d="M56 463 C80 460 100 466 120 463 S160 460 200 464"/><ellipse cx="96" cy="458" rx="15" ry="7"/><ellipse cx="96" cy="458" rx="21" ry="9.5"/></g>
+      <ellipse cx="96" cy="457" rx="8" ry="5" fill="#5d5a66"/><ellipse cx="150" cy="459" rx="6" ry="4" fill="#6e6a78"/><ellipse cx="160" cy="456" rx="3.5" ry="2.5" fill="#57545f"/>
+      <path d="M186 466 C184 452 192 446 188 434" stroke="#5a3b20" stroke-width="3" fill="none"/><circle cx="182" cy="436" r="8" fill="#4f7d44"/><circle cx="194" cy="430" r="7" fill="#5e8f4f"/><circle cx="188" cy="424" r="6" fill="#6f9a5a"/></g>
+    <!-- floor candles -->
+    <g><rect x="232" y="452" width="10" height="24" rx="2" fill="#efe2c4"/><rect x="246" y="460" width="9" height="16" rx="2" fill="#e6d6b4"/>
+      <ellipse class="flame" cx="237" cy="446" rx="3" ry="6" fill="#ffcf73"/><ellipse class="flame" cx="250.5" cy="454" rx="2.6" ry="5" fill="#ffcf73"/>
+      <circle cx="243" cy="452" r="26" fill="url(#rWarm)"/></g>
+    <!-- sleeping dog on the rug -->
+    <g transform="translate(372 462)"><ellipse cx="48" cy="22" rx="44" ry="15" fill="#d38b45"/><ellipse cx="62" cy="27" rx="20" ry="8" fill="#f1dcc0"/><path d="M8 20 q-10 -4 -6 8" stroke="#d38b45" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <circle cx="92" cy="18" r="14" fill="#d9944f"/><ellipse cx="101" cy="24" rx="8" ry="5.5" fill="#f1dcc0"/><circle cx="107" cy="23" r="2" fill="#2a1a10"/>
+      <path d="M82 8 L84 -8 L93 5 Z M96 6 L102 -8 L106 9 Z" fill="#c07a38"/><path d="M88 18 q3 2 6 0" stroke="#2a1a10" stroke-width="1.5" fill="none"/></g>
+    <!-- monstera -->
+    <g><path d="M496 444 h40 l-5 30 h-30 z" fill="#4a5a6a"/><g fill="#3f7a4a"><path d="M516 444 C490 420 480 390 500 370 C510 395 518 410 516 444 Z"/><path d="M516 444 C540 410 556 396 572 400 C560 420 540 436 516 444 Z"/><path d="M516 444 C508 400 520 370 540 360 C540 392 528 420 516 444 Z" fill="#4f8a58"/></g>
+      <g stroke="#2c5534" stroke-width="1.2"><path d="M516 444 L500 375 M516 444 L568 401 M516 444 L538 364"/></g></g>
+    <!-- café counter -->
+    <g><rect x="560" y="404" width="240" height="12" fill="#4a3020"/><rect x="566" y="416" width="234" height="104" fill="#21160f"/>
+      <path d="M600 426 v84 M660 426 v84 M720 426 v84 M780 426 v84" stroke="#3a281c" stroke-width="2"/>
+      <rect x="690" y="342" width="76" height="62" rx="6" fill="url(#rChrome)"/><rect x="696" y="332" width="64" height="12" rx="3" fill="#3a3844"/>
+      <rect x="702" y="362" width="52" height="8" rx="2" fill="#2a2834"/><rect x="718" y="370" width="20" height="10" rx="2" fill="#2a2834"/>
+      <path d="M722 392 h12 v8 a6 6 0 0 1 -12 0 z" fill="#efe6d6"/><circle cx="752" cy="352" r="4" fill="#ff8a5c"/>
+      <g class="steam" stroke="#e8dcc8" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M726 388 q-3 -5 0 -9 q3 -4 0 -8"/><path d="M732 386 q-3 -5 0 -9 q3 -4 0 -8"/></g>
+      <ellipse cx="626" cy="404" rx="24" ry="4" fill="#cfc4b0"/><path d="M604 404 C604 374 648 374 648 404 Z" fill="rgba(220,230,255,0.16)" stroke="rgba(230,235,255,0.45)"/><path d="M612 404 c0 -10 28 -10 28 0 z" fill="#b5654a"/>
+      <rect x="664" y="384" width="9" height="20" rx="2" fill="#efe2c4"/><rect x="676" y="390" width="8" height="14" rx="2" fill="#e6d6b4"/>
+      <ellipse class="flame" cx="668.5" cy="378" rx="2.8" ry="5.5" fill="#ffcf73"/><ellipse class="flame" cx="680" cy="385" rx="2.4" ry="4.6" fill="#ffcf73"/>
+      <circle cx="674" cy="388" r="26" fill="url(#rWarm)"/>
+      <path d="M574 404 h22 v-10 a11 11 0 0 0 -22 0 z" fill="#7a3236"/><path d="M596 396 a5 5 0 0 1 0 8" stroke="#7a3236" stroke-width="3" fill="none"/></g>
+    <!-- fairy lights -->
+    <g class="r-lights" fill="none" stroke="#3a3048" stroke-width="1.2">
+      <path d="M0 16 Q 200 92 400 20 T 800 16"/><path d="M110 6 Q 400 118 690 6"/>
+      <path d="M0 58 Q 126 84 252 56"/><path d="M548 56 Q 674 84 800 58"/>
     </g>
+    <g class="r-bulbs"></g>
   </svg>
-  <span class="zzz" style="left: calc(50% - 60px); top: 196px;">z</span>
-  <span class="zzz" style="left: calc(50% - 52px); top: 190px; animation-delay: 1.6s;">z</span>
-
-  <svg class="plant" viewBox="0 0 90 150" aria-hidden="true">
-    <path d="M45 0 V22" stroke="#2a1e17" stroke-width="2"/>
-    <path d="M28 22 h34 l-5 22 h-24 z" fill="#8a4f32"/><path d="M26 22 h38 v5 h-38z" fill="#a0603c"/>
-    <g fill="none" stroke="#3f6a3a" stroke-width="2">
-      <path d="M33 42 C 22 70, 30 100, 18 140"/><path d="M45 44 C 48 80, 40 100, 46 128"/><path d="M57 42 C 70 70, 64 92, 74 118"/>
-    </g>
-    <g fill="#5e8f4f">
-      <ellipse cx="27" cy="62" rx="7" ry="4" transform="rotate(-30 27 62)"/><ellipse cx="29" cy="88" rx="7" ry="4" transform="rotate(25 29 88)"/>
-      <ellipse cx="21" cy="116" rx="7" ry="4" transform="rotate(-20 21 116)"/><ellipse cx="18" cy="138" rx="6" ry="3.5"/>
-      <ellipse cx="49" cy="70" rx="7" ry="4" transform="rotate(30 49 70)"/><ellipse cx="42" cy="98" rx="7" ry="4" transform="rotate(-25 42 98)"/>
-      <ellipse cx="47" cy="124" rx="6" ry="3.5"/><ellipse cx="66" cy="62" rx="7" ry="4" transform="rotate(-30 66 62)"/>
-      <ellipse cx="66" cy="90" rx="7" ry="4" transform="rotate(30 66 90)"/><ellipse cx="73" cy="114" rx="6" ry="3.5"/>
-    </g>
-  </svg>
-  <svg class="plant2" viewBox="0 0 70 120" aria-hidden="true">
-    <path d="M35 0 V18" stroke="#2a1e17" stroke-width="2"/>
-    <path d="M22 18 h26 l-4 18 h-18 z" fill="#5d6b74"/>
-    <g fill="#6f9a5a">
-      <ellipse cx="24" cy="44" rx="5" ry="3"/><ellipse cx="22" cy="58" rx="5" ry="3"/><ellipse cx="25" cy="72" rx="5" ry="3"/><ellipse cx="22" cy="86" rx="5" ry="3"/>
-      <ellipse cx="44" cy="46" rx="5" ry="3"/><ellipse cx="47" cy="62" rx="5" ry="3"/><ellipse cx="44" cy="78" rx="5" ry="3"/>
-    </g>
-    <g stroke="#4e7a41" stroke-width="1.5" fill="none"><path d="M26 36 Q 20 70 23 96"/><path d="M42 36 Q 48 60 44 84"/></g>
-  </svg>
-
-  <div class="glow" aria-hidden="true"></div>
-  <svg class="lantern l1" viewBox="0 0 44 110" aria-hidden="true"><path d="M22 0 V30" stroke="#6d63a8" stroke-width="1.5"/><circle class="halo" cx="22" cy="64" r="24" fill="rgba(244,198,109,0.28)"/><path d="M14 36 h16 l-3 -5 h-10 z" fill="#c9a24a"/><rect x="12" y="38" width="20" height="40" rx="5" fill="rgba(255,228,163,0.9)" stroke="#c9a24a" stroke-width="2"/><path d="M22 40 v36 M12 58 h20" stroke="#c9a24a" stroke-width="1.2"/><ellipse cx="22" cy="60" rx="4" ry="7" fill="#fff6dc"/><path d="M12 78 h20 l-4 6 h-12 z" fill="#c9a24a"/></svg>
-  <svg class="lantern l2" viewBox="0 0 44 110" aria-hidden="true"><path d="M22 0 V40" stroke="#6d63a8" stroke-width="1.5"/><circle class="halo" cx="22" cy="72" r="22" fill="rgba(244,198,109,0.25)"/><path d="M15 46 h14 l-3 -5 h-8 z" fill="#c9a24a"/><path d="M13 48 h18 l3 30 h-24 z" fill="rgba(255,228,163,0.88)" stroke="#c9a24a" stroke-width="2"/><ellipse cx="22" cy="66" rx="3.5" ry="6" fill="#fff6dc"/><path d="M10 78 h24 l-4 6 h-16 z" fill="#c9a24a"/></svg>
-
-  <div class="floor" aria-hidden="true"></div>
-  <div class="rug" aria-hidden="true"></div>
-
-  <svg class="candle" viewBox="0 0 22 70" aria-hidden="true">
-    <ellipse class="flame" cx="11" cy="14" rx="5" ry="11" fill="#ffcf73"/>
-    <ellipse cx="11" cy="17" rx="2.4" ry="5" fill="#fff4cf"/>
-    <rect x="10.4" y="22" width="1.2" height="5" fill="#2a1a0e"/>
-    <rect x="5" y="26" width="12" height="38" rx="2" fill="#efe2c4"/>
-    <path d="M5 30 q3 6 0 10" stroke="#d9c8a4" stroke-width="2" fill="none"/>
-    <rect x="1" y="62" width="20" height="6" rx="3" fill="#8a6a3a"/>
-  </svg>
-
-  <svg class="table" viewBox="0 0 170 64" preserveAspectRatio="none" aria-hidden="true">
-    <rect x="0" y="0" width="170" height="10" rx="3" fill="#6b4733"/>
-    <rect x="16" y="10" width="8" height="54" fill="#4a3125"/><rect x="146" y="10" width="8" height="54" fill="#4a3125"/>
-  </svg>
-  <svg class="mug" viewBox="0 0 64 70" aria-hidden="true">
-    <g class="steam" stroke="#e8dcc8" stroke-width="2.4" fill="none" stroke-linecap="round">
-      <path d="M22 26 q-5 -7 0 -13 q5 -6 0 -12"/><path d="M32 24 q-5 -7 0 -13 q5 -6 0 -12"/><path d="M42 26 q-5 -7 0 -13 q5 -6 0 -12"/>
-    </g>
-    <ellipse cx="32" cy="66" rx="28" ry="4" fill="#d8cbb2"/>
-    <path d="M12 32 h40 v20 a14 14 0 0 1 -14 14 h-12 a14 14 0 0 1 -14 -14 z" fill="#7a3236"/>
-    <path d="M52 38 a8 8 0 0 1 0 16" stroke="#7a3236" stroke-width="4" fill="none"/>
-    <ellipse cx="32" cy="32" rx="20" ry="3.5" fill="#3b2116"/>
-  </svg>
-
   <div class="scene-controls">
     <button class="chip" id="weatherBtn" type="button">Leaves</button>
     <div class="music"><button class="chip music-btn" id="musicBtn" type="button" aria-haspopup="true" aria-expanded="false">♪</button>
@@ -724,11 +756,9 @@ h1, h2, h3 { font-weight: 600; letter-spacing: 0.01em; }
         <button type="button" role="menuitem" data-snd="cafe">Café</button><button type="button" role="menuitem" data-snd="library">Library</button>
         <button type="button" role="menuitem" data-snd="garden">Garden</button><button type="button" role="menuitem" data-snd="rain">Rain</button></div></div>
   </div>
-  <div class="scene-title">
-    <h1>The Lantern Library</h1>
-    <p>Shreya's reading café</p>
-  </div>
 </header>
+<div class="room-title"><h1>The Lantern Library</h1><p>Shreya's reading café</p></div>
+
 
 <main class="wrap">
   <section class="hud" aria-label="Your progress">
@@ -1150,7 +1180,6 @@ function celebrate(a, b) {
   Object.keys(b.genreCounts).forEach(k => { if (!a.genreCounts[k]) toast('<b>The fog lifts</b><br>You discovered ' + esc(G[k].region) + '.'); });
   b.achievements.forEach((x, i) => { if (x.done && !a.achievements[i].done) toast('<b>Trophy unlocked: ' + esc(x.name) + '</b><br>' + esc(x.desc)); });
   if (b.level > a.level) setTimeout(() => showLevelUp(b), 600);
-  if (window.sparkBurst && (b.finished.length > a.finished.length || b.achievements.some((x, i) => x.done && !a.achievements[i].done) || Object.keys(b.genreCounts).some(k => !a.genreCounts[k]))) sparkBurst();
 }
 
 /* ================= Rendering ================= */
@@ -2339,7 +2368,7 @@ function matchGenre(name) {
 
 function showLevelUp(s) {
   if (overlay.classList.contains('open')) { pendingLevel = s; return; }
-  if (window.sparkBurst) { sparkBurst(innerWidth / 2, innerHeight * 0.4, 120); setTimeout(() => sparkBurst(innerWidth / 2, innerHeight * 0.4, 80), 350); }
+  if (window.sparkBurst) sparkBurst(innerWidth / 2, innerHeight * 0.4, 70);
   openSheet(`<div class="levelup"><div class="qmeta">Level up</div><div class="big">${s.level}</div><h2 id="sheetTitle">${esc(s.rank)}</h2>
     <p class="section-note" style="margin-top:8px">The lanterns burn a little brighter. ${(s.lvlCeil - s.xp).toLocaleString()} XP until the next level.</p>
     <div class="actions" style="justify-content:center"><button class="btn" id="okLv" type="button">Keep reading</button></div></div>`);
@@ -2373,39 +2402,44 @@ function spawn(any) {
 }
 function backdrop() {
   const sky = ctx.createLinearGradient(0, 0, 0, H);
-  if (mode === 'rain') { sky.addColorStop(0, '#120f2e'); sky.addColorStop(1, '#2a2658'); }
-  else if (mode === 'snow') { sky.addColorStop(0, '#1d1a46'); sky.addColorStop(1, '#4a4590'); }
-  else { sky.addColorStop(0, '#120e34'); sky.addColorStop(0.6, '#2b2266'); sky.addColorStop(1, '#5a3f7a'); }
+  if (mode === 'rain') { sky.addColorStop(0, '#100d28'); sky.addColorStop(1, '#2a2650'); }
+  else if (mode === 'snow') { sky.addColorStop(0, '#1b1842'); sky.addColorStop(1, '#45407e'); }
+  else { sky.addColorStop(0, '#0f0c2c'); sky.addColorStop(0.65, '#2a2160'); sky.addColorStop(1, '#5b3c6e'); }
   ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
-  // stars
-  if (!backdrop.stars || backdrop.w !== W) { backdrop.w = W; backdrop.stars = Array.from({length: 46}, () => [Math.random() * W, Math.random() * H * 0.6, Math.random() * 1.2 + 0.3, Math.random() * 6]); }
-  const tt = performance.now() / 900;
-  backdrop.stars.forEach(([x, y, r, p]) => { ctx.fillStyle = `rgba(240,236,255,${(mode === 'rain' ? 0.25 : 0.55) + 0.35 * Math.sin(p + tt)})`; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.29); ctx.fill(); });
-  // moon
-  const mx = W * 0.7, my = H * 0.2, mr = Math.min(W, H) * 0.085;
-  const halo = ctx.createRadialGradient(mx, my, mr * 0.5, mx, my, mr * 4);
-  halo.addColorStop(0, mode === 'rain' ? 'rgba(200,190,255,0.18)' : 'rgba(255,240,205,0.45)'); halo.addColorStop(1, 'rgba(255,240,205,0)');
-  ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
-  if (mode !== 'rain') {
-    ctx.fillStyle = '#fff3d6'; ctx.beginPath(); ctx.arc(mx, my, mr, 0, 6.29); ctx.fill();
-    ctx.fillStyle = 'rgba(225,210,170,0.5)'; [[-0.3, -0.2, 0.22], [0.25, 0.2, 0.16], [0.1, -0.35, 0.1]].forEach(([dx, dy, rr]) => { ctx.beginPath(); ctx.arc(mx + dx * mr, my + dy * mr, rr * mr, 0, 6.29); ctx.fill(); });
-  } else {
-    ctx.fillStyle = 'rgba(90,80,150,0.45)'; [[0.2, 0.18, 0.5], [0.55, 0.12, 0.6], [0.85, 0.22, 0.45]].forEach(([x, y, r]) => { ctx.beginPath(); ctx.ellipse(x * W, y * H, r * W * 0.5, r * H * 0.16, 0, 0, 6.29); ctx.fill(); });
+  if (!backdrop.city || backdrop.w !== W || backdrop.h !== H) {
+    backdrop.w = W; backdrop.h = H;
+    let s = 7; const r = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+    backdrop.stars = Array.from({length: 40}, () => [r() * W, r() * H * 0.45, r() * 1.1 + 0.3]);
+    const city = []; let x = -4;
+    while (x < W) { const w = W * (0.07 + r() * 0.08), h = H * (0.16 + r() * 0.3); city.push({x, w, h, lit: Array.from({length: 40}, () => r() < 0.42)}); x += w + 1; }
+    backdrop.city = city;
   }
-  // distant spires and rooftops
-  ctx.fillStyle = mode === 'snow' ? '#231f52' : '#110d2a';
-  ctx.beginPath(); ctx.moveTo(0, H);
-  const roofs = [[0, .8], [.08, .72], [.14, .74], [.18, .6], [.2, .5], [.22, .6], [.28, .64], [.32, .72], [.42, .68], [.46, .55], [.5, .38], [.54, .55], [.58, .66], [.68, .72], [.74, .6], [.78, .62], [.84, .68], [.9, .74], [1, .7]];
-  roofs.forEach(([x, y]) => ctx.lineTo(x * W, y * H)); ctx.lineTo(W, H); ctx.fill();
-  if (mode === 'snow') { ctx.fillStyle = 'rgba(230,232,255,0.55)'; ctx.fillRect(0, H * 0.93, W, H * 0.07); }
-  // lit windows
-  ctx.fillStyle = 'rgba(255,214,130,0.85)';
-  [[.1, .82], [.2, .66], [.24, .78], [.44, .72], [.5, .5], [.52, .62], [.76, .7], [.86, .78]].forEach(([x, y]) => ctx.fillRect(x * W, y * H, 4, 5));
-  // street lamp
-  ctx.fillStyle = '#0a0820'; ctx.fillRect(W * 0.34, H * 0.56, 2, H * 0.44);
-  const lamp = ctx.createRadialGradient(W * 0.34 + 1, H * 0.56, 1, W * 0.34 + 1, H * 0.56, 32);
-  lamp.addColorStop(0, 'rgba(255,214,130,0.95)'); lamp.addColorStop(1, 'rgba(255,214,130,0)');
-  ctx.fillStyle = lamp; ctx.fillRect(W * 0.34 - 32, H * 0.56 - 32, 66, 64);
+  ctx.fillStyle = mode === 'rain' ? 'rgba(235,230,255,0.25)' : 'rgba(235,230,255,0.7)';
+  backdrop.stars.forEach(([x, y, rr]) => { ctx.beginPath(); ctx.arc(x, y, rr, 0, 6.29); ctx.fill(); });
+  const mx = W * 0.72, my = H * 0.14, mr = Math.min(W, H) * 0.09;
+  const halo = ctx.createRadialGradient(mx, my, mr * 0.5, mx, my, mr * 3.6);
+  halo.addColorStop(0, mode === 'rain' ? 'rgba(200,190,255,0.15)' : 'rgba(255,240,205,0.38)'); halo.addColorStop(1, 'rgba(255,240,205,0)');
+  ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+  if (mode !== 'rain') { ctx.fillStyle = '#fff3d6'; ctx.beginPath(); ctx.arc(mx, my, mr, 0, 6.29); ctx.fill(); ctx.fillStyle = '#2a2160'; ctx.globalAlpha = 0.18; ctx.beginPath(); ctx.arc(mx + mr * 0.35, my - mr * 0.2, mr * 0.9, 0, 6.29); ctx.fill(); ctx.globalAlpha = 1; }
+  // far skyline
+  const base = H;
+  ctx.fillStyle = mode === 'snow' ? '#2a2660' : '#1a1640';
+  backdrop.city.forEach((b, i) => { const h = b.h * 0.75; ctx.fillRect(b.x + b.w * 0.4, base - h - H * 0.05, b.w * 0.9, h + H * 0.05); });
+  // the needle tower
+  const tx = W * 0.3, tt = H * 0.18;
+  ctx.fillStyle = '#120f30';
+  ctx.beginPath(); ctx.moveTo(tx - 1.2, tt); ctx.lineTo(tx + 1.2, tt); ctx.lineTo(tx + 4, base); ctx.lineTo(tx - 4, base); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(tx, tt + H * 0.2, 7, 4, 0, 0, 6.29); ctx.fill();
+  ctx.fillStyle = '#ff6a6a'; ctx.beginPath(); ctx.arc(tx, tt - 1, 1.6, 0, 6.29); ctx.fill();
+  ctx.fillStyle = 'rgba(255,214,130,0.9)'; ctx.fillRect(tx - 6, tt + H * 0.2 - 1, 12, 1.5);
+  // near skyline with lit windows
+  backdrop.city.forEach(b => {
+    ctx.fillStyle = mode === 'snow' ? '#16133a' : '#0d0b22';
+    ctx.fillRect(b.x, base - b.h, b.w, b.h);
+    if (mode === 'snow') { ctx.fillStyle = 'rgba(235,235,255,0.7)'; ctx.fillRect(b.x, base - b.h, b.w, 2); }
+    const cols = Math.max(2, Math.floor(b.w / 7)), rows = Math.floor(b.h / 9); let k = 0;
+    for (let r = 1; r < rows; r++) for (let c = 0; c < cols; c++) { if (b.lit[(k++) % 40] && (r + c) % 2) { ctx.fillStyle = (r * c) % 7 === 0 ? 'rgba(180,200,255,0.75)' : 'rgba(255,208,120,0.85)'; ctx.fillRect(b.x + 3 + c * (b.w - 4) / cols, base - b.h + r * 9, 2.5, 3.5); } }
+  });
 }
 function frame() {
   backdrop();
@@ -2520,50 +2554,69 @@ window.LANTERN.session.then(s => {
 });
 if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
 
-/* ================= Enchanted night: sky, fireflies, sparks ================= */
+/* ================= Build the room: shelves of books, ladder rungs, fairy light bulbs ================= */
+(() => {
+  const svg = document.querySelector('svg.room'); if (!svg) return;
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v)); parent.appendChild(n); return n; };
+  const rand = (() => { let s = 20261105; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; })();
+  const COLORS = ['#6d2f3a', '#2f4a3a', '#8a6a3a', '#3a3a6c', '#5b3a4a', '#4c5b3a', '#7a4a2a', '#33485b', '#5d2f5a', '#8a5a2a', '#2f3f5a', '#6b5a2a'];
+  [['caseL', 10, 242], ['caseR', 558, 790]].forEach(([id, x0, x1]) => {
+    const g = svg.querySelector('#' + id + ' .r-books');
+    for (let k = 0; k < 7; k++) {
+      const top = 40 + k * 57, base = top + 57;
+      el('rect', {x: x0 - 10, y: base - 4, width: x1 - x0 + 20, height: 5, fill: '#3b261a'}, g);
+      let x = x0 + 3;
+      while (x < x1 - 8) {
+        const r = rand();
+        if (r < 0.05 && x < x1 - 30) { // a small candle or plant on the shelf
+          if (rand() < 0.5) { el('rect', {x, y: base - 20, width: 7, height: 16, rx: 1.5, fill: '#efe2c4'}, g); el('ellipse', {class: 'flame', cx: x + 3.5, cy: base - 24, rx: 2.2, ry: 4.4, fill: '#ffcf73'}, g); el('circle', {cx: x + 3.5, cy: base - 18, r: 16, fill: 'url(#rWarm)'}, g); x += 14; }
+          else { el('path', {d: `M${x} ${base - 14} h14 l-2 10 h-10 z`, fill: '#8a4f32'}, g); el('circle', {cx: x + 7, cy: base - 20, r: 7, fill: '#5e8f4f'}, g); x += 18; }
+          continue;
+        }
+        const w = 6 + Math.floor(rand() * 9), h = 30 + Math.floor(rand() * 18);
+        const c = COLORS[Math.floor(rand() * COLORS.length)];
+        if (r > 0.94 && x < x1 - 30) { el('rect', {x: x + 4, y: base - 4 - h, width: w, height: h, fill: c, transform: `rotate(-14 ${x + 4} ${base - 4})`}, g); x += w + 10; continue; }
+        el('rect', {x, y: base - 4 - h, width: w, height: h, fill: c}, g);
+        if (rand() < 0.5) el('rect', {x, y: base - 4 - h + 5, width: w, height: 1.5, fill: '#d9b26a', opacity: 0.7}, g);
+        x += w + (rand() < 0.15 ? 3 : 1);
+      }
+    }
+  });
+  const rungs = svg.querySelector('.r-rungs');
+  for (let i = 1; i < 11; i++) { const t = i / 11, y = 44 + 400 * t, xa = 172 + 54 * t, xb = 204 + 54 * t; el('path', {d: `M${xa.toFixed(1)} ${y.toFixed(1)} H${xb.toFixed(1)}`}, rungs); }
+  const bulbs = svg.querySelector('.r-bulbs');
+  svg.querySelectorAll('.r-lights path').forEach((p, j) => {
+    const L = p.getTotalLength(), n = Math.round(L / 24);
+    for (let i = 1; i < n; i++) {
+      const pt = p.getPointAtLength((i / n) * L), warm = (i + j) % 5 === 0 ? '#ffe7b0' : '#ffcf7a';
+      el('circle', {cx: pt.x.toFixed(1), cy: (pt.y + 2.5).toFixed(1), r: 4.5, fill: warm, opacity: 0.5, filter: 'url(#rBloom)'}, bulbs);
+      el('circle', {cx: pt.x.toFixed(1), cy: (pt.y + 2.5).toFixed(1), r: 1.9, fill: warm, class: i % 3 === 0 ? 'bulb tw' : 'bulb'}, bulbs);
+    }
+  });
+})();
+
+/* ================= Golden sparks, only when you level up ================= */
 (() => {
   const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const mk = (id, parent) => { const c = document.createElement('canvas'); c.id = id; c.setAttribute('aria-hidden', 'true'); parent.prepend(c); return c; };
-  const sky = mk('sky', document.body), fx = mk('fx', document.body), motes = mk('motes', document.querySelector('.scene'));
-  const fit = c => { const r = c.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1); c.width = r.width * d; c.height = r.height * d; c.getContext('2d').setTransform(d, 0, 0, d, 0, 0); return r; };
-  let stars = [], flies = [], sparks = [], sw = 0, sh = 0, mw = 0, mh = 0;
-  const seedSky = () => { const r = fit(sky); sw = r.width; sh = r.height; stars = Array.from({length: Math.round(sw * sh / 9000)}, () => ({x: Math.random() * sw, y: Math.random() * sh, r: Math.random() * 1.3 + 0.2, p: Math.random() * 6, s: 0.5 + Math.random() * 1.5})); };
-  const seedMotes = () => { const r = fit(motes); mw = r.width; mh = r.height; flies = Array.from({length: 22}, () => ({x: Math.random() * mw, y: Math.random() * mh, vx: (Math.random() - 0.5) * 0.25, vy: -0.1 - Math.random() * 0.25, p: Math.random() * 6, r: 1 + Math.random() * 1.8})); };
-  seedSky(); seedMotes(); fit(fx);
-  window.addEventListener('resize', () => { seedSky(); seedMotes(); fit(fx); });
-  const sc = sky.getContext('2d'), mc = motes.getContext('2d'), fc = fx.getContext('2d');
-  let t = 0;
+  const fx = document.createElement('canvas'); fx.id = 'fx'; fx.setAttribute('aria-hidden', 'true'); document.body.appendChild(fx);
+  const fit = () => { const d = Math.min(2, window.devicePixelRatio || 1); fx.width = innerWidth * d; fx.height = innerHeight * d; fx.getContext('2d').setTransform(d, 0, 0, d, 0, 0); };
+  fit(); window.addEventListener('resize', fit);
+  const fc = fx.getContext('2d'); let sparks = [];
   function tick() {
-    t += 1;
-    sc.clearRect(0, 0, sw, sh);
-    stars.forEach(s => { const a = 0.35 + 0.45 * Math.sin(s.p + t * 0.02 * s.s); sc.fillStyle = `rgba(236,231,255,${a.toFixed(3)})`; sc.beginPath(); sc.arc(s.x, s.y, s.r, 0, 6.29); sc.fill(); });
-    mc.clearRect(0, 0, mw, mh);
-    flies.forEach(f => {
-      f.p += 0.03; f.x += f.vx + Math.sin(f.p) * 0.2; f.y += f.vy; if (f.y < -5) { f.y = mh + 5; f.x = Math.random() * mw; } if (f.x < -5) f.x = mw + 5; if (f.x > mw + 5) f.x = -5;
-      const a = 0.35 + 0.4 * Math.sin(f.p * 1.7);
-      const g = mc.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 5); g.addColorStop(0, `rgba(255,228,163,${a.toFixed(3)})`); g.addColorStop(1, 'rgba(255,228,163,0)');
-      mc.fillStyle = g; mc.fillRect(f.x - f.r * 5, f.y - f.r * 5, f.r * 10, f.r * 10);
-    });
-    if (sparks.length) {
-      fc.clearRect(0, 0, fx.width, fx.height);
-      sparks = sparks.filter(p => p.life > 0);
-      sparks.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += 0.06; p.vx *= 0.985; p.life -= 1;
-        const a = Math.min(1, p.life / 40); fc.fillStyle = `hsla(${p.h},100%,${p.l}%,${a.toFixed(3)})`;
-        fc.beginPath(); fc.moveTo(p.x, p.y - p.r * 2); fc.lineTo(p.x + p.r * 0.6, p.y); fc.lineTo(p.x, p.y + p.r * 2); fc.lineTo(p.x - p.r * 0.6, p.y); fc.closePath(); fc.fill(); });
-      if (!sparks.length) fc.clearRect(0, 0, fx.width, fx.height);
-    }
-    if (!still || sparks.length) requestAnimationFrame(tick);
+    fc.clearRect(0, 0, innerWidth, innerHeight);
+    sparks = sparks.filter(p => p.life > 0);
+    sparks.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.vx *= 0.985; p.life -= 1;
+      fc.fillStyle = `hsla(${p.h},100%,${p.l}%,${Math.min(1, p.life / 40).toFixed(3)})`; fc.beginPath(); fc.arc(p.x, p.y, p.r, 0, 6.29); fc.fill(); });
+    if (sparks.length) requestAnimationFrame(tick);
   }
-  if (still) { tick(); } else requestAnimationFrame(tick);
-  window.sparkBurst = (x, y, n = 70) => {
+  window.sparkBurst = (x, y, n = 60) => {
     if (still) return;
-    const cx = x ?? innerWidth / 2, cy = y ?? innerHeight * 0.35;
-    for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, v = 2 + Math.random() * 6;
-      sparks.push({x: cx, y: cy, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 2.5, life: 50 + Math.random() * 50, r: 1.5 + Math.random() * 2.5, h: 38 + Math.random() * 18, l: 62 + Math.random() * 25}); }
-    if (sparks.length === n) requestAnimationFrame(tick);
+    const start = !sparks.length;
+    for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, v = 1.5 + Math.random() * 4.5;
+      sparks.push({x: x ?? innerWidth / 2, y: y ?? innerHeight * 0.4, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 2, life: 45 + Math.random() * 40, r: 1 + Math.random() * 2, h: 40 + Math.random() * 12, l: 65 + Math.random() * 20}); }
+    if (start) requestAnimationFrame(tick);
   };
-  // books glow and lift when tapped
-  document.addEventListener('pointerdown', e => { const s = e.target.closest('.spine'); if (!s) return; s.classList.remove('tapped'); void s.offsetWidth; s.classList.add('tapped'); }, {passive: true});
 })();
 
 /* ================= Start ================= */
