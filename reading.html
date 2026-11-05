@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What Shreya Nair is reading now, every book she has finished, and the genre map of her reading life.">
+    <meta name="theme-color" content="#f5efe7">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Reading log · Shreya Nair">
+    <meta property="og:description" content="What I am reading, what I have read, and my genre map.">
+    <meta property="og:image" content="assets/img/about.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Reading log · Shreya Nair</title>
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <script>
+        document.documentElement.classList.add("js");
+        document.documentElement.dataset.theme =
+            localStorage.getItem("portfolio-theme") ||
+            (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400&family=Dancing+Script:wght@600&family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/reading.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header" id="header">
+        <div class="availability">
+            <span class="availability__dot" aria-hidden="true"></span>
+            <span>Open to data science opportunities</span>
+        </div>
+
+        <nav class="nav container" aria-label="Primary navigation">
+            <a class="nav__brand" href="index.html#home" aria-label="Shreya Nair, home">Shreya Nair</a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li><a class="nav__link" href="index.html#work">Work</a></li>
+                    <li><a class="nav__link" href="index.html#about">About</a></li>
+                    <li><a class="nav__link" href="index.html#experience">Experience</a></li>
+                    <li><a class="nav__link active-link" href="reading.html" aria-current="page">Reading</a></li>
+                    <li><a class="nav__link" href="index.html#contact">Contact</a></li>
+                    <li><a class="nav__link" href="https://medium.com/@shreyanair.1697" target="_blank" rel="noopener noreferrer">Medium <span aria-hidden="true">↗</span></a></li>
+                </ul>
+            </div>
+
+            <div class="nav__controls">
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+                    <span class="theme-toggle__orb" aria-hidden="true"></span>
+                    <span class="theme-toggle__label">Dark</span>
+                </button>
+                <button class="nav__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="nav__toggle-label">Menu</span>
+                    <span class="nav__toggle-lines" aria-hidden="true"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="rlog-hero" aria-labelledby="rlog-title">
+            <div class="container">
+                <p class="eyebrow">Reading log</p>
+                <h1 id="rlog-title">Books, one page at a time.</h1>
+                <p>What I am reading now, every book I have finished, and a map of the genres I have wandered through. Tap any book to see what I thought of it.</p>
+            </div>
+        </section>
+        <div class="container rlog" id="reading-page" aria-live="polite">
+            <p class="rlog__empty">Loading my reading log...</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <p>© <span id="year">2026</span> Shreya Nair</p>
+            <a href="#main-content">Back to top ↑</a>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/reading.js"></script>
+</body>
+</html>

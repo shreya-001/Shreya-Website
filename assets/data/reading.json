@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "updated": "2026-11-05",
+  "books": [
+    {
+      "id": "seed-yellowface",
+      "title": "Yellowface",
+      "author": "R. F. Kuang",
+      "genre": "literary",
+      "status": "reading",
+      "format": "kindle",
+      "pages": 336,
+      "year": 2023,
+      "country": "United States",
+      "progressPct": 18,
+      "startDate": "2026-11-05",
+      "finishes": []
+    }
+  ]
+}
