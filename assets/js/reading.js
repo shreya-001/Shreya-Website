@@ -69,9 +69,9 @@
         const label = `${esc(b.title)} by ${esc(b.author || "unknown author")}`;
         const common = `type="button" data-book="${esc(b.id)}" title="${esc(b.title)}" aria-label="${label}"`;
         const rib = b.status === "reading" ? '<span class="rspine__ribbon" aria-hidden="true"></span>' : "";
-        if (b.spineImg && /^data:image\//.test(b.spineImg)) {
+        if (b.spineImg && /^(data:image\/|https:\/\/)/.test(b.spineImg)) {
             w = Math.max(Math.round(20 * scale), Math.min(Math.round(66 * scale), Math.round(h * (b.spineAspect || 0.25))));
-            return `<button ${common} class="rspine rspine--photo" style="width:${w}px;height:${h}px;margin-top:${rowH - h}px"><img src="${b.spineImg}" alt="" loading="lazy">${rib}</button>`;
+            return `<button ${common} class="rspine rspine--photo" style="width:${w}px;height:${h}px;margin-top:${rowH - h}px"><img src="${esc(b.spineImg)}" alt="" loading="lazy">${rib}</button>`;
         }
         const d = b.spine;
         if (d && Array.isArray(d.bg) && okHex(d.bg[0])) {
@@ -301,8 +301,20 @@
         if (homeEl) homeEl.innerHTML = msg;
         if (pageEl) pageEl.innerHTML = msg;
     }
-    fetch("assets/data/reading.json", { cache: "no-cache" })
-        .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+    // Live data from The Lantern Library (Supabase) when connected; otherwise the JSON file in this repo.
+    function loadData() {
+        const fileData = () => fetch("assets/data/reading.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
+        const C = window.LANTERN_CONFIG || {};
+        if (!C.supabaseUrl || !C.supabaseAnonKey) return fileData();
+        return fetch(`${C.supabaseUrl}/rest/v1/public_reading?id=eq.public&select=data,updated_at`, {
+            headers: String(C.supabaseAnonKey).startsWith("sb_") ? { apikey: C.supabaseAnonKey } : { apikey: C.supabaseAnonKey, Authorization: `Bearer ${C.supabaseAnonKey}` },
+            cache: "no-cache",
+        })
+            .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+            .then((rows) => (rows && rows[0] && rows[0].data && Array.isArray(rows[0].data.books) ? rows[0].data : fileData()))
+            .catch(fileData);
+    }
+    loadData()
         .then((data) => {
             if (homeEl) renderHome(data);
             if (pageEl) {
