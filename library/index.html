@@ -367,7 +367,7 @@ details.edit summary { cursor: pointer; color: var(--candle); }
 
 /* ---------- Round 6: real spines, music menu ---------- */
 .spine.photo { padding: 0; background: #1c1410; }
-.spine.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.spine.photo img { width: 100%; height: 100%; object-fit: fill; display: block; }
 .spine.photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0) 18%, rgba(255,255,255,0.08) 45%, rgba(0,0,0,0) 75%, rgba(0,0,0,0.3)); pointer-events: none; }
 .spine.designed { padding: 6px 0; background: linear-gradient(90deg, rgba(0,0,0,0.28), rgba(0,0,0,0) 14%, rgba(255,255,255,0.1) 40%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.32)), linear-gradient(180deg, var(--bg1), var(--bg2)); }
 .designed .sp-pub { order: -2; flex: none; width: 13px; height: 15px; border-radius: 3px; background: var(--band); margin-bottom: 5px; }
@@ -991,8 +991,12 @@ function spineHtml(b) {
   const attrs = `data-open="${esc(b.id)}" title="${esc(b.title)}" aria-label="${esc(b.title)} by ${esc(b.author || 'unknown author')}"`;
   const rib = b.status === 'reading' ? '<span class="ribbon" aria-hidden="true"></span>' : '';
   if (b.spineImg) {
-    const pw = Math.max(20, Math.min(66, Math.round(h * (b.spineAspect || 0.25))));
-    return `<button type="button" class="spine photo" ${attrs} style="width:${pw}px;height:${h}px;margin-top:${ROW - h}px"><img src="${esc(spineSrc(b))}" alt="" loading="lazy">${rib}</button>`;
+    // Keep the photo's own shape: never crop it. Very thin or wide photos change height instead of being cut.
+    const ar = b.spineAspect || 0.25;
+    let ph = h, pw = Math.round(ph * ar);
+    if (pw < 14) { pw = 14; ph = Math.min(ROW - 2, Math.round(pw / ar)); }
+    if (pw > 80) { pw = 80; ph = Math.round(pw / ar); }
+    return `<button type="button" class="spine photo" ${attrs} style="width:${pw}px;height:${ph}px;margin-top:${ROW - ph}px"><img src="${esc(spineSrc(b))}" alt="" loading="lazy">${rib}</button>`;
   }
   const d = sanitizeSpine(b.spine);
   if (d) return `<button type="button" class="spine designed f-${d.font}${d.upper ? ' upper' : ''}${d.order === 'author-first' ? ' afirst' : ''}" ${attrs}

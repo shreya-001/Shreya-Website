@@ -94,7 +94,7 @@
 .rspine.f-slab .rspine__title { font-family: "Roboto Slab", Georgia, serif; font-weight: 600; }
 .rspine.upper .rspine__title { text-transform: uppercase; }
 .rspine--photo { padding: 0; background: #1c1410; }
-.rspine--photo img { width: 100%; height: 100%; object-fit: cover; }
+.rspine--photo img { width: 100%; height: 100%; object-fit: fill; }
 .rspine--photo::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0) 18%, rgba(255,255,255,0.08) 45%, rgba(0,0,0,0) 75%, rgba(0,0,0,0.3)); }
 
 /* ---------- Spider web chart ---------- */
