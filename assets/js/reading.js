@@ -70,8 +70,11 @@
         const common = `type="button" data-book="${esc(b.id)}" title="${esc(b.title)}" aria-label="${label}"`;
         const rib = b.status === "reading" ? '<span class="rspine__ribbon" aria-hidden="true"></span>' : "";
         if (b.spineImg && /^(data:image\/|https:\/\/)/.test(b.spineImg)) {
-            w = Math.max(Math.round(20 * scale), Math.min(Math.round(66 * scale), Math.round(h * (b.spineAspect || 0.25))));
-            return `<button ${common} class="rspine rspine--photo" style="width:${w}px;height:${h}px;margin-top:${rowH - h}px"><img src="${esc(b.spineImg)}" alt="" loading="lazy">${rib}</button>`;
+            const ar = b.spineAspect || 0.25;
+            let ph = h; w = Math.round(ph * ar);
+            if (w < 14 * scale) { w = Math.round(14 * scale); ph = Math.min(rowH - 2, Math.round(w / ar)); }
+            if (w > 80 * scale) { w = Math.round(80 * scale); ph = Math.round(w / ar); }
+            return `<button ${common} class="rspine rspine--photo" style="width:${w}px;height:${ph}px;margin-top:${rowH - ph}px"><img src="${esc(b.spineImg)}" alt="" loading="lazy">${rib}</button>`;
         }
         const d = b.spine;
         if (d && Array.isArray(d.bg) && okHex(d.bg[0])) {
