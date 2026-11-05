@@ -19,10 +19,10 @@ const json = (body: unknown, status = 200) =>
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   try {
-    const supabase = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_ANON_KEY")!, {
-      global: { headers: { Authorization: req.headers.get("Authorization") ?? "" } },
-    });
-    const { data: { user } } = await supabase.auth.getUser();
+    const key = Deno.env.get("SUPABASE_ANON_KEY") ?? Deno.env.get("SUPABASE_PUBLISHABLE_KEY") ?? "";
+    const supabase = createClient(Deno.env.get("SUPABASE_URL")!, key);
+    const token = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "");
+    const { data: { user } } = token ? await supabase.auth.getUser(token) : { data: { user: null } };
     const owner = (Deno.env.get("OWNER_EMAIL") ?? "").trim().toLowerCase();
     if (!user || !owner || (user.email ?? "").toLowerCase() !== owner) return json({ error: "not_granted" }, 403);
 
