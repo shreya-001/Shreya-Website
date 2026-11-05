@@ -7,6 +7,7 @@
 
 ## Reading log
 
-`reading.html` and the Reading section on the homepage show what I'm reading, my finished shelf, and a genre map.
-They read `assets/data/reading.json`, which I export from my reading tracker (The Lantern Library → "Update my website")
-and paste into that file on GitHub.
+- `library/` is **The Lantern Library**, my installable reading tracker (works as a phone app).
+  It stores books in Supabase and asks Claude for genres and recommendations. Setup: [`library/SETUP.md`](library/SETUP.md).
+- `reading.html` and the Reading section on the homepage show what I'm reading, my shelf of spines, and a genre map.
+  They read the live public reading log from Supabase, falling back to `assets/data/reading.json`.
