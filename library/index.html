@@ -2623,7 +2623,7 @@ window.LANTERN.session.then(s => {
   renderAuth();
   if (window.LANTERN.ready && !s) setTimeout(() => { if (!overlay.classList.contains('open')) openSignIn(); }, 700);
 });
-if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
+if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js', {updateViaCache: 'none'}).then(r => r.update()).catch(() => {});
 
 /* ================= Build the room: shelves of books, ladder rungs, fairy light bulbs ================= */
 (() => {
