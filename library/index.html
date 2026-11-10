@@ -2517,7 +2517,8 @@ async function buildExport(opt) {
     const e = {id: b.id, title: b.title, author: b.author || '', genre: b.genre, status: b.status, format: b.format || 'physical', pages: b.pages || 0,
       year: b.year || null, country: b.country || '', series: b.series || '', seriesNo: b.seriesNo || 0, startDate: b.startDate || '', finishes: finishesOf(b)};
     if (b.status === 'reading') { const t = totalOf(b); e.progressPct = t ? Math.round(100 * progressOf(b) / t) : 0; }
-    { const c = clsOf(b); if (hasCls(b) || c.genres.length) e.cls = {genres: c.genres, sub: c.sub, themes: c.themes, tropes: c.tropes, subj: c.subj, trad: c.trad, form: c.form, aud: c.aud}; }
+    // Spice levels, community ratings, reading sessions and Insights never leave the app.
+    if (opt.catalogue) { const c = clsOf(b); if (hasCls(b) || c.genres.length) e.cls = {genres: c.genres, sub: c.sub, themes: c.themes, tropes: c.tropes, subj: c.subj, trad: c.trad, form: c.form, aud: c.aud}; }
     if (opt.ratings && b.rating) e.rating = b.rating;
     if (opt.moods && (b.moods || []).length) e.moods = b.moods;
     if (opt.thoughts && b.thoughts) e.thoughts = b.thoughts;
@@ -2531,7 +2532,7 @@ async function buildExport(opt) {
 function openExport() {
   const standalone = !!window.LANTERN_STANDALONE;
   const opt = {...SHARE_DEFAULT, ...(settings.share || {})};
-  const LABELS = {ratings: 'My star ratings', moods: 'Mood tags', want: 'My to-read pile', photos: 'Spine photos', thoughts: 'My written thoughts', quotes: 'Quotes I saved'};
+  const LABELS = {ratings: 'My star ratings', moods: 'Mood tags', want: 'My to-read pile', photos: 'Spine photos', thoughts: 'My written thoughts', quotes: 'Quotes I saved', catalogue: 'Catalogue card (themes, tropes, subgenres)'};
   let json = '', backup = '', token = 0;
   openSheet(`<h2 id="sheetTitle">${standalone ? 'Website & backup' : 'Website & moving'}</h2>
     <div class="flabel">What visitors see on your website</div>
@@ -2600,7 +2601,7 @@ function openExport() {
     wire(bkD, 'lantern-library-backup.json', () => backup);
   })();
 }
-const SHARE_DEFAULT = {ratings: true, moods: true, want: true, photos: true, thoughts: false, quotes: false};
+const SHARE_DEFAULT = {ratings: true, moods: true, want: true, photos: true, thoughts: false, quotes: false, catalogue: false};
 async function buildBackup() {
   const bk = [];
   for (const b of books) {
