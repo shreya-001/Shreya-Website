@@ -1,5 +1,5 @@
 // The Lantern Library service worker: makes the app installable and opens it offline.
-const CACHE = "lantern-v3";
+const CACHE = "lantern-v4";
 const SHELL = ["./", "./index.html", "./config.js", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener("activate", (e) => {

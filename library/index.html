@@ -728,6 +728,79 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
 .radar-toggle { display: flex; justify-content: center; gap: 6px; margin: 0 0 6px; }
 .radar-toggle button { border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 3px 12px; font-size: 13px; cursor: pointer; font-family: inherit; }
 .radar-toggle button[aria-pressed="true"] { color: var(--candle); border-color: var(--candle); background: rgba(240,180,92,0.12); }
+
+/* ---------- Insights tab ---------- */
+.ins { display: grid; gap: 14px; }
+.ins-scope { display: flex; gap: 6px; flex-wrap: wrap; }
+.ins-scope button, .ins-pill { border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 5px 14px; font-family: inherit; font-size: 15px; cursor: pointer; }
+.ins-scope button[aria-pressed="true"], .ins-pill[aria-pressed="true"] { color: #1c1840; background: var(--candle); border-color: var(--candle); }
+.ins-card { border: 1px solid var(--line); border-radius: 16px; padding: 16px; background: linear-gradient(160deg, rgba(36,30,80,0.55), rgba(16,13,40,0.6)); display: grid; gap: 10px; min-width: 0; }
+.ins-card h2 { margin: 0; color: var(--gold-2, var(--candle)); font-size: 24px; line-height: 1.1; }
+.ins-kicker { color: var(--muted); font-size: 14px; margin: 0; }
+.ins-big { font-family: var(--display); color: var(--gold-2, var(--candle)); font-size: 40px; line-height: 1; }
+.ins-big small { font-family: var(--body); font-size: 15px; color: var(--muted); margin-left: 6px; }
+.ins-note { color: var(--muted); font-size: 14px; margin: 0; }
+.ins-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.ins-tile { border: 1px solid var(--line); border-radius: 12px; padding: 10px 6px; text-align: center; display: grid; gap: 2px; }
+.ins-tile b { font-family: var(--display); font-size: 26px; color: var(--gold-2, var(--candle)); font-weight: 600; line-height: 1.1; }
+.ins-tile span { font-size: 12.5px; color: var(--muted); }
+.ins-goal { display: grid; gap: 4px; }
+.ins-goal .row { display: flex; justify-content: space-between; gap: 8px; font-size: 15px; }
+.ins-track { height: 10px; border-radius: 99px; background: rgba(185,166,255,0.14); overflow: hidden; }
+.ins-track i { display: block; height: 100%; border-radius: 99px; background: var(--candle); }
+.ins-goal-edit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.ins-goal-edit input { background: #120d0a; border: 1px solid var(--line); border-radius: 10px; padding: 8px; width: 100%; }
+.ins-goal-edit label { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
+.aura-title { font-family: var(--display); font-size: 26px; color: var(--gold-2, var(--candle)); text-align: center; margin: 0; }
+.aura-sub { text-align: center; color: var(--text); margin: 0; letter-spacing: 0.04em; }
+.aura-axis { display: grid; grid-template-columns: 82px 1fr 82px; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); }
+.aura-axis span:last-child { text-align: right; }
+.aura-axis .on { color: var(--gold-2, var(--candle)); }
+.aura-bar { position: relative; height: 6px; border-radius: 99px; background: rgba(185,166,255,0.18); }
+.aura-bar i { position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--candle); border: 2px solid #1c1840; transform: translate(-50%, -50%); }
+.ins-shelf .bookcase { margin: 0; }
+.ins-split { display: grid; grid-template-columns: 150px 1fr; gap: 14px; align-items: center; }
+.ins-legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14px; }
+.ins-legend li { display: flex; align-items: center; gap: 8px; }
+.ins-legend i { width: 10px; height: 10px; border-radius: 3px; background: var(--c); flex: none; }
+.ins-legend small { color: var(--muted); margin-left: auto; white-space: nowrap; padding-left: 6px; }
+.ins-rows { display: grid; gap: 6px; }
+.ins-mrow { display: grid; grid-template-columns: 34px 1fr; gap: 8px; align-items: center; min-height: 36px; }
+.ins-mrow > span { color: var(--muted); font-size: 13px; }
+.ins-mrow .lane { display: flex; flex-wrap: wrap; gap: 3px; align-items: flex-end; padding: 3px 6px; border-radius: 8px; background: rgba(185,166,255,0.06); min-height: 36px; }
+.mspine { display: inline-block; border-radius: 2px; overflow: hidden; flex: none; box-shadow: inset -2px 0 0 rgba(0,0,0,0.25); cursor: pointer; border: 0; padding: 0; }
+.mspine img { width: 100%; height: 100%; object-fit: fill; display: block; }
+.ins-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.ins-svg text { fill: var(--muted); font-family: var(--body); font-size: 11px; }
+.ins-cal-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ins-cal-head b { font-size: 18px; color: var(--text); }
+.ins-cal-head button { border: 1px solid var(--line); background: transparent; color: var(--text); border-radius: 999px; width: 34px; height: 34px; cursor: pointer; font-size: 18px; }
+.ins-cal-head button:disabled { opacity: 0.3; cursor: default; }
+.ins-cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.ins-cal .dow { text-align: center; font-size: 12px; color: var(--muted); }
+.ins-cal .day { min-height: 54px; border-radius: 9px; background: rgba(185,166,255,0.06); padding: 3px 4px; display: grid; align-content: space-between; gap: 2px; font-size: 12px; color: var(--muted); }
+.ins-cal .day.read { background: rgba(244,198,109,0.16); color: var(--text); }
+.ins-cal .day.best { background: rgba(244,198,109,0.42); color: #1c1840; font-weight: 600; }
+.ins-cal .day.out { visibility: hidden; }
+.ins-cal .day.today { outline: 1px solid var(--candle); }
+.ins-cal .day .covers { display: flex; gap: 2px; align-items: flex-end; }
+.ins-keys { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); }
+.ins-keys span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: var(--c); margin-right: 6px; vertical-align: -1px; }
+.ins-heat { display: grid; grid-template-columns: 16px repeat(12, minmax(0, 1fr)); gap: 2px; }
+.ins-heat i { aspect-ratio: 2.4; border-radius: 2px; background: rgba(185,166,255,0.1); }
+.ins-heat i.x { background: transparent; }
+.ins-heat i.r { background: rgba(244,198,109,0.45); }
+.ins-heat i.b { background: var(--candle); }
+.ins-heat i.f { background: var(--moss); }
+.ins-heat em { font-style: normal; font-size: 9px; color: var(--muted); text-align: center; line-height: 1.2; }
+.ins-comm { display: grid; gap: 10px; }
+.ins-comm .crow { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 10px; align-items: center; font-size: 14px; }
+.ins-comm .crow b { font-weight: 500; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ins-comm .crow small { color: var(--muted); }
+.spice { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.spice button { border: 1px solid var(--line); background: transparent; border-radius: 999px; width: 38px; height: 34px; font-size: 17px; cursor: pointer; filter: grayscale(1); opacity: 0.45; }
+.spice button.on { filter: none; opacity: 1; border-color: #ff7a5c; }
+.spice .sp0 { width: auto; padding: 0 12px; font-size: 13px; color: var(--muted); filter: none; opacity: 1; font-family: inherit; }
 </style>
 </head>
 <body>
@@ -890,6 +963,7 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
     <button class="tab" role="tab" data-tab="toread" aria-selected="false">To Read</button>
     <button class="tab" role="tab" data-tab="challenges" aria-selected="false">Challenges</button>
     <button class="tab" role="tab" data-tab="map" aria-selected="false">Genre Map</button>
+    <button class="tab" role="tab" data-tab="insights" aria-selected="false">Insights</button>
     <button class="tab" role="tab" data-tab="quotes" aria-selected="false">Quotes</button>
     <button class="tab" role="tab" data-tab="foryou" aria-selected="false">For You</button>
     <button class="tab" role="tab" data-tab="trophies" aria-selected="false">Trophies</button>
@@ -1204,10 +1278,10 @@ function exampleBooks() {
   const t = today();
   const fin = (d, p) => ({finishedDate: addDays(t, d), logs: [{d: addDays(t, d), p}], pagesRead: p, progress: p, status: 'finished'});
   return [
-    {id:'ex1', cls:{sub:['Epic Fantasy','Coming-of-Age'],themes:['Music','Grief','Ambition','Storytelling'],tropes:['Magic School','Unreliable Narrator'],form:'Novel',aud:'Adult'}, title:'The Name of the Wind', author:'Patrick Rothfuss', pages:662, chapters:92, year:2007, genre:'fantasy', country:'United States', format:'physical', ...fin(-20, 662), rating:5, moods:['cozy','adventurous'], series:'The Kingkiller Chronicle', seriesNo:1, seriesTotal:3, thoughts:'Slow, musical and cozy. I loved the university chapters most.', example:true},
-    {id:'ex2', cls:{genres:['science'],sub:['Hard SF','First Contact'],themes:['Friendship','Sacrifice','Problem Solving'],tropes:['Amnesia','Unlikely Friendship'],subj:['Astrophysics'],form:'Novel',aud:'Adult'}, title:'Project Hail Mary', author:'Andy Weir', pages:476, year:2021, genre:'scifi', country:'United States', format:'audio', ...fin(-9, 476), rating:5, moods:['funny','gripping'], example:true},
-    {id:'ex3', cls:{genres:['classics','romance'],sub:['Gothic Fiction','Psychological Thriller'],themes:['Jealousy','Identity','Memory'],tropes:['Unnamed Narrator','Haunting Past'],trad:['20th-Century British Literature'],form:'Novel',aud:'Adult'}, title:'Rebecca', author:'Daphne du Maurier', pages:410, year:1938, genre:'mystery', country:'United Kingdom', format:'kindle', ...fin(-4, 410), rating:4, moods:['eerie','slow-burn'], example:true},
-    {id:'ex4', cls:{sub:['Memoir'],themes:['Education','Family','Self-Invention'],subj:['Survivalism','Mormonism'],form:'Narrative Nonfiction',aud:'Adult'}, title:'Educated', author:'Tara Westover', pages:334, year:2018, genre:'memoir', country:'United States', format:'physical', ...fin(-2, 334), rating:4, moods:['inspiring','heartbreaking'], example:true},
+    {id:'ex1', community:4.5, cls:{sub:['Epic Fantasy','Coming-of-Age'],themes:['Music','Grief','Ambition','Storytelling'],tropes:['Magic School','Unreliable Narrator'],form:'Novel',aud:'Adult'}, title:'The Name of the Wind', author:'Patrick Rothfuss', pages:662, chapters:92, year:2007, genre:'fantasy', country:'United States', format:'physical', ...fin(-20, 662), rating:5, moods:['cozy','adventurous'], series:'The Kingkiller Chronicle', seriesNo:1, seriesTotal:3, thoughts:'Slow, musical and cozy. I loved the university chapters most.', example:true},
+    {id:'ex2', community:4.5, cls:{genres:['science'],sub:['Hard SF','First Contact'],themes:['Friendship','Sacrifice','Problem Solving'],tropes:['Amnesia','Unlikely Friendship'],subj:['Astrophysics'],form:'Novel',aud:'Adult'}, title:'Project Hail Mary', author:'Andy Weir', pages:476, year:2021, genre:'scifi', country:'United States', format:'audio', ...fin(-9, 476), rating:5, moods:['funny','gripping'], example:true},
+    {id:'ex3', community:4.3, spice:1, cls:{genres:['classics','romance'],sub:['Gothic Fiction','Psychological Thriller'],themes:['Jealousy','Identity','Memory'],tropes:['Unnamed Narrator','Haunting Past'],trad:['20th-Century British Literature'],form:'Novel',aud:'Adult'}, title:'Rebecca', author:'Daphne du Maurier', pages:410, year:1938, genre:'mystery', country:'United Kingdom', format:'kindle', ...fin(-4, 410), rating:4, moods:['eerie','slow-burn'], example:true},
+    {id:'ex4', community:4.5, cls:{sub:['Memoir'],themes:['Education','Family','Self-Invention'],subj:['Survivalism','Mormonism'],form:'Narrative Nonfiction',aud:'Adult'}, title:'Educated', author:'Tara Westover', pages:334, year:2018, genre:'memoir', country:'United States', format:'physical', ...fin(-2, 334), rating:4, moods:['inspiring','heartbreaking'], example:true},
     {id:'ex5', cls:{genres:['literary','historical'],sub:['Classic Literature','Social Fiction'],themes:['Marriage','Ambition','Community'],subj:['Provincial England'],trad:['Victorian Literature'],form:'Novel',aud:'Adult'}, title:'Middlemarch', author:'George Eliot', pages:880, year:1871, genre:'classics', country:'United Kingdom', format:'kindle', unit:'percent', progress:35, chapters:86, status:'reading', pagesRead:308, startDate:addDays(t,-6), logs:[{d:addDays(t,-1),p:40},{d:t,p:32}], rating:0, minutes:95, sessions:3, example:true},
     {id:'ex6', title:"The Wise Man's Fear", author:'Patrick Rothfuss', pages:994, year:2011, genre:'fantasy', country:'United States', status:'want', series:'The Kingkiller Chronicle', seriesNo:2, seriesTotal:3, example:true},
     {id:'ex7', title:'Piranesi', author:'Susanna Clarke', pages:272, year:2020, genre:'fantasy', country:'United Kingdom', status:'want', example:true},
@@ -1335,7 +1409,7 @@ async function initStore() {
     Store.col = api.collection('data/users/' + uid);
     let settled = false;
     const timer = setTimeout(() => { if (!settled) { settled = true; loadLocal(); setBanner('The library is slow to answer. Showing what this browser remembers.', true); } }, 10000);
-    const apply = snap => { settled = true; clearTimeout(timer); const raw = rawDocs(snap); books = raw.filter(b => b && b.id && b.title && !b.example && !b.kind); quotes = raw.filter(d => d && d.kind === 'quote' && d.id && d.text); const r = raw.find(d => d && d.kind === 'recs'); if (r) recs = {items: r.items || [], at: r.at || null, dismissed: r.dismissed || [], mood: r.mood || ''}; const st = raw.find(d => d && d.kind === 'settings'); if (st) settings = {goals: st.goals || {}, share: st.share || null}; afterLoad(); };
+    const apply = snap => { settled = true; clearTimeout(timer); const raw = rawDocs(snap); books = raw.filter(b => b && b.id && b.title && !b.example && !b.kind); quotes = raw.filter(d => d && d.kind === 'quote' && d.id && d.text); const r = raw.find(d => d && d.kind === 'recs'); if (r) recs = {items: r.items || [], at: r.at || null, dismissed: r.dismissed || [], mood: r.mood || ''}; const st = raw.find(d => d && d.kind === 'settings'); if (st) settings = {goals: st.goals || {}, share: st.share || null, targets: st.targets || {}}; afterLoad(); };
     try {
       if (typeof Store.col.onSnapshot === 'function') Store.col.onSnapshot(apply, () => { if (!settled) { settled = true; clearTimeout(timer); loadLocal(); } });
       else apply(await Store.col.get());
@@ -1356,7 +1430,7 @@ function rawDocs(snap) {
 }
 function loadLocal() {
   if (Store.mode !== 'db') Store.mode = 'local';
-  try { books = JSON.parse(localStorage.getItem('lantern-library-books') || '[]'); const r = JSON.parse(localStorage.getItem('lantern-library-recs') || 'null'); if (r) recs = r; quotes = JSON.parse(localStorage.getItem('lantern-library-quotes') || '[]'); const st = JSON.parse(localStorage.getItem('lantern-library-settings') || 'null'); if (st) settings = {goals: st.goals || {}, share: st.share || null}; } catch (e) { books = []; Store.mode = 'memory'; }
+  try { books = JSON.parse(localStorage.getItem('lantern-library-books') || '[]'); const r = JSON.parse(localStorage.getItem('lantern-library-recs') || 'null'); if (r) recs = r; quotes = JSON.parse(localStorage.getItem('lantern-library-quotes') || '[]'); const st = JSON.parse(localStorage.getItem('lantern-library-settings') || 'null'); if (st) settings = {goals: st.goals || {}, share: st.share || null, targets: st.targets || {}}; } catch (e) { books = []; Store.mode = 'memory'; }
   if (Store.mode !== 'db') setBanner(Store.mode === 'local'
     ? (window.LANTERN_STANDALONE ? 'Sign in to sync your books with your website and other devices.' : 'Your books are saved in this browser only. Open this page from claude.ai while signed in to keep them across devices.')
     : 'Saving is unavailable here, so books will disappear when you close the page.', true);
@@ -1373,7 +1447,7 @@ async function persistQuote(q, remove) {
   else { try { localStorage.setItem('lantern-library-quotes', JSON.stringify(quotes)); } catch (e) {} }
 }
 async function saveSettings() {
-  const d = {kind: 'settings', id: 'settings', goals: settings.goals, share: settings.share || null};
+  const d = {kind: 'settings', id: 'settings', goals: settings.goals, share: settings.share || null, targets: settings.targets || {}};
   if (Store.mode === 'db') { try { await Store.col.doc('settings').set(JSON.parse(JSON.stringify(d))); } catch (e) {} }
   else { try { localStorage.setItem('lantern-library-settings', JSON.stringify(d)); } catch (e) {} }
 }
@@ -1434,7 +1508,7 @@ function render() {
   const v = document.getElementById('view');
   const ex = isExample ? '<div class="banner">These are example books so you can see how everything works. They vanish the moment you add your first real book.</div>' : '';
   const R = {shelf: () => renderShelf(list), quests: () => renderQuests(s), toread: () => renderToRead(s, list), challenges: () => renderChallenges(s, list),
-    map: () => renderMap(s), quotes: () => renderQuotes(), foryou: () => renderRecs(s), trophies: () => renderTrophies(s)};
+    map: () => renderMap(s), insights: () => renderInsights(list), quotes: () => renderQuotes(), foryou: () => renderRecs(s), trophies: () => renderTrophies(s)};
   v.innerHTML = (tab === 'quotes' ? '' : ex) + (R[tab] || R.shelf)();
   if (tab === 'map') wireRadar(s);
   renderDailyQuote(); updatePill();
@@ -1881,12 +1955,12 @@ async function askLibrarian(prompt, tier) {
     return {out};
   } catch (e) { return {error: e && e.code === 'rate_limited' ? 'busy' : 'failed'}; }
 }
-const bookKeys = () => `"found": boolean, "title": string (correct full title), "author": string, "pages": integer (typical print edition page count), "chapters": integer (number of chapters, or 0 if unknown), "year": integer (year first published), "genre": one of ${JSON.stringify(GENRES.map(g => g.name))}, "country": string (the author's country, in English), "series": string (series name, or "" if standalone), "seriesNumber": integer (0 if standalone), "seriesTotal": integer (number of books in the series, 0 if unknown), "blurb": string (one spoiler-free sentence, at most 20 words), ${SPINE_KEYS}, ${CLS_KEYS()}`;
+const bookKeys = () => `"found": boolean, "title": string (correct full title), "author": string, "pages": integer (typical print edition page count), "chapters": integer (number of chapters, or 0 if unknown), "year": integer (year first published), "genre": one of ${JSON.stringify(GENRES.map(g => g.name))}, "country": string (the author's country, in English), "series": string (series name, or "" if standalone), "seriesNumber": integer (0 if standalone), "seriesTotal": integer (number of books in the series, 0 if unknown), "blurb": string (one spoiler-free sentence, at most 20 words), "communityRating": number (average reader rating out of 5 on Goodreads to one decimal, or 0 if unknown), ${SPINE_KEYS}, ${CLS_KEYS()}`;
 function bookFromInfo(info, fb) {
   info = info || {}; fb = fb || {};
   return {title: info.title || fb.title || '', author: info.author || fb.author || '', pages: +info.pages > 0 ? Math.round(+info.pages) : '', chapters: +info.chapters > 0 ? Math.round(+info.chapters) : '',
     year: +info.year ? Math.round(+info.year) : '', genre: matchGenre(info.genre), country: info.country || '', series: info.series || '', seriesNo: +info.seriesNumber > 0 ? Math.round(+info.seriesNumber) : '',
-    seriesTotal: +info.seriesTotal > 0 ? Math.round(+info.seriesTotal) : 0, blurb: info.blurb || '', spine: sanitizeSpine(info.spine), cls: clsFromInfo(info, matchGenre(info.genre)), found: !!(info.title && info.found !== false)};
+    seriesTotal: +info.seriesTotal > 0 ? Math.round(+info.seriesTotal) : 0, blurb: info.blurb || '', spine: sanitizeSpine(info.spine), cls: clsFromInfo(info, matchGenre(info.genre)), community: +info.communityRating > 0 && +info.communityRating <= 5 ? Math.round(+info.communityRating * 10) / 10 : 0, found: !!(info.title && info.found !== false)};
 }
 const thinkingHtml = msg => `<h2 id="sheetTitle">Consulting the librarian</h2><div class="thinking"><div class="quill"></div>${msg}</div>`;
 async function lookup() {
@@ -1966,7 +2040,7 @@ function showFound(f, note) {
         <div class="field"><label for="dSeries">Series (if any)</label><input id="dSeries" value="${esc(f.series || '')}"></div>
         <div class="field"><label for="dSeriesNo">Book number</label><input id="dSeriesNo" type="number" min="0" inputmode="numeric" value="${esc(f.seriesNo || '')}"></div>
       </div>
-      ${st === 'finished' ? `<div class="field"><span class="flabel">Your rating</span>${ratingHtml(0)}</div>
+      ${st === 'finished' ? `<div class="field"><span class="flabel">Your rating</span>${ratingHtml(0)}</div>${SPICE_FIELD(0)}
         <div class="field"><span class="flabel">How did it feel?</span>${moodChips([], 'dMoods')}</div>
         <div class="field"><label for="dThoughts">Your thoughts (+25 XP)</label><textarea id="dThoughts" placeholder="${THOUGHTS_PH}"></textarea></div>`
       : st === 'reading' ? `<div class="field"><span class="flabel">Track progress by</span>${seg('dUnit', UNITS, DEFAULT_UNIT[draft.format])}</div>
@@ -1974,7 +2048,7 @@ function showFound(f, note) {
     </div>
     <p class="err" id="formErr" hidden></p>
     <div class="actions"><button class="btn ghost" id="backBtn" type="button">Back</button><button class="btn" id="shelveBtn" type="button">${btn}</button></div>`);
-  wireRating(); wireMoods('dMoods'); wireCls('d', '#dGenre');
+  wireRating(); wireMoods('dMoods'); wireCls('d', '#dGenre'); wireSpice();
   let unit = DEFAULT_UNIT[draft.format];
   const READ_LABEL = {pages: 'Page you are on', chapters: 'Chapters finished so far', percent: 'Percent done (as Kindle shows it)'};
   const setUnitLabel = () => { const l = sheet.querySelector('#dReadLabel'); if (l) l.textContent = READ_LABEL[unit]; };
@@ -1993,12 +2067,12 @@ function showFound(f, note) {
       genre: v('#dGenre'), country: v('#dCountry'), blurb: f.blurb || '', status: st, addedAt: new Date().toISOString(), logs: [],
       format: draft.format, chapters: parseInt(v('#dChapters'), 10) || 0, unit: st === 'reading' ? unit : 'pages',
       series: v('#dSeries'), seriesNo: parseInt(v('#dSeriesNo'), 10) || 0, seriesTotal: f.seriesTotal || 0, spine: f.spine || null};
-    b.cls = readCls('d', b.genre, f.cls);
+    b.cls = readCls('d', b.genre, f.cls); if (f.community) b.community = f.community;
     if (draft.pre && draft.pre.kind !== 'tbr') b.fromRec = true;
     if (st === 'reading' && unit === 'chapters' && !b.chapters) return fail('Add the number of chapters to track by chapter.');
     if (st === 'finished') {
       b.pagesRead = pages; b.progress = pages; b.finishedDate = draft.date; b.rating = +sheet.querySelector('#rating').dataset.r || 0;
-      b.thoughts = v('#dThoughts'); b.moods = readMoods('dMoods'); b.logs.push({d: draft.date, p: pages});
+      b.thoughts = v('#dThoughts'); b.moods = readMoods('dMoods'); b.spice = readSpice(); b.logs.push({d: draft.date, p: pages});
     } else if (st === 'reading') {
       b.startDate = draft.date; b.rating = 0;
       b.progress = Math.min(totalOf(b), Math.max(0, parseInt(v('#dRead'), 10) || 0));
@@ -2022,7 +2096,7 @@ function openDetail(id) {
   const last = finishesOf(b).sort().pop();
   openSheet(`<h2 id="sheetTitle">${esc(b.title)}</h2>
     <div class="qmeta" style="margin-top:-6px">${[b.author, b.series && b.series + (b.seriesNo ? ', book ' + b.seriesNo : '')].filter(Boolean).map(esc).join(' · ')}</div>
-    <div class="rec-tags">${g ? `<span class="genre-pill" style="--c:${g.color}">${esc(g.name)}</span>` : ''}<span class="tag">${statusLabel}</span>${reads > 1 ? `<span class="tag">Read ${reads} times</span>` : ''}${b.rating ? `<span class="stars-inline" aria-label="${b.rating} stars">${'★'.repeat(b.rating)}</span>` : ''}</div>
+    <div class="rec-tags">${g ? `<span class="genre-pill" style="--c:${g.color}">${esc(g.name)}</span>` : ''}<span class="tag">${statusLabel}</span>${reads > 1 ? `<span class="tag">Read ${reads} times</span>` : ''}${b.rating ? `<span class="stars-inline" aria-label="${b.rating} stars">${'★'.repeat(b.rating)}</span>` : ''}${b.spice ? `<span aria-label="Spice ${b.spice} of 5">${'🌶'.repeat(b.spice)}</span>` : ''}</div>
     ${b.blurb ? `<p class="blurb" style="margin:0;font-style:italic;color:var(--muted)">${esc(b.blurb)}</p>` : ''}
     ${(b.moods || []).length ? `<div class="moods static">${b.moods.map(m => `<span class="mood" aria-pressed="true">${esc(m)}</span>`).join('')}</div>` : ''}
     ${clsCard(b) || (b.example ? '' : '<div class="cat-missing"><span>Not catalogued yet.</span><button type="button" class="btn ghost" id="clsOne">Ask the librarian to file it</button></div>')}
@@ -2044,7 +2118,7 @@ function openDetail(id) {
       ${last ? `<dt>Finished</dt><dd>${parseYmd(last).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'})}</dd>` : ''}
     </dl>
     ${b.example ? '<p class="qmeta">This is an example book.</p>' : `<details class="edit"><summary>Edit rating, thoughts and details</summary><div class="edit-body">
-      <div class="field"><span class="flabel">Your rating</span>${ratingHtml(b.rating)}</div>
+      <div class="field"><span class="flabel">Your rating</span>${ratingHtml(b.rating)}</div>${SPICE_FIELD(b.spice)}
       <div class="field"><span class="flabel">How did it feel?</span>${moodChips(b.moods, 'eMoods')}</div>
       <div class="field"><label for="eThoughts">Your thoughts</label><textarea id="eThoughts" placeholder="${THOUGHTS_PH}">${esc(b.thoughts || '')}</textarea></div>
       <div class="field"><label for="eGenre">Main genre</label><select id="eGenre">${genreOptions(b.genre)}</select></div>
@@ -2069,7 +2143,7 @@ function openDetail(id) {
   sheet.querySelectorAll('[data-q]').forEach(el => el.addEventListener('click', () => openQuote(el.dataset.q)));
   sheet.querySelectorAll('[data-ctag]').forEach(el => el.addEventListener('click', () => showTag(el.dataset.ctag)));
   if (b.example) return;
-  wireRating(); wireMoods('eMoods'); wireCls('e', '#eGenre');
+  wireRating(); wireMoods('eMoods'); wireCls('e', '#eGenre'); wireSpice();
   const c1 = sheet.querySelector('#clsOne'); if (c1) c1.addEventListener('click', async () => { c1.disabled = true; c1.textContent = 'Filing...'; const n = await classifyBooks([b]); if (n) openDetail(b.id); else { c1.disabled = false; c1.textContent = 'Try again'; } });
   sheet.querySelector('#spineFile').addEventListener('change', e => { const f = e.target.files && e.target.files[0]; if (f) openSpineCrop(b.id, f); });
   const sd = sheet.querySelector('#spineDel');
@@ -2083,7 +2157,7 @@ function openDetail(id) {
   sheet.querySelector('#saveBtn').addEventListener('click', async () => {
     const c = JSON.parse(JSON.stringify(b));
     c.genre = sheet.querySelector('#eGenre').value; c.cls = readCls('e', c.genre, b.cls); c.rating = +sheet.querySelector('#rating').dataset.r || 0;
-    c.thoughts = sheet.querySelector('#eThoughts').value.trim(); c.moods = readMoods('eMoods');
+    c.thoughts = sheet.querySelector('#eThoughts').value.trim(); c.moods = readMoods('eMoods'); c.spice = readSpice();
     c.format = sheet.querySelector('#eFormat').value; c.chapters = parseInt(sheet.querySelector('#eChapters').value, 10) || 0;
     c.series = sheet.querySelector('#eSeries').value.trim(); c.seriesNo = parseInt(sheet.querySelector('#eSeriesNo').value, 10) || 0;
     const eu = sheet.querySelector('#eUnit');
@@ -2106,12 +2180,12 @@ function openReflect(id) {
   const b = books.find(x => x.id === id); if (!b) return;
   openSheet(`<h2 id="sheetTitle">You finished ${esc(b.title)}</h2>
     <p class="section-note" style="margin:0">Before it goes on the shelf, how was it?</p>
-    <div class="field"><span class="flabel">Your rating</span>${ratingHtml(b.rating || 0)}</div>
+    <div class="field"><span class="flabel">Your rating</span>${ratingHtml(b.rating || 0)}</div>${SPICE_FIELD(b.spice)}
     <div class="field"><span class="flabel">How did it feel?</span>${moodChips(b.moods, 'rMoods')}</div>
     <div class="field"><label for="rThoughts">Your thoughts (+25 XP)</label><textarea id="rThoughts" placeholder="${THOUGHTS_PH}">${esc(b.thoughts || '')}</textarea></div>
     <div class="actions"><button class="btn ghost" id="quoteFrom" type="button">Save a favourite line</button><button class="btn ghost" id="skipR" type="button">Later</button><button class="btn" id="saveR" type="button">Save</button></div>`);
-  wireRating(); wireMoods('rMoods');
-  const collect = () => ({...b, rating: +sheet.querySelector('#rating').dataset.r || 0, thoughts: sheet.querySelector('#rThoughts').value.trim(), moods: readMoods('rMoods')});
+  wireRating(); wireMoods('rMoods'); wireSpice();
+  const collect = () => ({...b, rating: +sheet.querySelector('#rating').dataset.r || 0, thoughts: sheet.querySelector('#rThoughts').value.trim(), moods: readMoods('rMoods'), spice: readSpice()});
   sheet.querySelector('#skipR').addEventListener('click', closeSheet);
   sheet.querySelector('#saveR').addEventListener('click', async () => { const c = collect(); closeSheet(); await commit(c); });
   sheet.querySelector('#quoteFrom').addEventListener('click', async () => { const c = collect(); await commit(c); openQuote(null, c.id); });
@@ -2550,7 +2624,7 @@ async function importBackup(text, say) {
   }
   for (const q of d.quotes || []) await Store.col.doc(q.id).set(q);
   if (d.recs) await Store.col.doc('recs').set({kind: 'recs', items: d.recs.items || [], at: d.recs.at || null, dismissed: d.recs.dismissed || [], mood: d.recs.mood || ''});
-  if (d.settings) await Store.col.doc('settings').set({kind: 'settings', id: 'settings', goals: d.settings.goals || {}, share: d.settings.share || null});
+  if (d.settings) await Store.col.doc('settings').set({kind: 'settings', id: 'settings', goals: d.settings.goals || {}, share: d.settings.share || null, targets: d.settings.targets || {}});
   return n;
 }
 document.getElementById('exportBtn').addEventListener('click', openExport);
@@ -2587,6 +2661,14 @@ document.getElementById('view').addEventListener('click', e => {
   if ((el = q('[data-rno]'))) return dropRec(+el.dataset.rno, true);
   if (q('[data-addquote]')) return openQuote(null);
   if ((el = q('[data-quote]'))) return openQuote(el.dataset.quote);
+  if ((el = q('[data-insyear]'))) { insYear = el.dataset.insyear === 'all' ? 'all' : +el.dataset.insyear; insCal = null; return render(); }
+  if ((el = q('[data-calm]'))) { const d = new Date(insCal.y, insCal.m + +el.dataset.calm, 1); insCal = {y: d.getFullYear(), m: d.getMonth()}; return render(); }
+  if (q('[data-tgtedit]')) { tgtEditing = true; return render(); }
+  if (q('[data-tgtcancel]')) { tgtEditing = false; return render(); }
+  if (q('[data-tgtsave]')) { const n = id => Math.max(0, parseInt((document.getElementById(id) || {}).value, 10) || 0); const yv = n('tgY');
+    settings.goals = {...(settings.goals || {})}; if (yv) settings.goals[new Date().getFullYear()] = yv; else delete settings.goals[new Date().getFullYear()];
+    settings.targets = {month: n('tgM'), weekPages: n('tgW')}; tgtEditing = false; saveSettings(); return render(); }
+  if (q('[data-community]')) return fetchCommunity(shownBooks());
   if ((el = q('[data-cf]'))) { const t = el.dataset.cf; catF = catF.some(x => x.toLowerCase() === t.toLowerCase()) ? catF.filter(x => x.toLowerCase() !== t.toLowerCase()) : [...catF, t]; return render(); }
   if ((el = q('[data-cfx]'))) { catF = catF.filter(x => x !== el.dataset.cfx); return render(); }
   if (q('[data-cfclear]')) { catF = []; catQ = ''; return render(); }
@@ -2599,6 +2681,261 @@ document.getElementById('view').addEventListener('click', e => {
 
 
 
+
+
+/* ================= Insights ================= */
+let insYear = new Date().getFullYear(), insCal = null, tgtEditing = false;
+const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function ratingAt(b, i) { const h = b.history || []; return i < h.length ? (h[i].rating || 0) : (b.rating || 0); }
+function insYears(list) {
+  const ys = new Set([new Date().getFullYear()]);
+  list.forEach(b => { finishesOf(b).forEach(d => ys.add(+d.slice(0, 4))); (b.logs || []).forEach(l => l.d && ys.add(+l.d.slice(0, 4))); });
+  return [...ys].filter(Boolean).sort((a, b) => b - a);
+}
+function insData(list) {
+  const Y = insYear, inY = d => !!d && (Y === 'all' || d.startsWith(Y + '-'));
+  const days = new Map();
+  const touch = d => { let e = days.get(d); if (!e) days.set(d, e = {pages: 0, mins: 0, ids: new Set(), fin: []}); return e; };
+  list.forEach(b => (b.logs || []).forEach(l => { if (l.d && (l.p > 0 || l.u > 0 || l.m > 0)) { const e = touch(l.d); e.pages += l.p || 0; e.mins += l.m || 0; e.ids.add(b.id); } }));
+  const fins = [];
+  list.forEach(b => finishesOf(b).forEach((d, i) => { fins.push({b, d, r: ratingAt(b, i)}); const e = touch(d); e.ids.add(b.id); e.fin.push(b.id); }));
+  const sd = [...days.keys()].filter(inY).sort();
+  let best = {len: 0, start: '', end: ''}, cur = null;
+  sd.forEach(d => { if (cur && addDays(cur.end, 1) === d) { cur.end = d; cur.len++; } else cur = {start: d, end: d, len: 1}; if (cur.len > best.len) best = {...cur}; });
+  let run = 0, t = days.has(today()) ? today() : addDays(today(), -1);
+  while (days.has(t)) { run++; t = addDays(t, -1); }
+  const fy = fins.filter(f => inY(f.d)).sort((a, b) => a.d.localeCompare(b.d));
+  const pages = sd.reduce((a, d) => a + days.get(d).pages, 0);
+  const mins = sd.reduce((a, d) => a + days.get(d).mins, 0);
+  const rated = fy.filter(f => f.r > 0);
+  const avg = rated.length ? rated.reduce((a, f) => a + f.r, 0) / rated.length : 0;
+  const hy = Y === 'all' ? new Date().getFullYear() : Y;
+  return {Y, hy, inY, days, sd, best, run, fins: fy, all: fins, pages, mins, rated, avg};
+}
+function miniSpine(b, h) {
+  h = h || 30;
+  const attrs = `data-open="${esc(b.id)}" title="${esc(b.title)}" aria-label="${esc(b.title)}"`;
+  if (b.spineImg) { const w = Math.max(6, Math.min(h, Math.round(h * (b.spineAspect || 0.25)))); return `<button type="button" class="mspine" ${attrs} style="width:${w}px;height:${h}px"><img src="${esc(spineSrc(b))}" alt="" loading="lazy"></button>`; }
+  const d = sanitizeSpine(b.spine), g = G[b.genre] || {color: '#6b5b4f'};
+  const bg = d ? `linear-gradient(${d.bg[0]}, ${d.bg[1]})` : `linear-gradient(${g.color}, ${shade(g.color, -30)})`;
+  return `<button type="button" class="mspine" ${attrs} style="width:${Math.max(6, Math.round(h * 0.24))}px;height:${h}px;background:${bg}"></button>`;
+}
+const card = (kicker, title, body, extra) => `<section class="ins-card"${extra || ''}><div>${kicker ? `<p class="ins-kicker">${kicker}</p>` : ''}<h2>${title}</h2></div>${body}</section>`;
+const scopeWord = D => D.Y === 'all' ? 'all time' : D.Y === new Date().getFullYear() ? 'so far this year' : 'in ' + D.Y;
+function insSummary(D) {
+  const books = new Set(D.fins.map(f => f.b.id)).size;
+  const tile = (v, l) => `<div class="ins-tile"><b>${v}</b><span>${l}</span></div>`;
+  return card('Reader summary · ' + scopeWord(D), 'Your reading at a glance', `<div class="ins-tiles">
+    ${tile(books, books === 1 ? 'book read' : 'books read')}${tile(D.pages.toLocaleString(), 'pages read')}${tile(D.sd.length, D.sd.length === 1 ? 'day read' : 'days read')}
+    ${tile(D.best.len, 'best streak (days)')}${tile(D.avg ? D.avg.toFixed(1) + '★' : 'none', 'average rating')}${tile(D.mins ? fmtMin(D.mins) : '0 min', 'in sessions')}</div>`);
+}
+function insGoals(D, list) {
+  const now = new Date(), y = now.getFullYear(), tg = settings.targets || {};
+  const yGoal = +((settings.goals || {})[y]) || 0;
+  const all = D.all;
+  const yCount = all.filter(f => f.d.startsWith(y + '-')).length;
+  const mKey = today().slice(0, 7), mCount = all.filter(f => f.d.startsWith(mKey)).length;
+  const wStart = addDays(today(), -now.getDay());
+  let wPages = 0; for (let i = 0; i < 7; i++) { const e = D.days.get(addDays(wStart, i)); if (e) wPages += e.pages; }
+  if (tgtEditing || (!yGoal && !tg.month && !tg.weekPages)) return card('Set your targets', 'Reading goals', `<div class="ins-goal-edit">
+      <label>Books this year<input id="tgY" type="number" min="0" inputmode="numeric" value="${yGoal || ''}" placeholder="15"></label>
+      <label>Books a month<input id="tgM" type="number" min="0" inputmode="numeric" value="${tg.month || ''}" placeholder="2"></label>
+      <label>Pages a week<input id="tgW" type="number" min="0" inputmode="numeric" value="${tg.weekPages || ''}" placeholder="200"></label></div>
+      <div class="actions" style="justify-content:flex-start"><button class="btn" type="button" data-tgtsave>Save goals</button>${yGoal || tg.month || tg.weekPages ? '<button class="btn ghost" type="button" data-tgtcancel>Cancel</button>' : ''}</div>`);
+  const bar = (label, have, need, unit) => need ? `<div class="ins-goal"><div class="row"><span>${label}</span><span>${have.toLocaleString()} of ${need.toLocaleString()} ${unit}${have >= need ? ' · done!' : ''}</span></div><div class="ins-track" role="img" aria-label="${have} of ${need}"><i style="width:${Math.min(100, 100 * have / need)}%"></i></div></div>` : '';
+  return card('Your targets', 'Reading goals', bar(y + ' goal', yCount, yGoal, 'books') + bar(MONTHS[now.getMonth()], mCount, +tg.month || 0, 'books') + bar('This week', wPages, +tg.weekPages || 0, 'pages')
+    + '<div><button class="btn ghost" type="button" data-tgtedit>Change goals</button></div>');
+}
+function insReading(list) {
+  const r = list.filter(b => b.status === 'reading'); if (!r.length) return '';
+  return card('Currently reading', r.length === 1 ? esc(r[0].title) : r.length + ' books on the go', `<div class="ins-rows">${r.map(b => { const t = totalOf(b), p = t ? Math.round(100 * progressOf(b) / t) : 0;
+    return `<div class="ins-mrow" style="grid-template-columns:auto 1fr">${miniSpine(b, 40)}<div class="ins-goal"><div class="row"><span>${esc(b.title)}</span><span>${p}%</span></div><div class="ins-track"><i style="width:${p}%"></i></div></div></div>`; }).join('')}</div>`);
+}
+const SPEC_SUB = /magical realism|time travel|dystop|weird fiction|alternate history|slipstream|romantasy|fantasy|post-apocalyptic|science fiction|speculative|paranormal|supernatural/i;
+const LIGHT_M = ['cozy', 'funny', 'hopeful', 'romantic', 'inspiring'], DARK_M = ['dark', 'eerie', 'heartbreaking'];
+function insAura(D) {
+  const bs = [...new Map(D.fins.map(f => [f.b.id, f.b])).values()];
+  if (bs.length < 3) return card('Reader aura', 'Who are you as a reader?', `<p class="aura-sub" style="font-size:22px;letter-spacing:0.3em">? ? ? ?</p><p class="ins-note" style="text-align:center">Finish ${3 - bs.length} more book${3 - bs.length === 1 ? '' : 's'} ${D.Y === 'all' ? '' : 'in this period '}to reveal your aura.</p>`);
+  const share = f => bs.filter(f).length / bs.length;
+  const nonfic = share(b => NONFIC.includes(b.genre));
+  const fic = bs.filter(b => !NONFIC.includes(b.genre));
+  const spec = fic.length ? fic.filter(b => ['fantasy', 'scifi', 'horror'].includes(b.genre) || [...clsOf(b).sub, ...clsOf(b).genres.map(k => G[k].name)].some(t => SPEC_SUB.test(t))).length / fic.length : 0;
+  const toneOf = b => { const m = b.moods || []; let v = m.filter(x => DARK_M.includes(x)).length - m.filter(x => LIGHT_M.includes(x)).length;
+    if (!m.length) v = ['horror', 'mystery'].includes(b.genre) ? 1 : ['romance', 'selfhelp'].includes(b.genre) ? -1 : 0; return v > 0 ? 1 : v < 0 ? 0 : 0.5; };
+  const dark = bs.reduce((a, b) => a + toneOf(b), 0) / bs.length;
+  const avgP = bs.reduce((a, b) => a + (b.pages || 300), 0) / bs.length;
+  const epic = Math.max(0, Math.min(1, (avgP - 250) / 300));
+  const words = [nonfic > 0.5 ? 'Nonfiction' : 'Fiction', spec > 0.5 ? 'Speculative' : 'Grounded', dark > 0.5 ? 'Dark' : 'Light', epic > 0.5 ? 'Immersive' : 'Swift'];
+  const title = nonfic > 0.5 ? (dark > 0.5 ? 'The Truth Seeker' : 'The Curious Cartographer') : spec > 0.5 ? (dark > 0.5 ? 'The Shadow Walker' : 'The Starlit Dreamer') : (dark > 0.5 ? 'The Night Detective' : 'The Hearth Keeper');
+  const axis = (l, r, v) => `<div class="aura-axis"><span class="${v <= 0.5 ? 'on' : ''}">${l}</span><div class="aura-bar" role="img" aria-label="${Math.round(v * 100)}% toward ${r}"><i style="left:${Math.round(6 + v * 88)}%"></i></div><span class="${v > 0.5 ? 'on' : ''}">${r}</span></div>`;
+  return card('Reader aura · ' + scopeWord(D), 'Who are you as a reader?', `<p class="aura-title">${title}</p><p class="aura-sub">${words.join(' · ')}</p>
+    ${axis('Fiction', 'Nonfiction', nonfic)}${axis('Grounded', 'Speculative', spec)}${axis('Light', 'Dark', dark)}${axis('Swift', 'Immersive', epic)}
+    <p class="ins-note">Built from the genres, catalogue tags, moods and length of the ${bs.length} books you finished.</p>`);
+}
+function insFive(D) {
+  const five = [...new Map(D.fins.filter(f => f.r === 5).map(f => [f.b.id, f.b])).values()];
+  return card('Your', '5 star books', five.length ? `<div class="ins-shelf"><div class="bookcase"><div class="shelf">${five.map(spineHtml).join('')}</div></div></div>`
+    : '<p class="ins-note">Rate a book five stars when you finish it and it will be displayed here.</p>');
+}
+function donut(parts) {
+  const tot = parts.reduce((a, p) => a + p.n, 0), R = 54, C = 2 * Math.PI * R; let off = 0;
+  const gap = parts.length > 1 ? 3 : 0;
+  return `<svg class="ins-svg" viewBox="0 0 150 150" role="img" aria-label="${parts.map(p => p.name + ' ' + p.n).join(', ')}">${parts.map(p => {
+    const len = C * p.n / tot; const s = `<circle cx="75" cy="75" r="${R}" fill="none" stroke="${p.color}" stroke-width="18" stroke-dasharray="${Math.max(0.5, len - gap)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 75 75)"><title>${esc(p.name)}: ${p.n}</title></circle>`; off += len; return s; }).join('')}
+    <text x="75" y="80" text-anchor="middle" style="font-size:22px;fill:var(--text)">${tot}</text></svg>`;
+}
+function insGenres(D) {
+  const m = {}; D.fins.forEach(f => { if (G[f.b.genre]) m[f.b.genre] = (m[f.b.genre] || 0) + 1; });
+  const e = Object.entries(m).sort((a, b) => b[1] - a[1]);
+  if (!e.length) return card('Most read genres', 'None yet', '<p class="ins-note">Finish a book and your genres appear here.</p>');
+  let parts = e.slice(0, 5).map(([k, n]) => ({name: G[k].name, color: G[k].color, n}));
+  const rest = e.slice(5).reduce((a, x) => a + x[1], 0); if (rest) parts.push({name: 'Other', color: '#6b6890', n: rest});
+  return card('Most read genres · ' + scopeWord(D), esc(G[e[0][0]].name), `<div class="ins-split">${donut(parts)}<ul class="ins-legend">${parts.map(p => `<li><i style="--c:${p.color}"></i>${esc(p.name)}<small>${p.n} book${p.n === 1 ? '' : 's'}</small></li>`).join('')}</ul></div>`);
+}
+function insAuthors(D) {
+  const m = {}; D.fins.forEach(f => { const a = (f.b.author || '').trim(); if (a) { const k = a.toLowerCase(); (m[k] = m[k] || {name: a, n: 0, books: []}).n++; m[k].books.push(f.b); } });
+  const top = Object.values(m).filter(x => x.n >= 2).sort((a, b) => b.n - a.n).slice(0, 5);
+  return card('Most read authors', top.length ? esc(top[0].name) : 'None yet', top.length ? `<div class="ins-rows">${top.map(a => `<div class="ins-mrow" style="grid-template-columns:1fr auto"><span style="color:var(--text);font-size:15px">${esc(a.name)} <small style="color:var(--muted)">· ${a.n} books</small></span><div class="lane" style="background:none">${a.books.slice(0, 6).map(b => miniSpine(b, 30)).join('')}</div></div>`).join('')}</div>`
+    : '<p class="ins-note">Finish two or more books by the same author and they will be displayed here.</p>');
+}
+function insMonthly(D) {
+  if (D.Y === 'all') {
+    const by = {}; D.fins.forEach(f => (by[f.d.slice(0, 4)] = by[f.d.slice(0, 4)] || []).push(f.b));
+    const ys = Object.keys(by).sort().reverse();
+    return card('Finished · all time', D.fins.length + ' book' + (D.fins.length === 1 ? '' : 's'), ys.length ? `<div class="ins-rows">${ys.map(y => `<div class="ins-mrow" style="grid-template-columns:44px 1fr"><span>${y}</span><div class="lane">${by[y].map(b => miniSpine(b, 30)).join('')}</div></div>`).join('')}</div>` : '<p class="ins-note">Nothing finished yet.</p>');
+  }
+  const by = MON.map(() => []); D.fins.forEach(f => by[+f.d.slice(5, 7) - 1].push(f.b));
+  const n = D.fins.length, tg = +(settings.targets || {}).month || 0;
+  return card('Finished ' + scopeWord(D), n + ' book' + (n === 1 ? '' : 's'), `<div class="ins-rows">${MON.map((m, i) => `<div class="ins-mrow"><span>${m}</span><div class="lane" title="${by[i].length} finished${tg ? ' of ' + tg : ''}">${by[i].map(b => miniSpine(b, 30)).join('')}${tg && by[i].length >= tg ? '<span class="tag" style="margin-left:auto">goal met</span>' : ''}</div></div>`).join('')}</div>`);
+}
+function insDaysWeb(D) {
+  const y = D.hy, vals = MON.map((_, i) => D.sd.length || D.Y === 'all' ? [...D.days.keys()].filter(d => d.startsWith(y + '-' + String(i + 1).padStart(2, '0'))).length : 0);
+  const months = vals.filter((v, i) => new Date(y, i, 1) <= new Date()).length || 1;
+  const avg = vals.reduce((a, b) => a + b, 0) / months;
+  const N = 12, cx = 160, cy = 150, R = 110, max = Math.max(4, Math.ceil(Math.max(...vals) / 4) * 4);
+  const ang = i => -Math.PI / 2 + i * 2 * Math.PI / N, pt = (i, r) => [cx + r * Math.cos(ang(i)), cy + r * Math.sin(ang(i))];
+  const ring = f => `<polygon points="${MON.map((_, i) => pt(i, R * f).join(',')).join(' ')}" fill="none" stroke="rgba(185,166,255,${f === 1 ? 0.35 : 0.18})" stroke-dasharray="${f === 1 ? '' : '2 4'}"/>`;
+  const shape = MON.map((_, i) => pt(i, R * vals[i] / max).join(',')).join(' ');
+  return card('On average you read', `${avg.toFixed(1)} days <small style="font-size:15px;color:var(--muted)">a month in ${y}</small>`, `<svg class="ins-svg" viewBox="0 0 320 300" role="img" aria-label="Days read per month in ${y}">
+    ${[0.25, 0.5, 0.75, 1].map(ring).join('')}${MON.map((_, i) => { const [x, yy] = pt(i, R); return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${yy}" stroke="rgba(185,166,255,0.14)"/>`; }).join('')}
+    <text x="${cx + 4}" y="${cy - R / 2 + 12}">${max / 2}</text><text x="${cx + 4}" y="${cy - R + 12}">${max}</text>
+    <polygon points="${shape}" fill="rgba(244,198,109,0.18)" stroke="var(--candle)" stroke-width="2" stroke-linejoin="round"/>
+    ${MON.map((m, i) => { const [x, yy] = pt(i, R * vals[i] / max), [lx, ly] = pt(i, R + 18); return `<g><circle cx="${x}" cy="${yy}" r="${vals[i] ? 4 : 2.5}" fill="${vals[i] ? 'var(--gold-2, #ffe4a3)' : '#4b4580'}" stroke="#1c1840" stroke-width="2"/><circle cx="${x}" cy="${yy}" r="14" fill="transparent"><title>${m}: ${vals[i]} day${vals[i] === 1 ? '' : 's'}</title></circle><text x="${lx}" y="${ly + 4}" text-anchor="middle" ${vals[i] ? 'style="fill:var(--gold-2, #ffe4a3)"' : ''}>${m}</text></g>`; }).join('')}
+  </svg><p class="ins-note" style="text-align:center">Days you read each month. Tap a point for its count.</p>`);
+}
+function insWeeks(D) {
+  const now = new Date(), start = addDays(today(), -now.getDay() - 63), weeks = [];
+  for (let w = 0; w < 10; w++) { let p = 0; const ws = addDays(start, w * 7); for (let i = 0; i < 7; i++) { const e = D.days.get(addDays(ws, i)); if (e) p += e.pages; } weeks.push({ws, p}); }
+  const tg = +(settings.targets || {}).weekPages || 0, max = Math.max(tg, ...weeks.map(w => w.p), 10), avg = Math.round(weeks.reduce((a, w) => a + w.p, 0) / 10);
+  const W = 320, H = 170, bw = 22, gap = (W - 40 - bw * 10) / 9, y = v => 10 + (H - 40) * (1 - v / max);
+  return card('On average you read', `${avg.toLocaleString()} pages <small style="font-size:15px;color:var(--muted)">a week, last 10 weeks</small>`, `<svg class="ins-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Pages read per week">
+    <line x1="0" y1="${y(0)}" x2="${W - 36}" y2="${y(0)}" stroke="rgba(185,166,255,0.25)"/><text x="${W - 32}" y="${y(0) + 4}">0</text><text x="${W - 32}" y="${y(max) + 4}">${max.toLocaleString()}</text>
+    ${weeks.map((w, i) => { const x = i * (bw + gap), h = Math.max(w.p ? 3 : 0, y(0) - y(w.p)); const d = parseYmd(w.ws);
+      return `<g><rect x="${x}" y="10" width="${bw}" height="${H - 40}" rx="4" fill="rgba(185,166,255,0.06)"/>${h ? `<path d="M${x},${y(0)} v${-(h - 4)} q0,-4 4,-4 h${bw - 8} q4,0 4,4 v${h - 4} z" fill="${i === 9 ? 'var(--candle)' : 'rgba(244,198,109,0.6)'}"/>` : ''}<rect x="${x}" y="10" width="${bw}" height="${H - 40}" fill="transparent"><title>Week of ${MON[d.getMonth()]} ${d.getDate()}: ${w.p.toLocaleString()} pages</title></rect>${i % 3 === 0 || i === 9 ? `<text x="${x + bw / 2}" y="${H - 14}" text-anchor="middle" ${i === 9 ? 'style="fill:var(--candle)"' : ''}>${MON[d.getMonth()]} ${d.getDate()}</text>` : ''}</g>`; }).join('')}
+    ${tg ? `<line x1="0" y1="${y(tg)}" x2="${W - 36}" y2="${y(tg)}" stroke="var(--moss)" stroke-dasharray="4 4" stroke-width="1.5"/><text x="${W - 32}" y="${y(tg) + 4}" style="fill:var(--moss)">goal</text>` : ''}
+  </svg>${tg ? '' : '<p class="ins-note">Set a weekly pages goal above to see it as a line here.</p>'}`);
+}
+function insCalendar(D, list) {
+  const nowY = new Date().getFullYear();
+  if (!insCal || (D.Y !== 'all' && insCal.y !== D.Y)) insCal = D.Y === 'all' || D.Y === nowY ? {y: nowY, m: new Date().getMonth()} : {y: D.Y, m: 11};
+  const {y, m} = insCal, first = new Date(y, m, 1), nd = new Date(y, m + 1, 0).getDate(), byId = new Map(list.map(b => [b.id, b]));
+  const inBest = d => D.best.len > 1 && d >= D.best.start && d <= D.best.end;
+  const cells = [];
+  for (let i = 0; i < first.getDay(); i++) cells.push('<div class="day out"></div>');
+  for (let d = 1; d <= nd; d++) {
+    const k = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0'), e = D.days.get(k);
+    const bs = e ? [...e.ids].map(id => byId.get(id)).filter(Boolean) : [];
+    cells.push(`<div class="day${e ? ' read' : ''}${e && inBest(k) ? ' best' : ''}${k === today() ? ' today' : ''}" title="${e ? (e.pages ? e.pages + ' pages' : 'Read') + (bs.length ? ': ' + bs.map(b => b.title).join(', ') : '') : ''}"><span>${d}</span><span class="covers">${bs.slice(0, 2).map(b => miniSpine(b, 26)).join('')}</span></div>`);
+  }
+  const lo = D.Y === 'all' ? null : {y: D.Y, m: 0}, hi = D.Y === 'all' || D.Y === nowY ? {y: nowY, m: new Date().getMonth()} : {y: D.Y, m: 11};
+  const atLo = lo && y === lo.y && m === lo.m, atHi = y === hi.y && m === hi.m;
+  const insight = D.run && D.run >= D.best.len && D.Y !== 'all' ? "You're on your longest reading streak right now!" : D.run ? `Current streak: ${D.run} day${D.run === 1 ? '' : 's'}. Keep it going tonight.` : 'Read a few pages today to start a new streak.';
+  return card('Best reading streak · ' + scopeWord(D), `${D.best.len} day${D.best.len === 1 ? '' : 's'}`, `<div class="ins-cal-head"><button type="button" data-calm="-1" aria-label="Previous month" ${atLo ? 'disabled' : ''}>‹</button><b>${MONTHS[m]} ${y}</b><button type="button" data-calm="1" aria-label="Next month" ${atHi ? 'disabled' : ''}>›</button></div>
+    <div class="ins-cal">${['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(x => `<span class="dow">${x}</span>`).join('')}${cells.join('')}</div>
+    <div class="ins-keys"><span style="--c:rgba(244,198,109,0.7)">Best streak</span><span style="--c:rgba(244,198,109,0.25)">Days read</span><span style="--c:rgba(185,166,255,0.12)">No reading</span></div>
+    <p class="ins-note">✦ ${insight}</p>`);
+}
+function insHeat(D) {
+  const y = D.hy, inBest = d => D.best.len > 1 && d >= D.best.start && d <= D.best.end;
+  const n = [...D.days.keys()].filter(d => d.startsWith(y + '-')).length;
+  let g = '<em></em>' + MON.map(m => `<em>${m[0]}</em>`).join('');
+  for (let d = 1; d <= 31; d++) {
+    g += `<em>${d % 5 === 1 ? d : ''}</em>`;
+    for (let m = 0; m < 12; m++) {
+      if (d > new Date(y, m + 1, 0).getDate()) { g += '<i class="x"></i>'; continue; }
+      const k = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0'), e = D.days.get(k);
+      const c = !e ? '' : e.fin.length ? 'f' : inBest(k) ? 'b' : 'r';
+      g += `<i class="${c}" title="${MON[m]} ${d}${e ? (e.fin.length ? ': finished a book' : ': ' + (e.pages || 'some') + ' pages') : ''}"></i>`;
+    }
+  }
+  return card(`You've read`, `${n} day${n === 1 ? '' : 's'} <small style="font-size:15px;color:var(--muted)">in ${y}</small>`, `<div class="ins-heat" role="img" aria-label="Reading days in ${y}">${g}</div>
+    <div class="ins-keys"><span style="--c:var(--candle)">Best streak</span><span style="--c:rgba(244,198,109,0.45)">Days read</span><span style="--c:var(--moss)">Finished a book</span></div>`);
+}
+function insSpice(D) {
+  const sp = D.fins.filter(f => f.b.spice > 0).sort((a, b) => b.b.spice - a.b.spice);
+  if (!sp.length) return card('Your most spice-level read', 'None yet', '<p class="ins-note">Add a spice level (🌶 0 to 5) when you rate a book, from the book\'s edit section or the finish screen, and your spiciest read appears here.</p>');
+  const top = sp[0].b;
+  return card('Your most spice-level read · ' + scopeWord(D), esc(top.title), `<div class="ins-rows">${[...new Map(sp.map(f => [f.b.id, f.b])).values()].slice(0, 5).map(b => `<div class="ins-mrow" style="grid-template-columns:auto 1fr auto">${miniSpine(b, 30)}<span style="color:var(--text);font-size:15px">${esc(b.title)}</span><span aria-label="Spice ${b.spice} of 5">${'🌶'.repeat(b.spice)}</span></div>`).join('')}</div>`);
+}
+function insGenreTime(D) {
+  const y = D.hy, fs = D.all.filter(f => f.d.startsWith(y + '-'));
+  const used = [...new Set(fs.map(f => f.b.genre))].filter(k => G[k]);
+  if (!used.length) return card('You explored', '0 genres <small style="font-size:15px;color:var(--muted)">in ' + y + '</small>', '<p class="ins-note">Finished books stack up here by month, coloured by genre.</p>');
+  const by = MON.map((_, i) => { const m = {}; fs.filter(f => +f.d.slice(5, 7) === i + 1).forEach(f => { m[f.b.genre] = (m[f.b.genre] || 0) + 1; }); return m; });
+  const max = Math.max(1, ...by.map(m => Object.values(m).reduce((a, b) => a + b, 0))), W = 320, H = 150, bw = 18, step = (W - bw) / 11, unit = (H - 30) / max;
+  const bars = by.map((m, i) => { let yy = H - 20; const x = i * step; return used.filter(k => m[k]).map(k => { const h = m[k] * unit; yy -= h; return `<rect x="${x}" y="${yy + 1}" width="${bw}" height="${Math.max(1, h - 2)}" rx="3" fill="${G[k].color}"><title>${MON[i]}: ${m[k]} ${esc(G[k].name)}</title></rect>`; }).join('') + `<text x="${x + bw / 2}" y="${H - 5}" text-anchor="middle">${MON[i][0]}</text>`; }).join('');
+  return card('You explored', `${used.length} genre${used.length === 1 ? '' : 's'} <small style="font-size:15px;color:var(--muted)">in ${y}</small>`, `<svg class="ins-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Books finished per month by genre">${bars}</svg>
+    <ul class="ins-legend" style="grid-template-columns:repeat(2,minmax(0,1fr))">${used.map(k => `<li><i style="--c:${G[k].color}"></i>${esc(G[k].name)}</li>`).join('')}</ul>`);
+}
+function insRatings(D) {
+  if (!D.rated.length) return card('Average rating', 'No ratings yet', '<p class="ins-note">Rate the books you finish to see how your stars spread out.</p>');
+  const c = [1, 2, 3, 4, 5].map(s => D.rated.filter(f => f.r === s).length), max = Math.max(...c);
+  return card('Average rating · ' + scopeWord(D), `${D.avg.toFixed(1)} stars`, `<div class="ins-rows">${[5, 4, 3, 2, 1].map(s => `<div class="ins-goal" style="grid-template-columns:42px 1fr 24px;display:grid;align-items:center;gap:8px"><span style="color:var(--muted);font-size:14px">${s} ★</span><div class="ins-track"><i style="width:${max ? 100 * c[s - 1] / max : 0}%"></i></div><span style="font-size:14px;text-align:right">${c[s - 1]}</span></div>`).join('')}</div>`);
+}
+let commBusy = false;
+function insCommunity(D, list) {
+  const rows = [...new Map(D.rated.map(f => [f.b.id, f])).values()].filter(f => f.b.community > 0).slice(-10).reverse();
+  const missing = isExample ? 0 : list.filter(b => isFinished(b) && !(b.community > 0)).length;
+  const btn = missing ? `<div><button class="btn ghost" type="button" data-community ${commBusy ? 'disabled' : ''}>${commBusy ? 'Asking the librarian...' : 'Get community ratings (' + missing + ')'}</button></div>` : '';
+  if (!rows.length) return card('The community rating vs.', 'Your rating', `<p class="ins-note">See how your stars compare with other readers' average rating for each book you have rated.</p>${btn}`);
+  const diff = rows.reduce((a, f) => a + f.r - f.b.community, 0) / rows.length;
+  const x = v => 6 + 138 * v / 5;
+  return card('The community rating vs.', 'Your rating', `<p class="ins-note">${Math.abs(diff) < 0.15 ? 'You rate books about the same as other readers.' : `On average you rate books ${Math.abs(diff).toFixed(1)} stars ${diff > 0 ? 'higher' : 'lower'} than other readers.`}</p>
+    <div class="ins-comm">${rows.map(f => `<div class="crow"><div><b>${esc(f.b.title)}</b><small>You ${f.r}★ · readers ${f.b.community.toFixed(1)}★</small></div>
+      <svg class="ins-svg" viewBox="0 0 150 22" role="img" aria-label="You ${f.r}, readers ${f.b.community}"><line x1="6" y1="11" x2="144" y2="11" stroke="rgba(185,166,255,0.2)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="${x(f.r)}" y1="11" x2="${x(f.b.community)}" y2="11" stroke="rgba(244,198,109,0.45)" stroke-width="2"/>
+      <circle cx="${x(f.b.community)}" cy="11" r="5" fill="#b9a6ff" stroke="#1c1840" stroke-width="2"/><circle cx="${x(f.r)}" cy="11" r="5" fill="var(--candle)" stroke="#1c1840" stroke-width="2"/></svg></div>`).join('')}</div>
+    <div class="ins-keys"><span style="--c:var(--candle)">You</span><span style="--c:#b9a6ff">Other readers (the librarian's estimate)</span></div>${btn}`);
+}
+async function fetchCommunity(list) {
+  const todo = list.filter(b => !b.example && isFinished(b) && !(b.community > 0)); if (!todo.length || commBusy) return;
+  commBusy = true; render(); let done = 0;
+  for (let i = 0; i < todo.length; i += 10) {
+    const chunk = todo.slice(i, i + 10);
+    const r = await askLibrarian(`You are a librarian who knows how readers rate books. For each book give its average reader rating out of 5 on Goodreads, to one decimal. Use 0 if you do not know the book well. Reply with a single JSON object and nothing else.
+${chunk.map((b, j) => `${j + 1}. ${JSON.stringify(b.title)} by ${JSON.stringify(b.author || 'unknown')}`).join('\n')}
+JSON shape: {"books":[{"n": integer, "communityRating": number}]}`, 'quick');
+    if (r.away || r.error) { toast('<b>The librarian needs a short break</b><br>Try again in a minute.'); break; }
+    for (const x of (r.out && r.out.books) || []) {
+      const b = chunk[(+x.n || 0) - 1], v = +x.communityRating; if (!b || !(v > 0 && v <= 5)) continue;
+      const k = books.findIndex(y => y.id === b.id); if (k < 0) continue;
+      const c = JSON.parse(JSON.stringify(books[k])); c.community = Math.round(v * 10) / 10; books[k] = c; await persist(c); done++;
+    }
+  }
+  commBusy = false; render();
+  if (done) toast(`<b>Community ratings added</b><br>${done} book${done === 1 ? '' : 's'}.`);
+}
+function renderInsights(list) {
+  const D = insData(list), ys = insYears(list);
+  return `<div class="ins"><div class="ins-scope" role="group" aria-label="Time period"><button type="button" data-insyear="all" aria-pressed="${D.Y === 'all'}">All-time</button>${ys.map(y => `<button type="button" data-insyear="${y}" aria-pressed="${D.Y === y}">${y}</button>`).join('')}</div>
+    ${insSummary(D)}${insGoals(D, list)}${insReading(list)}${insAura(D)}${insFive(D)}${insGenres(D)}${insAuthors(D)}${insMonthly(D)}${insDaysWeb(D)}${insWeeks(D)}
+    <h2 class="subhead" style="text-align:center;margin:8px 0 0">Reading streaks</h2>${insCalendar(D, list)}${insHeat(D)}
+    <h2 class="subhead" style="text-align:center;margin:8px 0 0">Reading insights</h2>${insSpice(D)}${insGenreTime(D)}${insRatings(D)}${insCommunity(D, list)}</div>`;
+}
+function spiceHtml(v) { v = v || 0; return `<div class="spice" id="spice" data-s="${v}">${[1, 2, 3, 4, 5].map(i => `<button type="button" data-sp="${i}" class="${i <= v ? 'on' : ''}" aria-label="Spice ${i} of 5">🌶</button>`).join('')}<button type="button" data-sp="0" class="sp0">none</button></div>`; }
+function wireSpice() { const r = sheet.querySelector('#spice'); if (!r) return; r.addEventListener('click', e => { const b = e.target.closest('[data-sp]'); if (!b) return; const v = +b.dataset.sp; r.dataset.s = v; r.querySelectorAll('[data-sp]').forEach(x => x.classList.toggle('on', +x.dataset.sp > 0 && +x.dataset.sp <= v)); }); }
+function readSpice() { const r = sheet.querySelector('#spice'); return r ? +r.dataset.s || 0 : 0; }
+const SPICE_FIELD = v => `<div class="field"><span class="flabel">Spice level</span>${spiceHtml(v)}</div>`;
 
 /* ---------- Card catalogue (Genre Map tab) ---------- */
 let catQ = '', catF = [], catBusy = '';
