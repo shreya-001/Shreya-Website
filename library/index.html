@@ -695,6 +695,39 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
 .room .pl-leaves, .room .money-bush, .room .money-vines { transform-box: view-box; animation: sway 6.5s ease-in-out infinite; }
 .room .money-vines { animation-duration: 8s; }
 .gsap-on .room .pl-leaves, .gsap-on .room .money-bush, .gsap-on .room .money-vines { animation: none !important; }
+
+/* ---------- Classification: catalogue card, tag inputs, card catalogue ---------- */
+.cls-wrap summary { line-height: 1.35; }
+.cls-wrap summary small { color: var(--muted); font-size: 13px; }
+.cls-ed { display: grid; gap: 10px; margin-top: 8px; }
+.tagbox { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; background: #120d0a; border: 1px solid var(--line); border-radius: 10px; padding: 6px 8px; cursor: text; }
+.tagbox input { flex: 1 1 120px; min-width: 110px; border: 0 !important; background: transparent !important; padding: 4px 2px !important; outline: none; }
+.tchip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 4px 2px 10px; border-radius: 999px; background: rgba(240,180,92,0.16); border: 1px solid var(--line); font-size: 14px; }
+.tchip button { border: 0; background: transparent; color: var(--muted); font-size: 16px; line-height: 1; padding: 0 4px; cursor: pointer; }
+.cls-card dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 4px 0 0; align-items: start; }
+.cls-card dt { color: var(--muted); font-size: 14px; padding-top: 3px; }
+.cls-card dd { margin: 0; display: flex; flex-wrap: wrap; gap: 5px; }
+.ctag { border: 1px solid var(--line); background: transparent; color: var(--text, inherit); border-radius: 999px; padding: 2px 10px; font-size: 14px; cursor: pointer; font-family: inherit; display: inline-flex; gap: 6px; align-items: baseline; }
+.ctag small { color: var(--muted); font-size: 12px; }
+.ctag:hover, .ctag:focus-visible { border-color: var(--candle); }
+.ctag.on { background: rgba(240,180,92,0.2); border-color: var(--candle); color: var(--candle); }
+.catalogue { border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin: 0 0 14px; background: linear-gradient(160deg, rgba(36,30,80,0.55), rgba(16,13,40,0.6)); display: grid; gap: 12px; }
+.catalogue h2 { color: var(--gold-2, var(--candle)); font-size: 28px; text-align: center; margin: 0; }
+.catalogue .sub { color: var(--muted); text-align: center; font-style: italic; margin: 0; }
+.catalogue input[type=search] { background: #120d0a; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%; font-size: 17px; }
+.cat-missing { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; padding: 10px 12px; border: 1px dashed var(--line); border-radius: 12px; color: var(--muted); }
+.cat-active { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.cat-active .linkish { background: none; border: 0; color: var(--muted); text-decoration: underline; cursor: pointer; font-family: inherit; }
+.cat-facet { display: grid; gap: 6px; }
+.cat-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+.cat-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.cat-list button { width: 100%; display: flex; gap: 10px; align-items: center; text-align: left; background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; color: inherit; font-family: inherit; cursor: pointer; }
+.cat-list b { display: block; font-weight: 600; }
+.cat-list small { color: var(--muted); font-size: 13px; }
+.cat-dot { flex: none; width: 10px; height: 26px; border-radius: 3px; background: var(--c); }
+.radar-toggle { display: flex; justify-content: center; gap: 6px; margin: 0 0 6px; }
+.radar-toggle button { border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 3px 12px; font-size: 13px; cursor: pointer; font-family: inherit; }
+.radar-toggle button[aria-pressed="true"] { color: var(--candle); border-color: var(--candle); background: rgba(240,180,92,0.12); }
 </style>
 </head>
 <body>
@@ -965,6 +998,131 @@ const GENRES = [
   {key:'classics', name:'Classics & Poetry', region:'The Bell Tower', color:'#97483a', noun:'Sage', adj:'Venerable'},
 ];
 const G = Object.fromEntries(GENRES.map(g => [g.key, g]));
+/* ================= Classification =================
+   Each book keeps one main genre (it decides the region, XP and the web), plus a catalogue card:
+   b.cls = {genres: [extra genre keys], sub, themes, tropes, subj, trad: [tags], form, aud} */
+const FORMS = ['Novel','Novella','Short Stories','Poetry','Graphic Novel','Play','Essays','Narrative Nonfiction','Anthology','Guide or Handbook'];
+const AUDIENCES = ['Adult','New Adult','Young Adult','Middle Grade','Children'];
+const SUBGENRES = {
+  fantasy: ['Epic Fantasy','High Fantasy','Low Fantasy','Urban Fantasy','Dark Fantasy','Cozy Fantasy','Mythic Fantasy','Sword & Sorcery','Portal Fantasy','Progression Fantasy','LitRPG','Grimdark','Xianxia','Romantasy','Historical Fantasy','Fairy Tale Retelling'],
+  scifi: ['Hard SF','Soft SF','Space Opera','Cyberpunk','Biopunk','Solarpunk','Steampunk','Time Travel','First Contact','AI Fiction','Climate Fiction','Post-Apocalyptic','Dystopian Fiction','Utopian Fiction','Alternate History','Military SF'],
+  mystery: ['Cozy Mystery','Whodunit','Locked-Room Mystery','Police Procedural','Private Investigator','Noir','Historical Mystery','Forensic Mystery','Amateur Sleuth','Psychological Thriller','Domestic Thriller','Political Thriller','Espionage Thriller','Legal Thriller','Medical Thriller','Techno-Thriller','Conspiracy Thriller','Survival Thriller','Romantic Suspense'],
+  horror: ['Gothic Horror','Cosmic Horror','Folk Horror','Body Horror','Supernatural Horror','Psychological Horror','Occult Horror','Haunted House','Monster Horror','Eco-Horror'],
+  romance: ['Contemporary Romance','Historical Romance','Regency Romance','Romantic Suspense','Paranormal Romance','Romantic Comedy','Dark Romance','Sports Romance','Queer Romance','Romantasy'],
+  literary: ['Contemporary Fiction','Psychological Fiction','Philosophical Fiction','Experimental Fiction','Autofiction','Satire','Absurdist Fiction','Family Saga','Coming-of-Age','Campus Novel','Social Fiction','Magical Realism','Weird Fiction','Slipstream','Dystopian Fiction'],
+  historical: ['Historical Adventure','Historical Drama','Historical Mystery','Historical Romance','Historical Fantasy','Biographical Fiction','Alternate History','War Fiction'],
+  memoir: ['Memoir','Autobiography','Biography','Personal Essays','Travel Writing','Letters & Diaries'],
+  science: ['Popular Science','Neuroscience','Physics','Biology','Nature Writing','Medicine','Environment','Mathematics'],
+  selfhelp: ['Self-Help','Popular Psychology','Productivity','Wellbeing','Relationships','Habits','Personal Finance'],
+  history: ['World History','Military History','Social History','Politics','Economics','Sociology','True Crime','Journalism'],
+  philosophy: ['Philosophy','Ethics','Spirituality','Religion','Mythology','Stoicism'],
+  business: ['Business','Leadership','Entrepreneurship','Technology','Artificial Intelligence','Design'],
+  classics: ['Classic Literature','Poetry','Drama','Epic Poetry','Mythology','Fairy Tales','Gothic Fiction','Adventure Fiction'],
+};
+const ALIASES = {'sci-fi':'Science Fiction','scifi':'Science Fiction','sf':'Science Fiction','hard sci-fi':'Hard SF','soft sci-fi':'Soft SF','whodunnit':'Whodunit','rom-com':'Romantic Comedy','romcom':'Romantic Comedy','ya':'Young Adult','cli-fi':'Climate Fiction','climate fiction':'Climate Fiction','litrpg':'LitRPG','enemies-to-lovers':'Enemies to Lovers','coming of age':'Coming-of-Age','post apocalyptic':'Post-Apocalyptic','postapocalyptic':'Post-Apocalyptic','techno thriller':'Techno-Thriller','technothriller':'Techno-Thriller','ai':'Artificial Intelligence','dystopia':'Dystopian Fiction','dystopian':'Dystopian Fiction','found-family':'Found Family','self help':'Self-Help','true-crime':'True Crime','pop science':'Popular Science','popsci':'Popular Science','gothic':'Gothic Fiction','cozy':'Cozy'};
+const CLS_FIELDS = [
+  {k: 'sub', name: 'Subgenres', ph: 'Historical Adventure'},
+  {k: 'themes', name: 'Themes', ph: 'Revenge, Justice'},
+  {k: 'tropes', name: 'Tropes', ph: 'Hidden Identity'},
+  {k: 'subj', name: 'Subjects', ph: 'French History'},
+  {k: 'trad', name: 'Tradition & period', ph: '19th-Century Literature'},
+];
+const SMALLW = new Set(['a','an','and','as','at','but','by','for','in','of','on','or','the','to','vs','with']);
+function titleCase(s) { return s.split(' ').map((w, i) => i && SMALLW.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1)).join(' '); }
+function vocab() {
+  const m = new Map(); const add = t => { if (t) m.set(String(t).toLowerCase(), String(t)); };
+  Object.values(SUBGENRES).flat().forEach(add); FORMS.forEach(add); AUDIENCES.forEach(add); Object.values(ALIASES).forEach(add);
+  (typeof books !== 'undefined' ? books : []).forEach(b => { const c = b.cls; if (c) CLS_FIELDS.forEach(f => (c[f.k] || []).forEach(add)); });
+  return m;
+}
+function normTag(t, vm) {
+  const s = String(t || '').replace(/\s+/g, ' ').trim().replace(/^[#,;]+|[,;.]+$/g, '').trim();
+  if (!s || s.length > 48) return '';
+  const k = s.toLowerCase(); if (ALIASES[k]) return ALIASES[k];
+  const v = (vm || vocab()).get(k); if (v) return v;
+  return /[A-Z]/.test(s.slice(1)) ? s.charAt(0).toUpperCase() + s.slice(1) : titleCase(k);
+}
+function normTags(list, max) {
+  const vm = vocab(), out = [], seen = new Set();
+  (Array.isArray(list) ? list : String(list || '').split(',')).forEach(t => { const n = normTag(t, vm); if (n && !seen.has(n.toLowerCase())) { seen.add(n.toLowerCase()); out.push(n); } });
+  return out.slice(0, max || 12);
+}
+function clsOf(b) {
+  const c = (b && b.cls) || {};
+  return {genres: (c.genres || []).filter(k => G[k] && k !== b.genre), sub: c.sub || [], themes: c.themes || [], tropes: c.tropes || [], subj: c.subj || [], trad: c.trad || [], form: c.form || '', aud: c.aud || ''};
+}
+const hasCls = b => { const c = clsOf(b); return !!(c.sub.length + c.themes.length + c.subj.length + c.tropes.length); };
+function matchForm(x) {
+  const k = String(x || '').toLowerCase(); if (!k) return '';
+  return FORMS.find(f => f.toLowerCase() === k) || (k.includes('short') ? 'Short Stories' : /graphic|comic|manga/.test(k) ? 'Graphic Novel' : k.includes('novella') ? 'Novella'
+    : /non-?fiction/.test(k) ? 'Narrative Nonfiction' : k.includes('poe') ? 'Poetry' : k.includes('essay') ? 'Essays' : k.includes('play') || k.includes('drama') ? 'Play' : k.includes('novel') ? 'Novel' : '');
+}
+function matchAud(x) {
+  const k = String(x || '').toLowerCase().replace(/[^a-z]/g, ''); if (!k) return '';
+  return AUDIENCES.find(a => a.toLowerCase().replace(/[^a-z]/g, '') === k) || (k === 'ya' ? 'Young Adult' : k.includes('child') ? 'Children' : k.includes('adult') ? 'Adult' : '');
+}
+function clsFromInfo(info, primary) {
+  info = info || {};
+  const arr = v => Array.isArray(v) ? v : v ? [v] : [];
+  return {genres: [...new Set(arr(info.additionalGenres).map(matchGenre))].filter(k => k && k !== primary).slice(0, 3),
+    sub: normTags(arr(info.subgenres), 4), themes: normTags(arr(info.themes), 6), tropes: normTags(arr(info.tropes), 5),
+    subj: normTags(arr(info.subjects), 5), trad: normTags(arr(info.tradition), 3), form: matchForm(info.form), aud: matchAud(info.audience)};
+}
+const CLS_KEYS = () => `"additionalGenres": array of 0 to 2 more genres from that same genre list that also clearly fit (never repeat the main genre), "subgenres": array of 1 to 3 subgenres (prefer these names when one fits: ${[...new Set(Object.values(SUBGENRES).flat())].join(', ')}), "themes": array of 3 to 6 central themes, each a single idea such as "Revenge", "Grief" or "Identity", "tropes": array of 0 to 4 recognisable story tropes such as "Hidden Identity" or "Found Family" (use [] for nonfiction), "subjects": array of 0 to 4 real-world subjects the book is about, such as "French History" or "Neuroscience", "form": one of ${JSON.stringify(FORMS)}, "audience": one of ${JSON.stringify(AUDIENCES)}, "tradition": array of 0 to 2 literary traditions or periods such as "French Literature" or "19th-Century Literature"`;
+const tagChip = t => `<span class="tchip" data-t="${esc(t)}">${esc(t)}<button type="button" aria-label="Remove ${esc(t)}">×</button></span>`;
+function suggestFor(k, primary) {
+  const m = new Map();
+  if (k === 'sub') (SUBGENRES[primary] || []).concat(Object.values(SUBGENRES).flat()).forEach(t => m.set(t.toLowerCase(), t));
+  books.forEach(b => (clsOf(b)[k] || []).forEach(t => m.set(t.toLowerCase(), t)));
+  return [...m.values()].slice(0, 250);
+}
+function clsSummary(c) { const bits = [...c.sub, ...c.themes].slice(0, 4); return bits.length ? bits.join(', ') + ([...c.sub, ...c.themes].length > 4 ? '...' : '') : 'not filed yet'; }
+function clsEditor(c, primary, pfx) {
+  const opts = (list, cur) => `<option value="">Not set</option>` + list.map(x => `<option${x === cur ? ' selected' : ''}>${esc(x)}</option>`).join('');
+  return `<div class="cls-ed" id="${pfx}Cls">
+    <div class="field"><span class="flabel">Also fits these genres</span><div class="moods" id="${pfx}G2">${GENRES.map(g => `<button type="button" class="mood" data-g2="${g.key}" aria-pressed="${c.genres.includes(g.key)}"${g.key === primary ? ' hidden' : ''}>${esc(g.name)}</button>`).join('')}</div></div>
+    ${CLS_FIELDS.map(f => { const id = pfx + 'T' + f.k; return `<div class="field"><label for="${id}In">${f.name}</label><div class="tagbox" data-tagbox="${f.k}">${c[f.k].map(tagChip).join('')}<input id="${id}In" list="${id}List" placeholder="${c[f.k].length ? 'Add another' : 'e.g. ' + esc(f.ph)}" autocomplete="off" enterkeyhint="done"></div><datalist id="${id}List">${suggestFor(f.k, primary).map(t => `<option value="${esc(t)}">`).join('')}</datalist></div>`; }).join('')}
+    <div class="row2"><div class="field"><label for="${pfx}Form">Form</label><select id="${pfx}Form">${opts(FORMS, c.form)}</select></div>
+      <div class="field"><label for="${pfx}Aud">Audience</label><select id="${pfx}Aud">${opts(AUDIENCES, c.aud)}</select></div></div>
+    <p class="qmeta" style="margin:0">Type a tag and press Enter, or pick a suggestion. The main genre above decides the region and your web.</p></div>`;
+}
+function wireCls(pfx, primarySel) {
+  const root = sheet.querySelector('#' + pfx + 'Cls'); if (!root) return;
+  root.querySelectorAll('.tagbox').forEach(box => {
+    const inp = box.querySelector('input');
+    const addT = () => {
+      const have = new Set([...box.querySelectorAll('.tchip')].map(x => x.dataset.t.toLowerCase()));
+      normTags(inp.value).forEach(n => { if (!have.has(n.toLowerCase())) { inp.insertAdjacentHTML('beforebegin', tagChip(n)); have.add(n.toLowerCase()); } });
+      inp.value = ''; inp.placeholder = 'Add another';
+    };
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addT(); }
+      else if (e.key === 'Backspace' && !inp.value) { const l = [...box.querySelectorAll('.tchip')].pop(); if (l) l.remove(); }
+    });
+    inp.addEventListener('change', () => { if (inp.value.trim()) addT(); });
+    box.addEventListener('click', e => { const x = e.target.closest('.tchip button'); if (x) x.parentElement.remove(); else if (e.target === box) inp.focus(); });
+  });
+  root.querySelector('#' + pfx + 'G2').addEventListener('click', e => { const b = e.target.closest('[data-g2]'); if (b) b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); });
+  const ps = sheet.querySelector(primarySel);
+  if (ps) ps.addEventListener('change', () => root.querySelectorAll('[data-g2]').forEach(b => { const me = b.dataset.g2 === ps.value; b.hidden = me; if (me) b.setAttribute('aria-pressed', 'false'); }));
+}
+function readCls(pfx, primary, prev) {
+  const root = sheet.querySelector('#' + pfx + 'Cls'); if (!root) return prev || null;
+  const c = {genres: [...root.querySelectorAll('[data-g2][aria-pressed="true"]')].map(b => b.dataset.g2).filter(k => k !== primary)};
+  root.querySelectorAll('.tagbox').forEach(box => { c[box.dataset.tagbox] = normTags([...box.querySelectorAll('.tchip')].map(x => x.dataset.t).concat(normTags(box.querySelector('input').value)), 12); });
+  c.form = root.querySelector('#' + pfx + 'Form').value; c.aud = root.querySelector('#' + pfx + 'Aud').value;
+  return c;
+}
+function clsCard(b) {
+  const c = clsOf(b), rows = [];
+  if (c.genres.length) rows.push(['Also', c.genres.map(k => G[k].name)]);
+  CLS_FIELDS.forEach(f => { if (c[f.k].length) rows.push([f.name, c[f.k]]); });
+  const fa = [c.form, c.aud].filter(Boolean); if (fa.length) rows.push(['Form', fa]);
+  if (!rows.length) return '';
+  return `<div class="cls-card"><div class="flabel">Catalogue card</div><dl>${rows.map(([n, v]) => `<dt>${esc(n)}</dt><dd>${v.map(t => `<button type="button" class="ctag" data-ctag="${esc(t)}">${esc(t)}</button>`).join('')}</dd>`).join('')}</dl></div>`;
+}
+function allTagsOf(b) { const c = clsOf(b); return [...[b.genre, ...c.genres].filter(k => G[k]).map(k => G[k].name), ...c.sub, ...c.themes, ...c.tropes, ...c.subj, ...c.trad, c.form, c.aud].filter(Boolean); }
+
 const RANKS = ['Page Turner','Lamplighter','Shelf Wanderer','Chapter Knight','Bookwyrm','Lore Keeper','Archivist','Grand Librarian','Keeper of the Infinite Stacks'];
 const xpFor = n => 250 * n * (n - 1); // XP needed to reach level n
 
@@ -1046,11 +1204,11 @@ function exampleBooks() {
   const t = today();
   const fin = (d, p) => ({finishedDate: addDays(t, d), logs: [{d: addDays(t, d), p}], pagesRead: p, progress: p, status: 'finished'});
   return [
-    {id:'ex1', title:'The Name of the Wind', author:'Patrick Rothfuss', pages:662, chapters:92, year:2007, genre:'fantasy', country:'United States', format:'physical', ...fin(-20, 662), rating:5, moods:['cozy','adventurous'], series:'The Kingkiller Chronicle', seriesNo:1, seriesTotal:3, thoughts:'Slow, musical and cozy. I loved the university chapters most.', example:true},
-    {id:'ex2', title:'Project Hail Mary', author:'Andy Weir', pages:476, year:2021, genre:'scifi', country:'United States', format:'audio', ...fin(-9, 476), rating:5, moods:['funny','gripping'], example:true},
-    {id:'ex3', title:'Rebecca', author:'Daphne du Maurier', pages:410, year:1938, genre:'mystery', country:'United Kingdom', format:'kindle', ...fin(-4, 410), rating:4, moods:['eerie','slow-burn'], example:true},
-    {id:'ex4', title:'Educated', author:'Tara Westover', pages:334, year:2018, genre:'memoir', country:'United States', format:'physical', ...fin(-2, 334), rating:4, moods:['inspiring','heartbreaking'], example:true},
-    {id:'ex5', title:'Middlemarch', author:'George Eliot', pages:880, year:1871, genre:'classics', country:'United Kingdom', format:'kindle', unit:'percent', progress:35, chapters:86, status:'reading', pagesRead:308, startDate:addDays(t,-6), logs:[{d:addDays(t,-1),p:40},{d:t,p:32}], rating:0, minutes:95, sessions:3, example:true},
+    {id:'ex1', cls:{sub:['Epic Fantasy','Coming-of-Age'],themes:['Music','Grief','Ambition','Storytelling'],tropes:['Magic School','Unreliable Narrator'],form:'Novel',aud:'Adult'}, title:'The Name of the Wind', author:'Patrick Rothfuss', pages:662, chapters:92, year:2007, genre:'fantasy', country:'United States', format:'physical', ...fin(-20, 662), rating:5, moods:['cozy','adventurous'], series:'The Kingkiller Chronicle', seriesNo:1, seriesTotal:3, thoughts:'Slow, musical and cozy. I loved the university chapters most.', example:true},
+    {id:'ex2', cls:{genres:['science'],sub:['Hard SF','First Contact'],themes:['Friendship','Sacrifice','Problem Solving'],tropes:['Amnesia','Unlikely Friendship'],subj:['Astrophysics'],form:'Novel',aud:'Adult'}, title:'Project Hail Mary', author:'Andy Weir', pages:476, year:2021, genre:'scifi', country:'United States', format:'audio', ...fin(-9, 476), rating:5, moods:['funny','gripping'], example:true},
+    {id:'ex3', cls:{genres:['classics','romance'],sub:['Gothic Fiction','Psychological Thriller'],themes:['Jealousy','Identity','Memory'],tropes:['Unnamed Narrator','Haunting Past'],trad:['20th-Century British Literature'],form:'Novel',aud:'Adult'}, title:'Rebecca', author:'Daphne du Maurier', pages:410, year:1938, genre:'mystery', country:'United Kingdom', format:'kindle', ...fin(-4, 410), rating:4, moods:['eerie','slow-burn'], example:true},
+    {id:'ex4', cls:{sub:['Memoir'],themes:['Education','Family','Self-Invention'],subj:['Survivalism','Mormonism'],form:'Narrative Nonfiction',aud:'Adult'}, title:'Educated', author:'Tara Westover', pages:334, year:2018, genre:'memoir', country:'United States', format:'physical', ...fin(-2, 334), rating:4, moods:['inspiring','heartbreaking'], example:true},
+    {id:'ex5', cls:{genres:['literary','historical'],sub:['Classic Literature','Social Fiction'],themes:['Marriage','Ambition','Community'],subj:['Provincial England'],trad:['Victorian Literature'],form:'Novel',aud:'Adult'}, title:'Middlemarch', author:'George Eliot', pages:880, year:1871, genre:'classics', country:'United Kingdom', format:'kindle', unit:'percent', progress:35, chapters:86, status:'reading', pagesRead:308, startDate:addDays(t,-6), logs:[{d:addDays(t,-1),p:40},{d:t,p:32}], rating:0, minutes:95, sessions:3, example:true},
     {id:'ex6', title:"The Wise Man's Fear", author:'Patrick Rothfuss', pages:994, year:2011, genre:'fantasy', country:'United States', status:'want', series:'The Kingkiller Chronicle', seriesNo:2, seriesTotal:3, example:true},
     {id:'ex7', title:'Piranesi', author:'Susanna Clarke', pages:272, year:2020, genre:'fantasy', country:'United Kingdom', status:'want', example:true},
     {id:'ex8', title:'Tomorrow, and Tomorrow, and Tomorrow', author:'Gabrielle Zevin', pages:416, year:2022, genre:'literary', country:'United States', status:'want', example:true},
@@ -1530,7 +1688,8 @@ const QUICK = {pages: [10, 25, 50], chapters: [1, 2, 3], percent: [5, 10, 25]};
 const SHORT = {fantasy:'Fantasy', scifi:'Sci-Fi', mystery:'Mystery', horror:'Horror', romance:'Romance', literary:'Literary', historical:'Historical', memoir:'Memoir', science:'Science', selfhelp:'Self-Help', history:'History', philosophy:'Philosophy', business:'Business', classics:'Classics'};
 function renderRadar(s) {
   const N = GENRES.length, cx = 210, cy = 200, R = 130;
-  const vals = GENRES.map(g => s.genreCounts[g.key] || 0);
+  const rc = radarCounts(s);
+  const vals = GENRES.map(g => rc[g.key] || 0);
   const top = Math.max(...vals);
   const max = Math.max(2, Math.ceil(top / 2) * 2);
   const ang = i => -Math.PI / 2 + i * 2 * Math.PI / N;
@@ -1551,7 +1710,8 @@ function renderRadar(s) {
   const total = vals.reduce((a, b) => a + b, 0);
   const lead = GENRES.map((g, i) => [g, vals[i]]).sort((a, b) => b[1] - a[1]).filter(x => x[1]);
   const summary = total ? `Strongest pull: ${lead.slice(0, 2).map(x => x[0].name).join(' and ')}. ${14 - lead.length} genre${14 - lead.length === 1 ? '' : 's'} still unexplored.` : 'Finish a book and your web starts to take shape.';
-  return `<div class="radar-card"><h2>Your Reading Web</h2><p class="sub">Books finished in each genre. The further a point reaches, the more you have read there.</p>
+  return `<div class="radar-card"><h2>Your Reading Web</h2><p class="sub">${radarAll ? 'Every genre each finished book fits, so a book can count more than once.' : 'Books finished in each main genre. The further a point reaches, the more you have read there.'}</p>
+    <div class="radar-toggle" role="group" aria-label="What the web counts"><button type="button" data-radarall="0" aria-pressed="${!radarAll}">Main genre</button><button type="button" data-radarall="1" aria-pressed="${radarAll}">Every genre</button></div>
     <svg class="radar" id="radar" viewBox="0 0 420 400" role="group" aria-label="Spider web chart of finished books by genre">
       ${rings}${spokes}${ringLabels}
       <polygon points="${shape}" fill="rgba(142,59,63,0.22)" stroke="#8e3b3f" stroke-width="2" stroke-linejoin="round"/>
@@ -1563,12 +1723,12 @@ function renderRadar(s) {
 function wireRadar(s) {
   const svg = document.getElementById('radar'); if (!svg) return;
   const out = document.getElementById('radarRead');
-  const show = el => { svg.querySelectorAll('.vtx').forEach(v => v.classList.toggle('hl', v === el)); const g = GENRES[+el.dataset.i]; const n = s.genreCounts[g.key] || 0;
+  const show = el => { svg.querySelectorAll('.vtx').forEach(v => v.classList.toggle('hl', v === el)); const g = GENRES[+el.dataset.i]; const n = radarCounts(s)[g.key] || 0;
     out.innerHTML = `<b>${esc(g.name)}</b> · ${n} book${n === 1 ? '' : 's'} · ${esc(g.region)}`; };
   svg.querySelectorAll('.vtx').forEach(v => { v.addEventListener('pointerenter', () => show(v)); v.addEventListener('click', () => show(v)); v.addEventListener('focus', () => show(v)); });
 }
 function renderMap(s) {
-  return renderRadar(s) + `<div class="map"><h2>The Realm of Genres</h2><p class="sub">Each genre you read clears the fog from its region. One book explores it, three settle it, seven master it.</p>
+  return renderRadar(s) + renderCatalogue(shownBooks()) + `<div class="map"><h2>The Realm of Genres</h2><p class="sub">Each genre you read clears the fog from its region. One book explores it, three settle it, seven master it.</p>
   <div class="regions">${GENRES.map(g => {
     const n = s.genreCounts[g.key] || 0;
     const stars = n >= 7 ? 3 : n >= 3 ? 2 : n >= 1 ? 1 : 0;
@@ -1721,12 +1881,12 @@ async function askLibrarian(prompt, tier) {
     return {out};
   } catch (e) { return {error: e && e.code === 'rate_limited' ? 'busy' : 'failed'}; }
 }
-const bookKeys = () => `"found": boolean, "title": string (correct full title), "author": string, "pages": integer (typical print edition page count), "chapters": integer (number of chapters, or 0 if unknown), "year": integer (year first published), "genre": one of ${JSON.stringify(GENRES.map(g => g.name))}, "country": string (the author's country, in English), "series": string (series name, or "" if standalone), "seriesNumber": integer (0 if standalone), "seriesTotal": integer (number of books in the series, 0 if unknown), "blurb": string (one spoiler-free sentence, at most 20 words), ${SPINE_KEYS}`;
+const bookKeys = () => `"found": boolean, "title": string (correct full title), "author": string, "pages": integer (typical print edition page count), "chapters": integer (number of chapters, or 0 if unknown), "year": integer (year first published), "genre": one of ${JSON.stringify(GENRES.map(g => g.name))}, "country": string (the author's country, in English), "series": string (series name, or "" if standalone), "seriesNumber": integer (0 if standalone), "seriesTotal": integer (number of books in the series, 0 if unknown), "blurb": string (one spoiler-free sentence, at most 20 words), ${SPINE_KEYS}, ${CLS_KEYS()}`;
 function bookFromInfo(info, fb) {
   info = info || {}; fb = fb || {};
   return {title: info.title || fb.title || '', author: info.author || fb.author || '', pages: +info.pages > 0 ? Math.round(+info.pages) : '', chapters: +info.chapters > 0 ? Math.round(+info.chapters) : '',
     year: +info.year ? Math.round(+info.year) : '', genre: matchGenre(info.genre), country: info.country || '', series: info.series || '', seriesNo: +info.seriesNumber > 0 ? Math.round(+info.seriesNumber) : '',
-    seriesTotal: +info.seriesTotal > 0 ? Math.round(+info.seriesTotal) : 0, blurb: info.blurb || '', spine: sanitizeSpine(info.spine), found: !!(info.title && info.found !== false)};
+    seriesTotal: +info.seriesTotal > 0 ? Math.round(+info.seriesTotal) : 0, blurb: info.blurb || '', spine: sanitizeSpine(info.spine), cls: clsFromInfo(info, matchGenre(info.genre)), found: !!(info.title && info.found !== false)};
 }
 const thinkingHtml = msg => `<h2 id="sheetTitle">Consulting the librarian</h2><div class="thinking"><div class="quill"></div>${msg}</div>`;
 async function lookup() {
@@ -1735,7 +1895,7 @@ async function lookup() {
 Title as typed: ${JSON.stringify(draft.title)}${draft.author ? '\nAuthor as typed: ' + JSON.stringify(draft.author) : ''}
 Return exactly these keys:
 {${bookKeys()}}
-Choose the single best-fitting genre from the list. If you do not recognise the book, set found to false and make your best guess from the title.`);
+Choose the single best-fitting main genre from the list. Use Title Case for every tag. If you do not recognise the book, set found to false and make your best guess from the title.`);
   const note = r.away ? 'The librarian is away in this view. Fill in what you know below.' : r.error === 'busy' ? 'The librarian is busy for a moment. Fill in the details yourself or try again shortly.' : r.error ? 'The librarian could not look this one up. Fill in what you know below.' : '';
   showFound(bookFromInfo(r.out, draft), note);
 }
@@ -1800,7 +1960,8 @@ function showFound(f, note) {
         <div class="field"><label for="dYear">First published</label><input id="dYear" type="number" inputmode="numeric" value="${esc(f.year)}"></div>
         <div class="field"><label for="dCountry">Author's country</label><input id="dCountry" value="${esc(f.country)}"></div>
       </div>
-      <div class="field"><label for="dGenre">Genre</label><select id="dGenre"><option value="">Choose a genre</option>${genreOptions(f.genre)}</select></div>
+      <div class="field"><label for="dGenre">Main genre</label><select id="dGenre"><option value="">Choose a genre</option>${genreOptions(f.genre)}</select></div>
+      ${(() => { const fc = clsOf({cls: f.cls, genre: f.genre}); return `<details class="edit cls-wrap"><summary>Catalogue card <small>${esc(clsSummary(fc))}</small></summary>${clsEditor(fc, f.genre, 'd')}</details>`; })()}
       <div class="row2">
         <div class="field"><label for="dSeries">Series (if any)</label><input id="dSeries" value="${esc(f.series || '')}"></div>
         <div class="field"><label for="dSeriesNo">Book number</label><input id="dSeriesNo" type="number" min="0" inputmode="numeric" value="${esc(f.seriesNo || '')}"></div>
@@ -1813,7 +1974,7 @@ function showFound(f, note) {
     </div>
     <p class="err" id="formErr" hidden></p>
     <div class="actions"><button class="btn ghost" id="backBtn" type="button">Back</button><button class="btn" id="shelveBtn" type="button">${btn}</button></div>`);
-  wireRating(); wireMoods('dMoods');
+  wireRating(); wireMoods('dMoods'); wireCls('d', '#dGenre');
   let unit = DEFAULT_UNIT[draft.format];
   const READ_LABEL = {pages: 'Page you are on', chapters: 'Chapters finished so far', percent: 'Percent done (as Kindle shows it)'};
   const setUnitLabel = () => { const l = sheet.querySelector('#dReadLabel'); if (l) l.textContent = READ_LABEL[unit]; };
@@ -1832,6 +1993,7 @@ function showFound(f, note) {
       genre: v('#dGenre'), country: v('#dCountry'), blurb: f.blurb || '', status: st, addedAt: new Date().toISOString(), logs: [],
       format: draft.format, chapters: parseInt(v('#dChapters'), 10) || 0, unit: st === 'reading' ? unit : 'pages',
       series: v('#dSeries'), seriesNo: parseInt(v('#dSeriesNo'), 10) || 0, seriesTotal: f.seriesTotal || 0, spine: f.spine || null};
+    b.cls = readCls('d', b.genre, f.cls);
     if (draft.pre && draft.pre.kind !== 'tbr') b.fromRec = true;
     if (st === 'reading' && unit === 'chapters' && !b.chapters) return fail('Add the number of chapters to track by chapter.');
     if (st === 'finished') {
@@ -1863,6 +2025,7 @@ function openDetail(id) {
     <div class="rec-tags">${g ? `<span class="genre-pill" style="--c:${g.color}">${esc(g.name)}</span>` : ''}<span class="tag">${statusLabel}</span>${reads > 1 ? `<span class="tag">Read ${reads} times</span>` : ''}${b.rating ? `<span class="stars-inline" aria-label="${b.rating} stars">${'★'.repeat(b.rating)}</span>` : ''}</div>
     ${b.blurb ? `<p class="blurb" style="margin:0;font-style:italic;color:var(--muted)">${esc(b.blurb)}</p>` : ''}
     ${(b.moods || []).length ? `<div class="moods static">${b.moods.map(m => `<span class="mood" aria-pressed="true">${esc(m)}</span>`).join('')}</div>` : ''}
+    ${clsCard(b) || (b.example ? '' : '<div class="cat-missing"><span>Not catalogued yet.</span><button type="button" class="btn ghost" id="clsOne">Ask the librarian to file it</button></div>')}
     ${b.thoughts ? `<div><div class="flabel">Your thoughts</div><p class="thoughts">${esc(b.thoughts)}</p></div>` : ''}
     <div class="dq"><div class="flabel">Your saved quotes${bq.length ? ' (' + bq.length + ')' : ''}</div>
       ${bq.length ? bq.map(q => `<button type="button" class="quote mini" data-q="${esc(q.id)}"><blockquote>${esc(q.text)}</blockquote>${q.loc || q.note ? `<div class="src">${esc([q.loc, q.note].filter(Boolean).join(' · '))}</div>` : ''}</button>`).join('') : '<p class="qmeta" style="margin:0">No quotes saved from this book yet.</p>'}
@@ -1884,7 +2047,8 @@ function openDetail(id) {
       <div class="field"><span class="flabel">Your rating</span>${ratingHtml(b.rating)}</div>
       <div class="field"><span class="flabel">How did it feel?</span>${moodChips(b.moods, 'eMoods')}</div>
       <div class="field"><label for="eThoughts">Your thoughts</label><textarea id="eThoughts" placeholder="${THOUGHTS_PH}">${esc(b.thoughts || '')}</textarea></div>
-      <div class="field"><label for="eGenre">Genre</label><select id="eGenre">${genreOptions(b.genre)}</select></div>
+      <div class="field"><label for="eGenre">Main genre</label><select id="eGenre">${genreOptions(b.genre)}</select></div>
+      <div class="field"><span class="flabel">Catalogue card</span>${clsEditor(clsOf(b), b.genre, 'e')}</div>
       <div class="row2">
         <div class="field"><label for="eFormat">Format</label><select id="eFormat">${Object.entries(FORMATS).map(([k, n]) => `<option value="${k}"${k === (b.format || 'physical') ? ' selected' : ''}>${n}</option>`).join('')}</select></div>
         <div class="field"><label for="eChapters">Chapters</label><input id="eChapters" type="number" min="0" inputmode="numeric" value="${b.chapters || ''}"></div>
@@ -1903,8 +2067,10 @@ function openDetail(id) {
     </div>`);
   sheet.querySelector('#closeBtn').addEventListener('click', closeSheet);
   sheet.querySelectorAll('[data-q]').forEach(el => el.addEventListener('click', () => openQuote(el.dataset.q)));
+  sheet.querySelectorAll('[data-ctag]').forEach(el => el.addEventListener('click', () => showTag(el.dataset.ctag)));
   if (b.example) return;
-  wireRating(); wireMoods('eMoods');
+  wireRating(); wireMoods('eMoods'); wireCls('e', '#eGenre');
+  const c1 = sheet.querySelector('#clsOne'); if (c1) c1.addEventListener('click', async () => { c1.disabled = true; c1.textContent = 'Filing...'; const n = await classifyBooks([b]); if (n) openDetail(b.id); else { c1.disabled = false; c1.textContent = 'Try again'; } });
   sheet.querySelector('#spineFile').addEventListener('change', e => { const f = e.target.files && e.target.files[0]; if (f) openSpineCrop(b.id, f); });
   const sd = sheet.querySelector('#spineDel');
   if (sd) sd.addEventListener('click', async () => {
@@ -1916,7 +2082,7 @@ function openDetail(id) {
   const rr = sheet.querySelector('#rereadBtn'); if (rr) rr.addEventListener('click', () => startReread(b.id));
   sheet.querySelector('#saveBtn').addEventListener('click', async () => {
     const c = JSON.parse(JSON.stringify(b));
-    c.genre = sheet.querySelector('#eGenre').value; c.rating = +sheet.querySelector('#rating').dataset.r || 0;
+    c.genre = sheet.querySelector('#eGenre').value; c.cls = readCls('e', c.genre, b.cls); c.rating = +sheet.querySelector('#rating').dataset.r || 0;
     c.thoughts = sheet.querySelector('#eThoughts').value.trim(); c.moods = readMoods('eMoods');
     c.format = sheet.querySelector('#eFormat').value; c.chapters = parseInt(sheet.querySelector('#eChapters').value, 10) || 0;
     c.series = sheet.querySelector('#eSeries').value.trim(); c.seriesNo = parseInt(sheet.querySelector('#eSeriesNo').value, 10) || 0;
@@ -2108,7 +2274,7 @@ function renderRecs(s) {
 async function getRecs() {
   const list = shownBooks();
   recsLoading = true; recsError = ''; render();
-  const fmt = b => `- ${b.title} by ${b.author || 'unknown'} [${(G[b.genre] || {}).name || 'unsorted'}]${b.rating ? ' rated ' + b.rating + '/5' : ''}${(b.moods || []).length ? ' felt ' + b.moods.join(', ') : ''}`;
+  const fmt = b => `- ${b.title} by ${b.author || 'unknown'} [${(G[b.genre] || {}).name || 'unsorted'}${(() => { const c = clsOf(b); const t = [...c.sub.slice(0, 2), ...c.themes.slice(0, 3)]; return t.length ? '; ' + t.join(', ') : ''; })()}]${b.rating ? ' rated ' + b.rating + '/5' : ''}${(b.moods || []).length ? ' felt ' + b.moods.join(', ') : ''}`;
   const finished = list.filter(isFinished).sort((a, b) => (finishesOf(b).sort().pop() || '').localeCompare(finishesOf(a).sort().pop() || '')).slice(0, 60);
   const reading = list.filter(b => b.status === 'reading');
   const wantL = list.filter(b => b.status === 'want');
@@ -2130,7 +2296,7 @@ Recommend exactly 6 books:
 - 2 "explore" picks from a genre they have not read (or barely read) that still connect to their taste,
 - 1 "wildcard" that is surprising but likely to delight them.
 Apart from "tbr" picks, every book must be real, published, and on none of the lists above.
-JSON shape: {"recommendations":[{"title": string, "author": string, "genre": one of ${JSON.stringify(GENRES.map(g => g.name))}, "pages": integer, "chapters": integer, "year": integer, "country": string (author's country), "series": string or "", "seriesNumber": integer or 0, "kind": "tbr"|"comfort"|"explore"|"wildcard", "because": string (max 25 words, name one of their books it connects to), "blurb": string (one spoiler-free sentence, max 20 words)}]}`, 'default');
+JSON shape: {"recommendations":[{"title": string, "author": string, "genre": one of ${JSON.stringify(GENRES.map(g => g.name))}, "pages": integer, "chapters": integer, "year": integer, "country": string (author's country), "series": string or "", "seriesNumber": integer or 0, "subgenres": array of 1 to 2 strings, "themes": array of 2 to 4 strings, "kind": "tbr"|"comfort"|"explore"|"wildcard", "because": string (max 25 words, name one of their books it connects to), "blurb": string (one spoiler-free sentence, max 20 words)}]}`, 'default');
   if (r.away) recsError = 'The librarian is away in this view. Open the page from claude.ai to get picks.';
   else if (r.error) recsError = r.error === 'busy' ? 'The librarian needs a short break. Try again in a minute.' : 'The librarian could not put together picks this time. Try again.';
   else {
@@ -2141,7 +2307,7 @@ JSON shape: {"recommendations":[{"title": string, "author": string, "genre": one
     recs.items = items.filter(x => x && x.title && (x.kind === 'tbr' ? wantT.has(String(x.title).toLowerCase()) : !have.has(String(x.title).toLowerCase()))).slice(0, 6).map(x => ({
       title: String(x.title), author: String(x.author || ''), genre: matchGenre(x.genre), pages: +x.pages > 0 ? Math.round(+x.pages) : 0,
       chapters: +x.chapters > 0 ? Math.round(+x.chapters) : 0, year: +x.year ? Math.round(+x.year) : null, country: String(x.country || ''),
-      series: String(x.series || ''), seriesNo: +x.seriesNumber > 0 ? Math.round(+x.seriesNumber) : '',
+      series: String(x.series || ''), seriesNo: +x.seriesNumber > 0 ? Math.round(+x.seriesNumber) : '', cls: {genres: [], sub: normTags(x.subgenres, 2), themes: normTags(x.themes, 4)},
       kind: ['comfort', 'explore', 'wildcard', 'tbr'].includes(x.kind) ? x.kind : 'comfort', because: String(x.because || ''), blurb: String(x.blurb || '')}));
     recs.at = new Date().toISOString(); recs.mood = recMood;
     if (!recs.items.length) recsError = 'The librarian came back empty-handed. Try again.';
@@ -2152,7 +2318,7 @@ JSON shape: {"recommendations":[{"title": string, "author": string, "genre": one
 async function saveRecForLater(i) {
   const r = recs.items[i]; if (!r) return;
   const b = {id: newId(), title: r.title, author: r.author, pages: r.pages || 0, chapters: r.chapters || 0, year: r.year, genre: r.genre, country: r.country, blurb: r.blurb,
-    series: r.series, seriesNo: +r.seriesNo || 0, status: 'want', format: 'physical', unit: 'pages', pagesRead: 0, progress: 0, logs: [], fromRec: true, addedAt: new Date().toISOString()};
+    series: r.series, seriesNo: +r.seriesNo || 0, cls: r.cls || null, status: 'want', format: 'physical', unit: 'pages', pagesRead: 0, progress: 0, logs: [], fromRec: true, addedAt: new Date().toISOString()};
   recs.items.splice(i, 1); saveRecs();
   await commit(b);
   toast('<b>Saved to your to-read pile</b><br>' + esc(b.title));
@@ -2277,6 +2443,7 @@ async function buildExport(opt) {
     const e = {id: b.id, title: b.title, author: b.author || '', genre: b.genre, status: b.status, format: b.format || 'physical', pages: b.pages || 0,
       year: b.year || null, country: b.country || '', series: b.series || '', seriesNo: b.seriesNo || 0, startDate: b.startDate || '', finishes: finishesOf(b)};
     if (b.status === 'reading') { const t = totalOf(b); e.progressPct = t ? Math.round(100 * progressOf(b) / t) : 0; }
+    { const c = clsOf(b); if (hasCls(b) || c.genres.length) e.cls = {genres: c.genres, sub: c.sub, themes: c.themes, tropes: c.tropes, subj: c.subj, trad: c.trad, form: c.form, aud: c.aud}; }
     if (opt.ratings && b.rating) e.rating = b.rating;
     if (opt.moods && (b.moods || []).length) e.moods = b.moods;
     if (opt.thoughts && b.thoughts) e.thoughts = b.thoughts;
@@ -2420,12 +2587,89 @@ document.getElementById('view').addEventListener('click', e => {
   if ((el = q('[data-rno]'))) return dropRec(+el.dataset.rno, true);
   if (q('[data-addquote]')) return openQuote(null);
   if ((el = q('[data-quote]'))) return openQuote(el.dataset.quote);
+  if ((el = q('[data-cf]'))) { const t = el.dataset.cf; catF = catF.some(x => x.toLowerCase() === t.toLowerCase()) ? catF.filter(x => x.toLowerCase() !== t.toLowerCase()) : [...catF, t]; return render(); }
+  if ((el = q('[data-cfx]'))) { catF = catF.filter(x => x !== el.dataset.cfx); return render(); }
+  if (q('[data-cfclear]')) { catF = []; catQ = ''; return render(); }
+  if (q('[data-catfill]')) return classifyBooks(shownBooks().filter(b => !hasCls(b)));
+  if ((el = q('[data-radarall]'))) { radarAll = el.dataset.radarall === '1'; try { localStorage.setItem('lantern-radar-all', radarAll ? '1' : '0'); } catch (er) {} return render(); }
   if ((el = q('[data-open]'))) return openDetail(el.dataset.open);
 });
 
 
 
 
+
+
+/* ---------- Card catalogue (Genre Map tab) ---------- */
+let catQ = '', catF = [], catBusy = '';
+function catMatches(list) {
+  const fs = catF.map(x => x.toLowerCase());
+  const terms = catQ.toLowerCase().split('+').map(x => x.trim()).filter(Boolean);
+  return list.filter(b => {
+    const tags = allTagsOf(b).map(t => t.toLowerCase());
+    if (!fs.every(f => tags.includes(f))) return false;
+    const hay = [b.title, b.author, b.series, ...tags].join(' | ').toLowerCase();
+    return terms.every(t => hay.includes(t));
+  });
+}
+function catResultsHtml(list) {
+  if (!catQ.trim() && !catF.length) return '';
+  const r = catMatches(list);
+  const ST = {finished: 'finished', reading: 'reading now', want: 'to read', dnf: 'set aside'};
+  return `<p class="qmeta" style="margin:0">${r.length} book${r.length === 1 ? '' : 's'} match${r.length === 1 ? 'es' : ''}</p>` + (r.length ? `<ul class="cat-list">${r.map(b => { const g = G[b.genre]; const c = clsOf(b);
+    return `<li><button type="button" data-open="${esc(b.id)}"><span class="cat-dot" style="--c:${g ? g.color : '#6b5b4f'}"></span><span><b>${esc(b.title)}</b><small>${[b.author, g && g.name, ST[b.status], c.themes.slice(0, 3).join(', ')].filter(Boolean).map(esc).join(' · ')}</small></span></button></li>`; }).join('')}</ul>` : '');
+}
+function renderCatalogue(list) {
+  const missing = isExample ? [] : list.filter(b => !hasCls(b));
+  const on = t => catF.some(x => x.toLowerCase() === t.toLowerCase());
+  const facet = k => { const m = {}; list.forEach(b => { const c = clsOf(b); (k === 'form' ? [c.form].filter(Boolean) : c[k]).forEach(t => { m[t] = (m[t] || 0) + 1; }); }); return Object.entries(m).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])); };
+  const FACETS = [['themes', 'Themes you return to'], ['tropes', 'Tropes'], ['sub', 'Subgenres'], ['subj', 'Subjects'], ['trad', 'Traditions & periods'], ['form', 'Forms']];
+  const clouds = FACETS.map(([k, n]) => { const f = facet(k).slice(0, 16); return f.length ? `<div class="cat-facet"><div class="flabel">${n}</div><div class="cat-cloud">${f.map(([t, c]) => `<button type="button" class="ctag${on(t) ? ' on' : ''}" data-cf="${esc(t)}">${esc(t)}<small>${c}</small></button>`).join('')}</div></div>` : ''; }).join('');
+  return `<section class="catalogue" id="catalogue"><h2>The Card Catalogue</h2>
+    <p class="sub">Every book is filed by genre, subgenre, theme, trope and subject. Tap tags to combine them, or search with a plus, like <i>historical + revenge</i>.</p>
+    ${missing.length ? `<div class="cat-missing"><span>${missing.length} book${missing.length === 1 ? ' is' : 's are'} not catalogued yet.</span><button type="button" class="btn" data-catfill ${catBusy ? 'disabled' : ''}>${catBusy ? esc(catBusy) : 'Ask the librarian to file them'}</button></div>` : ''}
+    <input type="search" id="catSearch" placeholder="Search titles, authors, themes, tropes..." value="${esc(catQ)}" autocomplete="off" aria-label="Search the catalogue">
+    ${catF.length ? `<div class="cat-active">${catF.map(t => `<button type="button" class="ctag on" data-cfx="${esc(t)}" aria-label="Remove filter ${esc(t)}">${esc(t)} ×</button>`).join('')}<button type="button" class="linkish" data-cfclear>Clear</button></div>` : ''}
+    <div id="catResults" style="display:grid;gap:8px">${catResultsHtml(list)}</div>
+    ${clouds || '<p class="qmeta" style="margin:0;text-align:center">Tags appear here once your books are catalogued.</p>'}</section>`;
+}
+async function classifyBooks(list) {
+  const todo = list.filter(b => !b.example); if (!todo.length || catBusy) return 0;
+  let done = 0;
+  for (let i = 0; i < todo.length; i += 6) {
+    const chunk = todo.slice(i, i + 6);
+    catBusy = `Filing ${Math.min(i + chunk.length, todo.length)} of ${todo.length}...`; render();
+    const r = await askLibrarian(`You are a meticulous librarian filing books in a card catalogue. Reply with a single JSON object and nothing else.
+Books (the main genre is already chosen):
+${chunk.map((b, j) => `${j + 1}. ${JSON.stringify(b.title)} by ${JSON.stringify(b.author || 'unknown')}${b.year ? ' (' + b.year + ')' : ''} [main genre: ${(G[b.genre] || {}).name || 'unknown'}]`).join('\n')}
+The genre list is ${JSON.stringify(GENRES.map(g => g.name))}.
+JSON shape: {"books":[{"n": integer (the number above), ${CLS_KEYS()}}]}
+Use Title Case for every tag, and use the same name for the same idea across books.`, 'quick');
+    if (r.away || r.error) { catBusy = ''; render(); toast(r.away ? '<b>The librarian is away</b><br>Open the app signed in to file books.' : '<b>The librarian needs a short break</b><br>' + done + ' filed so far. Try again in a minute.'); return done; }
+    const arr = (r.out && (r.out.books || (Array.isArray(r.out) ? r.out : []))) || [];
+    for (const x of arr) {
+      const b = chunk[(+x.n || 0) - 1]; if (!b) continue;
+      const k = books.findIndex(y => y.id === b.id); if (k < 0) continue;
+      const c = JSON.parse(JSON.stringify(books[k])); c.cls = clsFromInfo(x, c.genre); books[k] = c; await persist(c); done++;
+    }
+  }
+  catBusy = ''; render();
+  toast(`<b>Catalogued</b><br>${done} book${done === 1 ? '' : 's'} filed with themes, tropes and subgenres.`);
+  return done;
+}
+function showTag(t) {
+  closeSheet(); tab = 'map'; catQ = ''; catF = [t]; render();
+  setTimeout(() => { const el = document.getElementById('catalogue'); if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'}); }, 50);
+}
+document.getElementById('view').addEventListener('input', e => {
+  if (e.target.id !== 'catSearch') return;
+  catQ = e.target.value; const out = document.getElementById('catResults'); if (out) out.innerHTML = catResultsHtml(shownBooks());
+});
+let radarAll = false; try { radarAll = localStorage.getItem('lantern-radar-all') === '1'; } catch (e) {}
+function radarCounts(s) {
+  if (!radarAll) return s.genreCounts;
+  const m = {}; s.finished.forEach(b => [b.genre, ...clsOf(b).genres].forEach(k => { if (G[k]) m[k] = (m[k] || 0) + 1; })); return m;
+}
 
 function matchGenre(name) {
   if (!name) return '';

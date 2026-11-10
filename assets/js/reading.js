@@ -171,6 +171,8 @@
                 <p class="rbook__author">${esc(book.author || "")}</p>
                 ${book.rating ? `<p class="rbook__stars" aria-label="Rated ${book.rating} out of 5">${"★".repeat(book.rating)}<span>${"★".repeat(5 - book.rating)}</span></p>` : ""}
                 ${(book.moods || []).length ? `<p class="rbook__moods">${book.moods.map((m) => `<span>${esc(m)}</span>`).join("")}</p>` : ""}
+                ${(() => { const c = book.cls || {}; const rows = [["Also", (c.genres || []).map((k) => GENRES[k] && GENRES[k].name).filter(Boolean)], ["Subgenres", c.sub || []], ["Themes", c.themes || []], ["Tropes", c.tropes || []], ["Subjects", c.subj || []], ["Tradition", c.trad || []], ["Form", [c.form, c.aud].filter(Boolean)]].filter((r) => r[1].length);
+                    return rows.length ? `<dl class="rbook__cls">${rows.map(([n, v]) => `<dt>${n}</dt><dd>${v.map((t) => `<span>${esc(t)}</span>`).join("")}</dd>`).join("")}</dl>` : ""; })()}
                 ${book.thoughts ? `<blockquote class="rbook__thoughts">${esc(book.thoughts)}</blockquote>` : ""}
                 ${quotes.length ? `<div class="rbook__quotes"><p class="eyebrow">Lines I kept</p>${quotes.map((q) => `<figure><blockquote>${esc(q.text)}</blockquote>${q.loc ? `<figcaption>${esc(q.loc)}</figcaption>` : ""}</figure>`).join("")}</div>` : ""}
                 <dl class="rbook__facts">
