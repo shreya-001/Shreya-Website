@@ -233,6 +233,10 @@
 .rbook__stars span { opacity: 0.25; }
 .rbook__moods { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .rbook__moods span { padding: 0.15rem 0.7rem; border: 1px solid var(--line); border-radius: 99px; font-size: 0.8rem; }
+.rbook__cls { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.9rem; margin: 0; font-size: 0.85rem; align-items: start; }
+.rbook__cls dt { color: var(--muted); padding-top: 0.15rem; }
+.rbook__cls dd { margin: 0; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.rbook__cls span { padding: 0.1rem 0.6rem; border-radius: 99px; background: color-mix(in srgb, var(--accent) 10%, transparent); }
 .rbook__thoughts { margin: 0; padding-left: 1rem; border-left: 3px solid var(--accent); font-size: 1.02rem; white-space: pre-wrap; }
 .rbook__quotes { display: grid; gap: 0.6rem; }
 .rbook__quotes figure { padding: 0.9rem 1rem; background: color-mix(in srgb, var(--accent) 7%, transparent); border-radius: 14px; }
