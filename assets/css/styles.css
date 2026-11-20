@@ -601,7 +601,7 @@ ul {
 
 .capabilities {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     margin-top: 5rem;
     border-top: 1px solid var(--line);
 }
@@ -676,6 +676,32 @@ ul {
 .timeline article p {
     color: rgba(242, 244, 238, 0.58);
     font-size: 0.82rem;
+}
+
+.timeline article p a {
+    color: var(--accent);
+}
+
+.timeline__wins {
+    margin: 0.9rem 0 0;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.45rem;
+    color: rgba(242, 244, 238, 0.78);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.timeline__wins li::marker {
+    color: var(--accent);
+}
+
+.timeline__subhead {
+    margin: 3.5rem 0 2rem;
+    color: var(--accent);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
 }
 
 /* Contact */
